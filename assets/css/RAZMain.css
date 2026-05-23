@@ -1,0 +1,407 @@
+/**
+ * RAZMain.css — Design Tokens & Global Styles SIMAJURAZ
+ * Versi: 1.0.0 | Dibuat: 2026-05-21
+ * Deskripsi: CSS utama dengan design tokens, reset, tipografi, dan layout grid.
+ */
+
+/* === IMPORT FONT GOOGLE === */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* === DESIGN TOKENS (Variabel CSS Global) === */
+:root {
+  /* Warna Utama - Indigo premium */
+  --raz-primary: #4F46E5;
+  --raz-primary-light: #818CF8;
+  --raz-primary-dark: #3730A3;
+  --raz-primary-bg: #EEF2FF;
+
+  /* Warna Fungsional */
+  --raz-success: #059669;
+  --raz-success-light: #D1FAE5;
+  --raz-danger: #DC2626;
+  --raz-danger-light: #FEE2E2;
+  --raz-warning: #D97706;
+  --raz-warning-light: #FEF3C7;
+  --raz-info: #0EA5E9;
+  --raz-info-light: #E0F2FE;
+
+  /* Warna Netral */
+  --raz-bg: #F3F4F6;
+  --raz-bg-dark: #E5E7EB;
+  --raz-card: #FFFFFF;
+  --raz-text: #111827;
+  --raz-text-secondary: #4B5563;
+  --raz-text-muted: #6B7280;
+  --raz-text-light: #9CA3AF;
+  --raz-border: #E5E7EB;
+  --raz-border-dark: #D1D5DB;
+
+  /* Bayangan */
+  --raz-shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --raz-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --raz-shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --raz-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --raz-shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+
+  /* Border Radius */
+  --raz-radius-sm: 6px;
+  --raz-radius: 8px;
+  --raz-radius-md: 12px;
+  --raz-radius-lg: 16px;
+  --raz-radius-xl: 24px;
+  --raz-radius-full: 9999px;
+
+  /* Transisi */
+  --raz-transition: all 0.2s ease;
+  --raz-transition-slow: all 0.3s ease;
+
+  /* Sidebar */
+  --raz-sidebar-width: 260px;
+  --raz-sidebar-collapsed: 72px;
+  --raz-topbar-height: 64px;
+
+  /* Font */
+  --raz-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --raz-font-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* === RESET & BASE === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--raz-font);
+  color: var(--raz-text);
+  background-color: var(--raz-bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a { color: var(--raz-primary); text-decoration: none; transition: var(--raz-transition); }
+a:hover { color: var(--raz-primary-dark); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* === TIPOGRAFI === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--raz-text);
+}
+h1 { font-size: 1.875rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.125rem; }
+
+.raz-text-muted { color: var(--raz-text-muted); }
+.raz-text-mono { font-family: var(--raz-font-mono); font-size: 0.875rem; }
+.raz-text-rupiah { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* === LAYOUT UTAMA (Sidebar + Topbar + Content) === */
+.raz-app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* --- Sidebar --- */
+.raz-sidebar {
+  width: var(--raz-sidebar-width);
+  background: linear-gradient(180deg, #1E1B4B 0%, #312E81 100%);
+  color: #fff;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+.raz-sidebar.collapsed { width: var(--raz-sidebar-collapsed); }
+
+.raz-sidebar-logo {
+  height: var(--raz-topbar-height);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+.raz-sidebar-logo img { width: 36px; height: 36px; border-radius: var(--raz-radius-sm); }
+.raz-sidebar-logo span { font-size: 1.125rem; font-weight: 700; white-space: nowrap; }
+.raz-sidebar.collapsed .raz-sidebar-logo span { display: none; }
+
+.raz-sidebar-menu {
+  flex: 1;
+  padding: 12px 8px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.raz-sidebar-menu li { margin-bottom: 2px; }
+
+.raz-sidebar-menu a,
+.raz-sidebar-menu button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--raz-radius);
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--raz-transition);
+  width: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--raz-font);
+  white-space: nowrap;
+}
+
+.raz-sidebar-menu a:hover,
+.raz-sidebar-menu button:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.raz-sidebar-menu a.active,
+.raz-sidebar-menu button.active {
+  background: var(--raz-primary);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(79,70,229,0.4);
+}
+
+.raz-sidebar-menu .menu-icon { font-size: 1.25rem; flex-shrink: 0; width: 24px; text-align: center; }
+.raz-sidebar.collapsed .menu-text { display: none; }
+
+.raz-sidebar-section {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.35);
+  padding: 16px 14px 6px;
+  font-weight: 600;
+}
+.raz-sidebar.collapsed .raz-sidebar-section { display: none; }
+
+/* Toggle Button */
+.raz-sidebar-toggle {
+  padding: 12px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+.raz-sidebar-toggle button {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; padding: 8px; border: none; border-radius: var(--raz-radius-sm);
+  background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.5);
+  cursor: pointer; transition: var(--raz-transition); font-size: 1.1rem;
+}
+.raz-sidebar-toggle button:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+/* --- Area Konten Utama --- */
+.raz-main {
+  flex: 1;
+  margin-left: var(--raz-sidebar-width);
+  transition: margin-left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.raz-sidebar.collapsed ~ .raz-main { margin-left: var(--raz-sidebar-collapsed); }
+
+/* --- Topbar --- */
+.raz-topbar {
+  height: var(--raz-topbar-height);
+  background: var(--raz-card);
+  border-bottom: 1px solid var(--raz-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--raz-shadow-sm);
+}
+
+.raz-topbar-left { display: flex; align-items: center; gap: 16px; }
+.raz-topbar-title { font-size: 1.125rem; font-weight: 600; }
+
+.raz-topbar-right { display: flex; align-items: center; gap: 16px; }
+
+.raz-topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  border-radius: var(--raz-radius-full);
+  background: var(--raz-bg);
+  cursor: pointer;
+  transition: var(--raz-transition);
+  border: none;
+  font-family: var(--raz-font);
+  position: relative;
+}
+.raz-topbar-user:hover { background: var(--raz-bg-dark); }
+
+.raz-topbar-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--raz-primary);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 0.8rem;
+}
+
+.raz-topbar-info { text-align: left; }
+.raz-topbar-name { font-size: 0.85rem; font-weight: 600; color: var(--raz-text); display: block; }
+.raz-topbar-role {
+  font-size: 0.7rem;
+  color: var(--raz-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Dropdown Menu */
+.raz-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: var(--raz-card);
+  border: 1px solid var(--raz-border);
+  border-radius: var(--raz-radius-md);
+  box-shadow: var(--raz-shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: var(--raz-transition);
+  z-index: 200;
+  padding: 6px;
+}
+.raz-dropdown.show { opacity: 1; visibility: visible; transform: translateY(0); }
+
+.raz-dropdown a, .raz-dropdown button {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: var(--raz-radius-sm);
+  color: var(--raz-text-secondary); font-size: 0.875rem;
+  transition: var(--raz-transition); width: 100%;
+  border: none; background: none; cursor: pointer;
+  font-family: var(--raz-font); text-align: left;
+}
+.raz-dropdown a:hover, .raz-dropdown button:hover { background: var(--raz-bg); color: var(--raz-text); }
+.raz-dropdown .danger { color: var(--raz-danger); }
+.raz-dropdown .danger:hover { background: var(--raz-danger-light); }
+
+/* --- Area Content --- */
+.raz-content {
+  flex: 1;
+  padding: 24px;
+}
+
+/* === CARD === */
+.raz-card {
+  background: var(--raz-card);
+  border-radius: var(--raz-radius-md);
+  box-shadow: var(--raz-shadow);
+  border: 1px solid var(--raz-border);
+  padding: 24px;
+  transition: var(--raz-transition);
+}
+.raz-card:hover { box-shadow: var(--raz-shadow-md); }
+
+.raz-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--raz-border);
+}
+.raz-card-title { font-size: 1.1rem; font-weight: 600; }
+
+/* === STAT CARDS (Dashboard) === */
+.raz-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 24px; }
+
+.raz-stat-card {
+  background: var(--raz-card);
+  border-radius: var(--raz-radius-md);
+  padding: 20px;
+  border: 1px solid var(--raz-border);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: var(--raz-transition);
+  box-shadow: var(--raz-shadow-sm);
+}
+.raz-stat-card:hover { transform: translateY(-2px); box-shadow: var(--raz-shadow-md); }
+
+.raz-stat-icon {
+  width: 48px; height: 48px;
+  border-radius: var(--raz-radius);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; flex-shrink: 0;
+}
+.raz-stat-icon.primary { background: var(--raz-primary-bg); color: var(--raz-primary); }
+.raz-stat-icon.success { background: var(--raz-success-light); color: var(--raz-success); }
+.raz-stat-icon.danger { background: var(--raz-danger-light); color: var(--raz-danger); }
+.raz-stat-icon.warning { background: var(--raz-warning-light); color: var(--raz-warning); }
+.raz-stat-icon.info { background: var(--raz-info-light); color: var(--raz-info); }
+
+.raz-stat-value { font-size: 1.5rem; font-weight: 700; color: var(--raz-text); line-height: 1.2; }
+.raz-stat-label { font-size: 0.8rem; color: var(--raz-text-muted); margin-top: 2px; }
+
+/* === GRID HELPERS === */
+.raz-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.raz-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+/* === BADGE === */
+.raz-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: var(--raz-radius-full);
+  font-size: 0.75rem; font-weight: 600;
+}
+.raz-badge.primary { background: var(--raz-primary-bg); color: var(--raz-primary); }
+.raz-badge.success { background: var(--raz-success-light); color: var(--raz-success); }
+.raz-badge.danger { background: var(--raz-danger-light); color: var(--raz-danger); }
+.raz-badge.warning { background: var(--raz-warning-light); color: var(--raz-warning); }
+
+/* === SCROLLBAR CUSTOM === */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--raz-border-dark); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--raz-text-light); }
+
+/* === RESPONSIVE === */
+@media (max-width: 1024px) {
+  .raz-sidebar { transform: translateX(-100%); }
+  .raz-sidebar.mobile-open { transform: translateX(0); }
+  .raz-main { margin-left: 0 !important; }
+  .raz-grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .raz-content { padding: 16px; }
+  .raz-stats { grid-template-columns: 1fr 1fr; }
+  .raz-grid-2, .raz-grid-3 { grid-template-columns: 1fr; }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+}
+
+@media (max-width: 480px) {
+  .raz-stats { grid-template-columns: 1fr; }
+  .raz-topbar { padding: 0 16px; }
+}

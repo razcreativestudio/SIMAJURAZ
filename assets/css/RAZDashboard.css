@@ -1,0 +1,161 @@
+/**
+ * RAZDashboard.css — Styling Dashboard SIMAJURAZ
+ * Versi: 1.0.0 | Dibuat: 2026-05-21
+ * Deskripsi: Layout dan komponen khusus halaman dashboard.
+ *            Chart container, stat cards, tabel ringkasan, welcome banner.
+ */
+
+/* === WELCOME BANNER === */
+.raz-welcome {
+  background: linear-gradient(135deg, var(--raz-primary) 0%, #7C3AED 100%);
+  border-radius: var(--raz-radius-md);
+  padding: 28px 32px;
+  color: #fff;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.raz-welcome::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 300px; height: 300px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+}
+.raz-welcome::after {
+  content: '';
+  position: absolute;
+  bottom: -30%; right: 5%;
+  width: 200px; height: 200px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+}
+.raz-welcome-content { position: relative; z-index: 1; }
+.raz-welcome h2 { color: #fff; font-size: 1.4rem; margin-bottom: 4px; }
+.raz-welcome p { color: rgba(255,255,255,0.75); font-size: 0.9rem; }
+.raz-welcome .welcome-date {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.15); padding: 6px 14px;
+  border-radius: var(--raz-radius-full); font-size: 0.8rem;
+  margin-top: 12px; backdrop-filter: blur(4px);
+}
+
+/* === DASHBOARD GRID === */
+.dash-grid { display: grid; gap: 20px; margin-bottom: 24px; }
+.dash-grid-2 { grid-template-columns: 2fr 1fr; }
+.dash-grid-equal { grid-template-columns: 1fr 1fr; }
+
+/* === CHART CONTAINER === */
+.raz-chart-container {
+  position: relative;
+  height: 280px;
+  width: 100%;
+}
+.raz-chart-container canvas { width: 100% !important; height: 100% !important; }
+
+/* === QUICK ACTION BUTTONS === */
+.dash-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.dash-quick-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 16px;
+  background: var(--raz-card);
+  border: 1px solid var(--raz-border);
+  border-radius: var(--raz-radius-md);
+  cursor: pointer;
+  transition: var(--raz-transition);
+  text-decoration: none;
+  color: var(--raz-text);
+}
+.dash-quick-btn:hover {
+  border-color: var(--raz-primary-light);
+  transform: translateY(-3px);
+  box-shadow: var(--raz-shadow-md);
+  color: var(--raz-primary);
+}
+.dash-quick-btn .qb-icon {
+  width: 48px; height: 48px;
+  border-radius: var(--raz-radius);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+}
+.dash-quick-btn .qb-icon.primary { background: var(--raz-primary-bg); color: var(--raz-primary); }
+.dash-quick-btn .qb-icon.success { background: var(--raz-success-light); color: var(--raz-success); }
+.dash-quick-btn .qb-icon.warning { background: var(--raz-warning-light); color: var(--raz-warning); }
+.dash-quick-btn .qb-icon.info { background: var(--raz-info-light); color: var(--raz-info); }
+.dash-quick-btn .qb-label { font-size: 0.82rem; font-weight: 600; text-align: center; }
+
+/* === RINGKASAN TABEL (Transaksi Terbaru, Top Items) === */
+.dash-mini-table { width: 100%; font-size: 0.85rem; }
+.dash-mini-table th {
+  text-align: left; padding: 8px 12px;
+  font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 0.5px; color: var(--raz-text-muted);
+  border-bottom: 1px solid var(--raz-border);
+}
+.dash-mini-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--raz-border);
+  vertical-align: middle;
+}
+.dash-mini-table tbody tr:hover { background: var(--raz-bg); }
+.dash-mini-table tbody tr:last-child td { border-bottom: none; }
+
+/* === LOW STOCK ALERT LIST === */
+.dash-alert-list { list-style: none; }
+.dash-alert-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--raz-border);
+  font-size: 0.85rem;
+}
+.dash-alert-item:last-child { border-bottom: none; }
+.dash-alert-item .item-name { font-weight: 500; }
+.dash-alert-item .stock-badge {
+  padding: 3px 10px; border-radius: var(--raz-radius-full);
+  font-size: 0.75rem; font-weight: 600;
+  background: var(--raz-danger-light); color: var(--raz-danger);
+}
+
+/* === ADMIN DASHBOARD (Tenant List) === */
+.dash-tenant-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--raz-border);
+}
+.dash-tenant-card:last-child { border-bottom: none; }
+.dash-tenant-avatar {
+  width: 40px; height: 40px; border-radius: var(--raz-radius);
+  background: var(--raz-primary-bg); color: var(--raz-primary);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.9rem; flex-shrink: 0;
+}
+.dash-tenant-info { flex: 1; }
+.dash-tenant-name { font-weight: 600; font-size: 0.9rem; }
+.dash-tenant-owner { font-size: 0.78rem; color: var(--raz-text-muted); }
+
+/* === EMPTY STATE DASHBOARD === */
+.dash-empty {
+  text-align: center; padding: 40px 20px;
+}
+.dash-empty .empty-icon { font-size: 2.5rem; color: var(--raz-text-light); margin-bottom: 12px; }
+.dash-empty p { color: var(--raz-text-muted); font-size: 0.875rem; }
+
+/* === RESPONSIVE === */
+@media (max-width: 1024px) {
+  .dash-grid-2, .dash-grid-equal { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .raz-welcome { padding: 20px 24px; }
+  .raz-welcome h2 { font-size: 1.2rem; }
+  .dash-quick-actions { grid-template-columns: repeat(2, 1fr); }
+}

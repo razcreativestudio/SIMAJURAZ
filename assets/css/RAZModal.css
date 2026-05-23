@@ -1,0 +1,123 @@
+/**
+ * RAZModal.css — Sistem Modal SIMAJURAZ
+ * Versi: 1.0.0 | Dibuat: 2026-05-21
+ * Deskripsi: Styling modal overlay dengan backdrop blur, animasi, dan variasi ukuran.
+ */
+
+/* === MODAL OVERLAY (Latar belakang gelap) === */
+.raz-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s ease;
+}
+.raz-modal-overlay.show { opacity: 1; visibility: visible; }
+
+/* === MODAL CONTAINER === */
+.raz-modal {
+  background: var(--raz-card);
+  border-radius: var(--raz-radius-lg);
+  box-shadow: var(--raz-shadow-xl);
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.9) translateY(20px);
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+.raz-modal-overlay.show .raz-modal { transform: scale(1) translateY(0); }
+
+/* Ukuran modal */
+.raz-modal.modal-sm { max-width: 400px; }
+.raz-modal.modal-lg { max-width: 720px; }
+.raz-modal.modal-xl { max-width: 960px; }
+.raz-modal.modal-full { max-width: calc(100vw - 48px); max-height: calc(100vh - 48px); }
+
+/* === MODAL HEADER === */
+.raz-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--raz-border);
+  flex-shrink: 0;
+}
+.raz-modal-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--raz-text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.raz-modal-title .modal-icon { font-size: 1.3rem; }
+
+.raz-modal-close {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  border: none; border-radius: var(--raz-radius);
+  background: transparent;
+  color: var(--raz-text-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: var(--raz-transition);
+}
+.raz-modal-close:hover { background: var(--raz-bg); color: var(--raz-text); }
+
+/* === MODAL BODY === */
+.raz-modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* === MODAL FOOTER === */
+.raz-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--raz-border);
+  background: var(--raz-bg);
+  flex-shrink: 0;
+}
+
+/* === MODAL KONFIRMASI (Hapus/Batal) === */
+.raz-modal-confirm-icon {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 20px;
+}
+.raz-modal-confirm-icon.danger { background: var(--raz-danger-light); color: var(--raz-danger); }
+.raz-modal-confirm-icon.warning { background: var(--raz-warning-light); color: var(--raz-warning); }
+.raz-modal-confirm-icon.success { background: var(--raz-success-light); color: var(--raz-success); }
+
+.raz-modal-confirm-text { text-align: center; }
+.raz-modal-confirm-text h3 { margin-bottom: 8px; font-size: 1.15rem; }
+.raz-modal-confirm-text p { color: var(--raz-text-muted); font-size: 0.9rem; }
+
+/* === RESPONSIVE === */
+@media (max-width: 640px) {
+  .raz-modal-overlay { padding: 16px; align-items: flex-end; }
+  .raz-modal {
+    max-width: 100%;
+    border-radius: var(--raz-radius-lg) var(--raz-radius-lg) 0 0;
+    max-height: 90vh;
+  }
+  .raz-modal-overlay.show .raz-modal { transform: scale(1) translateY(0); }
+  .raz-modal-header, .raz-modal-body, .raz-modal-footer { padding-left: 20px; padding-right: 20px; }
+}

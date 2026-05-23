@@ -1,0 +1,92 @@
+/**
+ * RAZFinance.css — Styling Halaman Keuangan SIMAJURAZ
+ * Versi: 1.0.0 | Dibuat: 2026-05-21
+ */
+
+/* === SUMMARY CARDS === */
+.fin-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.fin-summary-card {
+  padding: 20px; background: var(--raz-card); border-radius: var(--raz-radius-md);
+  border: 1px solid var(--raz-border); text-align: center; transition: var(--raz-transition);
+}
+.fin-summary-card:hover { transform: translateY(-2px); box-shadow: var(--raz-shadow-md); }
+.fin-summary-card .fin-label { font-size: 0.78rem; color: var(--raz-text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.fin-summary-card .fin-value { font-size: 1.3rem; font-weight: 800; }
+.fin-summary-card .fin-value.income { color: var(--raz-success); }
+.fin-summary-card .fin-value.expense { color: var(--raz-danger); }
+.fin-summary-card .fin-value.profit { color: var(--raz-primary); }
+.fin-summary-card .fin-value.loss { color: var(--raz-danger); }
+
+/* === PERIOD FILTER BAR === */
+.fin-filter-bar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 20px; padding: 16px; background: var(--raz-card);
+  border-radius: var(--raz-radius-md); border: 1px solid var(--raz-border);
+}
+.fin-period-chips { display: flex; gap: 4px; }
+.fin-period-chip {
+  padding: 6px 14px; border: 1.5px solid var(--raz-border); border-radius: var(--raz-radius-full);
+  background: transparent; font-family: var(--raz-font); font-size: 0.8rem; font-weight: 600;
+  color: var(--raz-text-muted); cursor: pointer; transition: var(--raz-transition);
+}
+.fin-period-chip:hover { border-color: var(--raz-primary-light); color: var(--raz-primary); }
+.fin-period-chip.active { background: var(--raz-primary); color: #fff; border-color: var(--raz-primary); }
+.fin-date-inputs { display: flex; gap: 8px; align-items: center; margin-left: auto; }
+.fin-date-inputs input {
+  padding: 6px 12px; border: 1.5px solid var(--raz-border); border-radius: var(--raz-radius);
+  font-family: var(--raz-font); font-size: 0.82rem; outline: none;
+}
+.fin-date-inputs input:focus { border-color: var(--raz-primary); }
+
+/* === CASHFLOW TABLE TYPE BADGES === */
+.cf-type-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px; border-radius: var(--raz-radius-full);
+  font-size: 0.75rem; font-weight: 600;
+}
+.cf-type-badge.income { background: var(--raz-success-light); color: var(--raz-success); }
+.cf-type-badge.expense { background: var(--raz-danger-light); color: var(--raz-danger); }
+
+/* === SHIFT CARD === */
+.fin-shift-card {
+  display: flex; align-items: center; gap: 20px;
+  padding: 20px; background: var(--raz-primary-bg); border-radius: var(--raz-radius-md);
+  border: 1px solid rgba(79,70,229,0.15); margin-bottom: 20px;
+}
+.fin-shift-icon { font-size: 2rem; color: var(--raz-primary); }
+.fin-shift-info { flex: 1; }
+.fin-shift-status { font-weight: 700; font-size: 0.95rem; margin-bottom: 2px; }
+.fin-shift-detail { font-size: 0.82rem; color: var(--raz-text-muted); }
+
+/* === PROFIT SHARE === */
+.fin-profit-share {
+  padding: 24px; background: linear-gradient(135deg, #312E81, #4F46E5);
+  border-radius: var(--raz-radius-md); color: #fff; text-align: center;
+}
+.fin-profit-share h3 { color: #fff; margin-bottom: 16px; }
+.fin-profit-share .share-amount { font-size: 2rem; font-weight: 800; margin: 10px 0; }
+.fin-profit-share .share-slider { width: 100%; margin: 12px 0; accent-color: #fff; }
+.fin-profit-share .share-pct { font-size: 1.1rem; font-weight: 600; }
+
+/* === TABS KEUANGAN === */
+.fin-tabs { display: flex; gap: 4px; background: var(--raz-bg); border-radius: var(--raz-radius); padding: 4px; margin-bottom: 24px; width: fit-content; }
+.fin-tab {
+  padding: 8px 20px; border: none; border-radius: var(--raz-radius-sm); background: transparent;
+  font-family: var(--raz-font); font-size: 0.85rem; font-weight: 600;
+  color: var(--raz-text-muted); cursor: pointer; transition: var(--raz-transition);
+  display: flex; align-items: center; gap: 8px;
+}
+.fin-tab:hover { color: var(--raz-text); }
+.fin-tab.active { background: var(--raz-card); color: var(--raz-primary); box-shadow: var(--raz-shadow-sm); }
+.fin-tab-content { display: none; }
+.fin-tab-content.active { display: block; animation: fadeUp 0.3s ease; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .fin-filter-bar { flex-direction: column; align-items: stretch; }
+  .fin-date-inputs { margin-left: 0; }
+  .fin-shift-card { flex-direction: column; text-align: center; }
+  .fin-tabs { width: 100%; }
+  .fin-tab { flex: 1; justify-content: center; }
+}

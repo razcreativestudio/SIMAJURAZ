@@ -1,0 +1,334 @@
+/**
+ * RAZComponents.css — Komponen Reusable SIMAJURAZ
+ * Versi: 1.0.0 | Dibuat: 2026-05-21
+ * Deskripsi: Toast notification, buttons, data table, skeleton loading, form elements, pagination.
+ */
+
+/* ============================
+   BUTTONS — Tombol dengan Ikon
+   ============================ */
+.raz-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--raz-radius);
+  font-family: var(--raz-font);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--raz-transition);
+  white-space: nowrap;
+  line-height: 1.4;
+  position: relative;
+  overflow: hidden;
+}
+.raz-btn:active { transform: scale(0.97); }
+.raz-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.raz-btn .btn-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+/* Variasi warna tombol */
+.raz-btn-primary { background: var(--raz-primary); color: #fff; }
+.raz-btn-primary:hover:not(:disabled) { background: var(--raz-primary-dark); box-shadow: 0 4px 12px rgba(79,70,229,0.35); }
+
+.raz-btn-success { background: var(--raz-success); color: #fff; }
+.raz-btn-success:hover:not(:disabled) { background: #047857; box-shadow: 0 4px 12px rgba(5,150,105,0.35); }
+
+.raz-btn-danger { background: var(--raz-danger); color: #fff; }
+.raz-btn-danger:hover:not(:disabled) { background: #B91C1C; box-shadow: 0 4px 12px rgba(220,38,38,0.35); }
+
+.raz-btn-warning { background: var(--raz-warning); color: #fff; }
+.raz-btn-warning:hover:not(:disabled) { background: #B45309; }
+
+.raz-btn-secondary { background: var(--raz-bg); color: var(--raz-text-secondary); border: 1px solid var(--raz-border); }
+.raz-btn-secondary:hover:not(:disabled) { background: var(--raz-bg-dark); }
+
+.raz-btn-ghost { background: transparent; color: var(--raz-text-secondary); }
+.raz-btn-ghost:hover:not(:disabled) { background: var(--raz-bg); }
+
+/* Ukuran tombol */
+.raz-btn-sm { padding: 6px 14px; font-size: 0.8rem; }
+.raz-btn-lg { padding: 14px 28px; font-size: 1rem; }
+.raz-btn-xl { padding: 16px 32px; font-size: 1.1rem; border-radius: var(--raz-radius-md); }
+.raz-btn-icon-only { padding: 10px; width: 40px; height: 40px; }
+.raz-btn-icon-only.raz-btn-sm { width: 32px; height: 32px; padding: 6px; }
+.raz-btn-block { width: 100%; }
+
+/* Spinner loading di dalam tombol */
+.raz-btn .spinner {
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: razSpin 0.6s linear infinite;
+}
+@keyframes razSpin { to { transform: rotate(360deg); } }
+
+/* ============================
+   FORM ELEMENTS — Input, Select
+   ============================ */
+.raz-form-group { margin-bottom: 16px; }
+
+.raz-form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--raz-text-secondary);
+  margin-bottom: 6px;
+}
+.raz-form-label .required { color: var(--raz-danger); margin-left: 2px; }
+
+.raz-form-input,
+.raz-form-select,
+.raz-form-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--raz-border);
+  border-radius: var(--raz-radius);
+  font-family: var(--raz-font);
+  font-size: 0.9rem;
+  color: var(--raz-text);
+  background: var(--raz-card);
+  transition: var(--raz-transition);
+  outline: none;
+}
+.raz-form-input:focus,
+.raz-form-select:focus,
+.raz-form-textarea:focus {
+  border-color: var(--raz-primary);
+  box-shadow: 0 0 0 3px var(--raz-primary-bg);
+}
+.raz-form-input::placeholder { color: var(--raz-text-light); }
+.raz-form-input.error { border-color: var(--raz-danger); }
+.raz-form-input.error:focus { box-shadow: 0 0 0 3px var(--raz-danger-light); }
+
+.raz-form-hint { font-size: 0.78rem; color: var(--raz-text-muted); margin-top: 4px; }
+.raz-form-error { font-size: 0.78rem; color: var(--raz-danger); margin-top: 4px; }
+
+.raz-form-textarea { min-height: 100px; resize: vertical; }
+
+/* Input group (input + icon/button) */
+.raz-input-group {
+  display: flex;
+  align-items: stretch;
+}
+.raz-input-group .raz-form-input { border-radius: var(--raz-radius) 0 0 var(--raz-radius); }
+.raz-input-group .raz-btn { border-radius: 0 var(--raz-radius) var(--raz-radius) 0; }
+.raz-input-group .input-icon {
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 14px; background: var(--raz-bg);
+  border: 1.5px solid var(--raz-border); border-right: none;
+  border-radius: var(--raz-radius) 0 0 var(--raz-radius);
+  color: var(--raz-text-muted); font-size: 1.1rem;
+}
+.raz-input-group .input-icon + .raz-form-input { border-radius: 0 var(--raz-radius) var(--raz-radius) 0; }
+
+/* ============================
+   DATA TABLE — Tabel dengan Aksi
+   ============================ */
+.raz-table-wrapper { overflow-x: auto; }
+
+.raz-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.raz-table-header-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.raz-table-header-right { display: flex; align-items: center; gap: 8px; }
+
+.raz-table-search {
+  position: relative;
+}
+.raz-table-search input {
+  padding: 8px 14px 8px 38px;
+  border: 1.5px solid var(--raz-border);
+  border-radius: var(--raz-radius);
+  font-size: 0.85rem;
+  min-width: 250px;
+  transition: var(--raz-transition);
+  font-family: var(--raz-font);
+  outline: none;
+}
+.raz-table-search input:focus { border-color: var(--raz-primary); box-shadow: 0 0 0 3px var(--raz-primary-bg); }
+.raz-table-search .search-icon {
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  color: var(--raz-text-muted); font-size: 1rem; pointer-events: none;
+}
+
+.raz-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.raz-table thead th {
+  background: var(--raz-bg);
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--raz-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--raz-border);
+  white-space: nowrap;
+}
+.raz-table tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--raz-border);
+  vertical-align: middle;
+}
+.raz-table tbody tr { transition: var(--raz-transition); }
+.raz-table tbody tr:hover { background: var(--raz-primary-bg); }
+.raz-table tbody tr:last-child td { border-bottom: none; }
+
+/* Kolom aksi */
+.raz-table .col-action { text-align: right; white-space: nowrap; }
+.raz-table .action-btns { display: flex; gap: 4px; justify-content: flex-end; }
+
+/* Empty state tabel */
+.raz-table-empty {
+  text-align: center;
+  padding: 60px 20px;
+}
+.raz-table-empty .empty-icon { font-size: 3rem; color: var(--raz-text-light); margin-bottom: 16px; }
+.raz-table-empty .empty-title { font-size: 1.1rem; font-weight: 600; color: var(--raz-text-secondary); margin-bottom: 8px; }
+.raz-table-empty .empty-desc { color: var(--raz-text-muted); font-size: 0.875rem; margin-bottom: 20px; }
+
+/* ============================
+   PAGINATION — Navigasi Halaman
+   ============================ */
+.raz-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--raz-border);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.raz-pagination-info { font-size: 0.8rem; color: var(--raz-text-muted); }
+.raz-pagination-buttons { display: flex; gap: 4px; }
+.raz-pagination-buttons button {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--raz-border); border-radius: var(--raz-radius-sm);
+  background: var(--raz-card); color: var(--raz-text-secondary);
+  font-size: 0.85rem; cursor: pointer; transition: var(--raz-transition);
+  font-family: var(--raz-font);
+}
+.raz-pagination-buttons button:hover { border-color: var(--raz-primary); color: var(--raz-primary); }
+.raz-pagination-buttons button.active { background: var(--raz-primary); color: #fff; border-color: var(--raz-primary); }
+.raz-pagination-buttons button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ============================
+   TOAST NOTIFICATION
+   ============================ */
+.raz-toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.raz-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 18px;
+  min-width: 320px;
+  max-width: 420px;
+  background: var(--raz-card);
+  border-radius: var(--raz-radius-md);
+  box-shadow: var(--raz-shadow-xl);
+  border-left: 4px solid var(--raz-primary);
+  pointer-events: auto;
+  animation: razToastIn 0.35s ease;
+  transition: var(--raz-transition-slow);
+}
+.raz-toast.removing { animation: razToastOut 0.3s ease forwards; }
+
+.raz-toast.success { border-left-color: var(--raz-success); }
+.raz-toast.danger { border-left-color: var(--raz-danger); }
+.raz-toast.warning { border-left-color: var(--raz-warning); }
+.raz-toast.info { border-left-color: var(--raz-info); }
+
+.raz-toast-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+.raz-toast.success .raz-toast-icon { color: var(--raz-success); }
+.raz-toast.danger .raz-toast-icon { color: var(--raz-danger); }
+.raz-toast.warning .raz-toast-icon { color: var(--raz-warning); }
+.raz-toast.info .raz-toast-icon { color: var(--raz-info); }
+
+.raz-toast-body { flex: 1; }
+.raz-toast-title { font-weight: 600; font-size: 0.9rem; color: var(--raz-text); }
+.raz-toast-message { font-size: 0.82rem; color: var(--raz-text-muted); margin-top: 2px; }
+
+.raz-toast-close {
+  background: none; border: none; cursor: pointer;
+  color: var(--raz-text-light); font-size: 1.1rem;
+  padding: 2px; transition: var(--raz-transition);
+}
+.raz-toast-close:hover { color: var(--raz-text); }
+
+@keyframes razToastIn { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: translateX(0); } }
+@keyframes razToastOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(100%); } }
+
+/* ============================
+   SKELETON LOADING
+   ============================ */
+.raz-skeleton {
+  background: linear-gradient(90deg, var(--raz-bg) 25%, var(--raz-bg-dark) 50%, var(--raz-bg) 75%);
+  background-size: 200% 100%;
+  animation: razShimmer 1.5s infinite;
+  border-radius: var(--raz-radius-sm);
+}
+.raz-skeleton-text { height: 14px; margin-bottom: 10px; }
+.raz-skeleton-text:last-child { width: 70%; }
+.raz-skeleton-title { height: 24px; width: 40%; margin-bottom: 16px; }
+.raz-skeleton-avatar { width: 48px; height: 48px; border-radius: 50%; }
+.raz-skeleton-card { height: 120px; }
+.raz-skeleton-table-row { height: 48px; margin-bottom: 4px; }
+
+@keyframes razShimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+/* ============================
+   TOOLTIP
+   ============================ */
+[data-tooltip] { position: relative; }
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%; transform: translateX(-50%) scale(0.9);
+  padding: 6px 12px;
+  background: var(--raz-text);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: var(--raz-radius-sm);
+  white-space: nowrap;
+  opacity: 0; visibility: hidden;
+  transition: var(--raz-transition);
+  pointer-events: none;
+  z-index: 1000;
+}
+[data-tooltip]:hover::after { opacity: 1; visibility: visible; transform: translateX(-50%) scale(1); }
+
+/* ============================
+   RESPONSIVE OVERRIDES
+   ============================ */
+@media (max-width: 768px) {
+  .raz-table-header { flex-direction: column; align-items: stretch; }
+  .raz-table-search input { min-width: auto; width: 100%; }
+  .raz-toast-container { left: 12px; right: 12px; top: 12px; }
+  .raz-toast { min-width: auto; }
+}

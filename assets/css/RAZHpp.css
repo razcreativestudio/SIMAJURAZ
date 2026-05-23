@@ -1,0 +1,115 @@
+/**
+ * RAZHpp.css — Styling Kalkulator HPP SIMAJURAZ
+ * Versi: 1.0.0 | Dibuat: 2026-05-22
+ * Deskripsi: Layout 2 kolom (list + detail) untuk kalkulator HPP.
+ */
+
+/* === LAYOUT 2 KOLOM === */
+.hpp-layout { display: grid; grid-template-columns: 280px 1fr; gap: 20px; min-height: calc(100vh - 140px); }
+
+/* === LIST PANEL (KIRI) === */
+.hpp-list-panel { background: var(--raz-card); border-radius: var(--raz-radius-md); border: 1px solid var(--raz-border); display: flex; flex-direction: column; overflow: hidden; }
+.hpp-list-header { padding: 16px; border-bottom: 1px solid var(--raz-border); }
+.hpp-list-header h3 { font-size: 0.9rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.hpp-list-items { flex: 1; overflow-y: auto; padding: 8px; }
+.hpp-list-item {
+  padding: 12px; margin-bottom: 4px; border-radius: var(--raz-radius); cursor: pointer;
+  transition: var(--raz-transition); border: 1.5px solid transparent;
+}
+.hpp-list-item:hover { background: var(--raz-bg); }
+.hpp-list-item.active { background: var(--raz-primary-bg); border-color: var(--raz-primary); }
+.hpp-list-item-name { font-weight: 600; font-size: 0.88rem; margin-bottom: 2px; }
+.hpp-list-item-hpp { font-size: 0.78rem; color: var(--raz-text-muted); }
+.hpp-list-item-hpp strong { color: var(--raz-primary); }
+.hpp-list-empty { text-align: center; padding: 32px 16px; color: var(--raz-text-muted); font-size: 0.85rem; }
+.hpp-list-empty i { font-size: 2rem; display: block; margin-bottom: 8px; opacity: 0.4; }
+
+/* === DETAIL PANEL (KANAN) === */
+.hpp-detail-panel { display: flex; flex-direction: column; gap: 16px; }
+.hpp-detail-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 300px; color: var(--raz-text-muted); background: var(--raz-card); border-radius: var(--raz-radius-md); border: 1px solid var(--raz-border); padding: 40px; }
+.hpp-detail-empty i { font-size: 3rem; margin-bottom: 12px; opacity: 0.3; }
+.hpp-detail-empty p { font-size: 0.9rem; line-height: 1.6; }
+
+/* === SECTION CARDS === */
+.hpp-section { background: var(--raz-card); border-radius: var(--raz-radius-md); border: 1px solid var(--raz-border); overflow: hidden; }
+.hpp-section-header {
+  padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--raz-border); background: var(--raz-bg);
+}
+.hpp-section-title { font-size: 0.88rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.hpp-section-title i { color: var(--raz-primary); }
+.hpp-section-body { padding: 16px; }
+
+/* === EDUKASI / INFO BOX === */
+.hpp-info-box { background: var(--raz-primary-bg); border-left: 4px solid var(--raz-primary); padding: 12px 16px; border-radius: 0 var(--raz-radius) var(--raz-radius) 0; margin-bottom: 16px; font-size: 0.82rem; line-height: 1.5; color: var(--raz-text); }
+.hpp-info-box h4 { font-size: 0.85rem; color: var(--raz-primary); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.hpp-info-box p { margin-bottom: 6px; }
+.hpp-info-box p:last-child { margin-bottom: 0; }
+.hpp-info-box ul { padding-left: 20px; margin-top: 4px; margin-bottom: 4px; }
+
+/* === DYNAMIC ROW === */
+.hpp-row { display: grid; gap: 10px; align-items: end; margin-bottom: 10px; padding: 10px 12px; background: var(--raz-bg); border-radius: var(--raz-radius); border: 1px solid var(--raz-border); position: relative; }
+.hpp-row-ing { grid-template-columns: 2fr 1fr 1fr 1.2fr 1fr 36px; }
+.hpp-row-pkg { grid-template-columns: 2fr 1fr 1fr 1.2fr 1fr 1fr 36px; }
+.hpp-row-ext { grid-template-columns: 2fr 1.5fr 1fr 36px; }
+.hpp-row label { font-size: 0.72rem; font-weight: 600; color: var(--raz-text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; display: block; }
+.hpp-row input, .hpp-row select { padding: 7px 10px; border: 1.5px solid var(--raz-border); border-radius: var(--raz-radius-sm); font-family: var(--raz-font); font-size: 0.82rem; background: var(--raz-card); color: var(--raz-text); outline: none; width: 100%; }
+.hpp-row input:focus { border-color: var(--raz-primary); box-shadow: 0 0 0 3px var(--raz-primary-bg); }
+.hpp-row-del { background: none; border: none; color: var(--raz-text-muted); cursor: pointer; padding: 6px; border-radius: var(--raz-radius-sm); transition: var(--raz-transition); align-self: end; margin-bottom: 2px; }
+.hpp-row-del:hover { color: var(--raz-danger); background: var(--raz-danger-light); }
+.hpp-per-portion { font-size: 0.75rem; color: var(--raz-primary); font-weight: 700; text-align: right; padding-top: 4px; }
+.hpp-add-btn { margin-top: 8px; }
+
+/* === OVERHEAD SECTION === */
+.hpp-overhead { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.hpp-overhead-input { display: flex; align-items: center; gap: 8px; }
+.hpp-overhead-input input { width: 80px; text-align: center; padding: 8px; border: 1.5px solid var(--raz-border); border-radius: var(--raz-radius-sm); font-family: var(--raz-font); font-size: 1rem; font-weight: 700; background: var(--raz-card); color: var(--raz-text); outline: none; }
+.hpp-overhead-input input:focus { border-color: var(--raz-primary); }
+.hpp-overhead-info { font-size: 0.78rem; color: var(--raz-text-muted); line-height: 1.6; }
+.hpp-overhead-info strong { color: var(--raz-text); }
+
+/* === RINGKASAN HPP === */
+.hpp-summary-card { background: linear-gradient(135deg, #312E81, #4F46E5); border-radius: var(--raz-radius-md); padding: 24px; color: #fff; }
+.hpp-summary-card h3 { color: #fff; font-size: 0.95rem; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.hpp-sum-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.88rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.hpp-sum-row:last-child { border-bottom: none; }
+.hpp-sum-row.total { font-weight: 800; font-size: 1.1rem; border-top: 2px solid rgba(255,255,255,0.3); margin-top: 8px; padding-top: 12px; }
+.hpp-sum-row .hpp-sum-label { opacity: 0.85; }
+
+/* === HARGA JUAL === */
+.hpp-price-section { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.hpp-price-card { padding: 20px; border-radius: var(--raz-radius); text-align: center; border: 1.5px solid var(--raz-border); }
+.hpp-price-card.recommended { background: var(--raz-success-light); border-color: var(--raz-success); }
+.hpp-price-card.user-price { background: var(--raz-bg); }
+.hpp-price-label { font-size: 0.78rem; color: var(--raz-text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.hpp-price-value { font-size: 1.5rem; font-weight: 800; }
+.hpp-price-card.recommended .hpp-price-value { color: var(--raz-success); }
+.hpp-price-sub { font-size: 0.78rem; color: var(--raz-text-muted); margin-top: 4px; }
+.hpp-price-input { width: 100%; text-align: center; padding: 10px; border: 1.5px solid var(--raz-border); border-radius: var(--raz-radius-sm); font-family: var(--raz-font); font-size: 1.3rem; font-weight: 700; color: var(--raz-text); outline: none; margin-bottom: 6px; }
+.hpp-price-input:focus { border-color: var(--raz-primary); box-shadow: 0 0 0 3px var(--raz-primary-bg); }
+
+/* === FEEDBACK HARGA === */
+.hpp-feedback { padding: 14px 16px; border-radius: var(--raz-radius); font-size: 0.85rem; line-height: 1.6; margin-top: 12px; }
+.hpp-feedback.good { background: var(--raz-success-light); color: #065F46; border: 1px solid rgba(16,185,129,0.3); }
+.hpp-feedback.warn { background: var(--raz-danger-light); color: #991B1B; border: 1px solid rgba(239,68,68,0.3); }
+.hpp-feedback i { margin-right: 4px; }
+
+/* === MARGIN INFO === */
+.hpp-margin-info { background: var(--raz-bg); border-radius: var(--raz-radius); padding: 14px 16px; margin-top: 12px; }
+.hpp-margin-info h4 { font-size: 0.82rem; margin-bottom: 8px; }
+.hpp-margin-tip { font-size: 0.78rem; color: var(--raz-text-muted); padding: 3px 0; display: flex; justify-content: space-between; }
+
+/* === ACTION BAR === */
+.hpp-action-bar { display: flex; gap: 10px; flex-wrap: wrap; padding: 16px 0; }
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  .hpp-layout { grid-template-columns: 1fr; }
+  .hpp-row-ing { grid-template-columns: 1fr 1fr; }
+  .hpp-row-pkg, .hpp-row-ext { grid-template-columns: 1fr 1fr; }
+  .hpp-overhead { grid-template-columns: 1fr; }
+  .hpp-price-section { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .hpp-row-ing { grid-template-columns: 1fr; }
+}

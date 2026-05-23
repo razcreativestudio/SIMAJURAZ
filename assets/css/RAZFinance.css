@@ -1,0 +1,172 @@
+/**
+ * RAZFinance.css — Styling Halaman Keuangan SIMAJURAZ
+ * Versi: 1.0.0 | Dibuat: 2026-05-21
+ */
+
+/* === SUMMARY CARDS === */
+.fin-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.fin-summary-card {
+  padding: 20px; background: var(--raz-card); border-radius: var(--raz-radius-md);
+  border: 1px solid var(--raz-border); text-align: center; transition: var(--raz-transition);
+}
+.fin-summary-card:hover { transform: translateY(-2px); box-shadow: var(--raz-shadow-md); }
+.fin-summary-card .fin-label { font-size: 0.78rem; color: var(--raz-text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.fin-summary-card .fin-value { font-size: 1.3rem; font-weight: 800; }
+.fin-summary-card .fin-value.income { color: var(--raz-success); }
+.fin-summary-card .fin-value.expense { color: var(--raz-danger); }
+.fin-summary-card .fin-value.profit { color: var(--raz-primary); }
+.fin-summary-card .fin-value.loss { color: var(--raz-danger); }
+
+/* === PERIOD FILTER BAR === */
+.fin-filter-bar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 20px; padding: 16px; background: var(--raz-card);
+  border-radius: var(--raz-radius-md); border: 1px solid var(--raz-border);
+}
+.fin-period-chips { display: flex; gap: 4px; }
+.fin-period-chip {
+  padding: 6px 14px; border: 1.5px solid var(--raz-border); border-radius: var(--raz-radius-full);
+  background: transparent; font-family: var(--raz-font); font-size: 0.8rem; font-weight: 600;
+  color: var(--raz-text-muted); cursor: pointer; transition: var(--raz-transition);
+}
+.fin-period-chip:hover { border-color: var(--raz-primary-light); color: var(--raz-primary); }
+.fin-period-chip.active { background: var(--raz-primary); color: #fff; border-color: var(--raz-primary); }
+.fin-date-inputs { display: flex; gap: 8px; align-items: center; margin-left: auto; }
+.fin-date-inputs input {
+  padding: 6px 12px; border: 1.5px solid var(--raz-border); border-radius: var(--raz-radius);
+  font-family: var(--raz-font); font-size: 0.82rem; outline: none;
+}
+.fin-date-inputs input:focus { border-color: var(--raz-primary); }
+
+/* === CASHFLOW TABLE TYPE BADGES === */
+.cf-type-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px; border-radius: var(--raz-radius-full);
+  font-size: 0.75rem; font-weight: 600;
+}
+.cf-type-badge.income { background: var(--raz-success-light); color: var(--raz-success); }
+.cf-type-badge.expense { background: var(--raz-danger-light); color: var(--raz-danger); }
+
+/* === SHIFT CARD === */
+.fin-shift-card {
+  display: flex; align-items: center; gap: 20px;
+  padding: 20px; background: var(--raz-primary-bg); border-radius: var(--raz-radius-md);
+  border: 1px solid rgba(79,70,229,0.15); margin-bottom: 20px;
+}
+.fin-shift-icon { font-size: 2rem; color: var(--raz-primary); }
+.fin-shift-info { flex: 1; }
+.fin-shift-status { font-weight: 700; font-size: 0.95rem; margin-bottom: 2px; }
+.fin-shift-detail { font-size: 0.82rem; color: var(--raz-text-muted); }
+
+/* === PROFIT SHARING — Header Keuntungan Bersih === */
+.ps-net-card {
+  padding: 28px; background: linear-gradient(135deg, #312E81, #4F46E5);
+  border-radius: var(--raz-radius-md); color: #fff; text-align: center;
+}
+.ps-net-label { font-size: 0.82rem; opacity: 0.85; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.ps-net-amount { font-size: 2.2rem; font-weight: 800; margin: 8px 0; }
+.ps-net-amount.negative { color: #FCA5A5; }
+.ps-net-breakdown { font-size: 0.82rem; opacity: 0.7; margin-bottom: 16px; }
+.ps-net-breakdown span { font-weight: 700; opacity: 1; }
+.ps-period-chips { display: flex; gap: 6px; justify-content: center; }
+.ps-chip {
+  padding: 5px 14px; border: 1.5px solid rgba(255,255,255,0.3); border-radius: var(--raz-radius-full);
+  background: transparent; color: rgba(255,255,255,0.8); font-family: var(--raz-font);
+  font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: var(--raz-transition);
+}
+.ps-chip:hover { background: rgba(255,255,255,0.15); color: #fff; }
+.ps-chip.active { background: #fff; color: #4F46E5; border-color: #fff; }
+
+/* === Distribusi Bagi Hasil === */
+.ps-shares-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.ps-share-item {
+  display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+  background: var(--raz-bg); border-radius: var(--raz-radius); border: 1px solid var(--raz-border);
+  transition: var(--raz-transition);
+}
+.ps-share-item:hover { box-shadow: var(--raz-shadow-sm); border-color: var(--raz-primary-light); }
+.ps-share-color { width: 4px; height: 40px; border-radius: 4px; flex-shrink: 0; }
+.ps-share-info { flex: 1; min-width: 0; }
+.ps-share-name { font-weight: 600; font-size: 0.88rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ps-share-badge { font-size: 0.68rem; padding: 2px 8px; border-radius: var(--raz-radius-full); font-weight: 600; }
+.ps-share-bar-wrap { height: 6px; background: var(--raz-border); border-radius: 3px; overflow: hidden; }
+.ps-share-bar { height: 100%; border-radius: 3px; transition: width 0.3s ease; min-width: 2px; }
+.ps-share-pct { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+.ps-pct-input {
+  width: 56px; padding: 6px 4px; text-align: center; border: 1.5px solid var(--raz-border);
+  border-radius: var(--raz-radius-sm); font-family: var(--raz-font); font-size: 0.88rem;
+  font-weight: 700; color: var(--raz-text); background: var(--raz-card); outline: none;
+}
+.ps-pct-input:focus { border-color: var(--raz-primary); box-shadow: 0 0 0 3px var(--raz-primary-bg); }
+.ps-share-pct span { font-size: 0.82rem; color: var(--raz-text-muted); font-weight: 600; }
+.ps-share-amount { font-weight: 700; font-size: 0.88rem; color: var(--raz-primary); min-width: 100px; text-align: right; }
+.ps-share-delete {
+  background: none; border: none; color: var(--raz-text-muted); cursor: pointer;
+  padding: 6px; border-radius: var(--raz-radius-sm); transition: var(--raz-transition);
+}
+.ps-share-delete:hover { color: var(--raz-danger); background: var(--raz-danger-light); }
+
+/* === Total Bar === */
+.ps-total-bar-wrap { margin-bottom: 16px; }
+.ps-total-bar { height: 8px; background: var(--raz-border); border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+.ps-total-bar-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease, background 0.3s; background: var(--raz-primary); }
+.ps-total-info { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--raz-text-muted); }
+.ps-status-ok { color: var(--raz-success); font-weight: 600; display: flex; align-items: center; gap: 4px; }
+.ps-status-over { color: var(--raz-danger); font-weight: 600; display: flex; align-items: center; gap: 4px; }
+.ps-pct-indicator { font-size: 0.82rem; font-weight: 700; color: var(--raz-text-muted); padding: 4px 12px; border-radius: var(--raz-radius-full); background: var(--raz-bg); }
+.ps-pct-indicator.full { background: var(--raz-success-light); color: var(--raz-success); }
+.ps-pct-indicator.over { background: var(--raz-danger-light); color: var(--raz-danger); }
+.ps-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* === Empty States === */
+.ps-empty { text-align: center; padding: 32px; color: var(--raz-text-muted); }
+.ps-empty i { font-size: 2.5rem; margin-bottom: 12px; display: block; opacity: 0.4; }
+.ps-empty p { font-size: 0.85rem; line-height: 1.6; }
+.ps-empty-sm { text-align: center; padding: 20px; color: var(--raz-text-muted); font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+/* === Riwayat Laporan === */
+.ps-reports-list { display: flex; flex-direction: column; gap: 8px; }
+.ps-report-item {
+  display: flex; align-items: center; gap: 16px; padding: 14px 16px;
+  background: var(--raz-bg); border-radius: var(--raz-radius); border: 1px solid var(--raz-border);
+  transition: var(--raz-transition);
+}
+.ps-report-item:hover { box-shadow: var(--raz-shadow-sm); }
+.ps-report-info { flex: 1; min-width: 0; }
+.ps-report-period { font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; }
+.ps-report-meta { font-size: 0.78rem; color: var(--raz-text-muted); margin-top: 2px; }
+.ps-report-profit { font-weight: 800; font-size: 0.95rem; }
+.ps-report-profit.profit { color: var(--raz-success); }
+.ps-report-profit.loss { color: var(--raz-danger); }
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .ps-net-amount { font-size: 1.6rem; }
+  .ps-period-chips { flex-wrap: wrap; }
+  .ps-share-item { flex-wrap: wrap; gap: 8px; }
+  .ps-share-amount { min-width: auto; text-align: left; }
+  .ps-report-item { flex-wrap: wrap; }
+}
+
+/* === TABS KEUANGAN === */
+.fin-tabs { display: flex; gap: 4px; background: var(--raz-bg); border-radius: var(--raz-radius); padding: 4px; margin-bottom: 24px; width: fit-content; }
+.fin-tab {
+  padding: 8px 20px; border: none; border-radius: var(--raz-radius-sm); background: transparent;
+  font-family: var(--raz-font); font-size: 0.85rem; font-weight: 600;
+  color: var(--raz-text-muted); cursor: pointer; transition: var(--raz-transition);
+  display: flex; align-items: center; gap: 8px;
+}
+.fin-tab:hover { color: var(--raz-text); }
+.fin-tab.active { background: var(--raz-card); color: var(--raz-primary); box-shadow: var(--raz-shadow-sm); }
+.fin-tab-content { display: none; }
+.fin-tab-content.active { display: block; animation: fadeUp 0.3s ease; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .fin-filter-bar { flex-direction: column; align-items: stretch; }
+  .fin-date-inputs { margin-left: 0; }
+  .fin-shift-card { flex-direction: column; text-align: center; }
+  .fin-tabs { width: 100%; }
+  .fin-tab { flex: 1; justify-content: center; }
+}
