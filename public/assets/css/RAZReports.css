@@ -1,0 +1,72 @@
+/**
+ * RAZReports.css — Styling Halaman Laporan SIMAJURAZ
+ * Versi: 1.0.0 | Dibuat: 2026-05-21
+ */
+
+/* === REPORT TYPE SELECTOR === */
+.rpt-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.rpt-type-card {
+  padding: 20px; background: var(--raz-card); border: 2px solid var(--raz-border);
+  border-radius: var(--raz-radius-md); cursor: pointer; transition: var(--raz-transition);
+  text-align: center;
+}
+.rpt-type-card:hover { border-color: var(--raz-primary-light); transform: translateY(-2px); }
+.rpt-type-card.active { border-color: var(--raz-primary); background: var(--raz-primary-bg); }
+.rpt-type-card i { font-size: 2rem; color: var(--raz-primary); display: block; margin-bottom: 8px; }
+.rpt-type-card .rpt-type-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 2px; }
+.rpt-type-card .rpt-type-desc { font-size: 0.75rem; color: var(--raz-text-muted); }
+
+/* === REPORT FILTER BAR === */
+.rpt-filter {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 16px; background: var(--raz-card); border: 1px solid var(--raz-border);
+  border-radius: var(--raz-radius-md); margin-bottom: 20px;
+}
+.rpt-filter label { font-size: 0.82rem; font-weight: 600; color: var(--raz-text-secondary); }
+.rpt-filter input[type="date"] {
+  padding: 8px 12px; border: 1.5px solid var(--raz-border); border-radius: var(--raz-radius);
+  font-family: var(--raz-font); font-size: 0.85rem; outline: none;
+}
+.rpt-filter input:focus { border-color: var(--raz-primary); }
+
+/* === P&L REPORT TABLE === */
+.rpt-pl-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.rpt-pl-table th { text-align: left; padding: 10px 16px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--raz-text-muted); border-bottom: 2px solid var(--raz-border); }
+.rpt-pl-table td { padding: 10px 16px; border-bottom: 1px solid var(--raz-border); }
+.rpt-pl-table .pl-section { font-weight: 700; font-size: 0.82rem; color: var(--raz-text-secondary); background: var(--raz-bg); text-transform: uppercase; letter-spacing: 0.5px; }
+.rpt-pl-table .pl-total { font-weight: 800; font-size: 1rem; }
+.rpt-pl-table .pl-indent { padding-left: 32px; }
+.rpt-pl-table .text-right { text-align: right; }
+.rpt-pl-table .text-success { color: var(--raz-success); }
+.rpt-pl-table .text-danger { color: var(--raz-danger); }
+
+/* === REPORT CONTENT SECTIONS === */
+.rpt-section { display: none; }
+.rpt-section.active { display: block; animation: fadeUp 0.3s ease; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+/* === REPORT SUMMARY ROW === */
+.rpt-summary { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.rpt-sum-card {
+  flex: 1; min-width: 150px; padding: 16px; background: var(--raz-card);
+  border: 1px solid var(--raz-border); border-radius: var(--raz-radius-md); text-align: center;
+}
+.rpt-sum-label { font-size: 0.72rem; color: var(--raz-text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.rpt-sum-value { font-size: 1.15rem; font-weight: 800; margin-top: 4px; }
+
+/* === PDF PRINT BUTTON === */
+.rpt-export-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; background: linear-gradient(135deg, #DC2626, #B91C1C);
+  color: #fff; border: none; border-radius: var(--raz-radius);
+  font-family: var(--raz-font); font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; transition: var(--raz-transition);
+}
+.rpt-export-btn:hover { box-shadow: 0 4px 16px rgba(220,38,38,0.35); transform: translateY(-1px); }
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .rpt-types { grid-template-columns: repeat(2, 1fr); }
+  .rpt-filter { flex-direction: column; align-items: stretch; }
+  .rpt-summary { flex-direction: column; }
+}

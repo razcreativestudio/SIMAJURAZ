@@ -15,3 +15,5 @@
 | 8 | Laporan & PDF Export | 🟢 Selesai | 100% |
 
 ## Total Progress: ██████████ 100% 🎉
+
+- [x] (23 Mei 2026) Revamp README.md, animasi Landing Page, Injeksi Footer raz.my.id, dan Fix Translasi Knowledge Base (EN).

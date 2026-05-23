@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80" width="100%" height="100%">
+  <!-- Definisi Warna Gradien -->
+  <defs>
+    <linearGradient id="razPrimary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9" /> <!-- Biru Muda / Modern Tech -->
+      <stop offset="100%" stop-color="#2563eb" /> <!-- Biru Gelap / Trust & Security -->
+    </linearGradient>
+    <linearGradient id="razAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" /> <!-- Kuning Amber / Growth -->
+      <stop offset="100%" stop-color="#ea580c" /> <!-- Oranye / Energy -->
+    </linearGradient>
+  </defs>
+
+  <!-- Ikon: Abstrak Mesin Kasir & Grafik Pertumbuhan -->
+  <g transform="translate(10, 15)">
+    <!-- Badan Layar POS -->
+    <path d="M10,40 L10,15 A5,5 0 0,1 15,10 L35,10 A5,5 0 0,1 40,15 L40,40" fill="none" stroke="url(#razPrimary)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Laci Kasir -->
+    <path d="M5,45 L45,45 A5,5 0 0,1 50,50 L50,55 A5,5 0 0,1 45,60 L5,60 A5,5 0 0,1 0,55 L0,50 A5,5 0 0,1 5,45 Z" fill="url(#razPrimary)" />
+    <!-- Panah Pertumbuhan (Arrow Up) -->
+    <path d="M16,33 L25,22 L34,33" fill="none" stroke="url(#razAccent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M25,22 L25,45" fill="none" stroke="url(#razAccent)" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- Tipografi Teks Logo -->
+  <text x="75" y="45" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-size="28" font-weight="800" fill="#ffffff" letter-spacing="-0.5">
+    SIMAJU<tspan fill="url(#razAccent)">RAZ</tspan>
+  </text>
+  <text x="77" y="60" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-size="8.3" font-weight="700" fill="#d1d5db" letter-spacing="2.5">
+    SISTEM MANAJEMEN JUALAN
+  </text>
+  <text x="77" y="70" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-size="8" font-weight="700" fill="#d1d5db" letter-spacing="0.5">
+    By <tspan fill="url(#razAccent)">RAZ Creative Studio</tspan>
+  </text>
+</svg>

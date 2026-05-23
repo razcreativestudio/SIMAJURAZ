@@ -49,12 +49,8 @@ SIMAJURAZ dirancang tidak hanya sebagai mesin kasir, melainkan sebagai "**Otak B
 
 ## 📂 Struktur Proyek Terpadu
 
-> [!IMPORTANT]
-> **Versi Clean / Production Ready:** Jika Anda ingin men- *deploy* atau meng- *hosting* aplikasi ini, silakan gunakan isi dari folder **`public/`**. Folder `public/` telah dibersihkan dari file-file pengembangan internal (*backup*, catatan *developer*, riwayat *update*, dan skrip *testing*) sehingga sangat bersih dan aman untuk produksi.
-
 ```text
 SIMAJURAZ/
-├── public/                       # 🌟 VERSI CLEAN (SIAP UPLOAD KE HOSTING/VPS)
 ├── RAZinstall.php                # Wizard GUI Setup Database
 ├── RAZconfig.php                 # Modul Koneksi Database Dinamis
 ├── index.php                     # Halaman Landing & Autentikasi (Bilingual)

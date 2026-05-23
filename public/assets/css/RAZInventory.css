@@ -1,0 +1,96 @@
+/**
+ * RAZInventory.css — Styling Halaman Inventori SIMAJURAZ
+ * Versi: 1.0.0 | Dibuat: 2026-05-21
+ * Deskripsi: Layout dan komponen khusus halaman inventori barang.
+ */
+
+/* === TAB INVENTORI (Barang / Kategori) === */
+.inv-tabs {
+  display: flex; gap: 4px;
+  background: var(--raz-bg); border-radius: var(--raz-radius);
+  padding: 4px; margin-bottom: 24px; width: fit-content;
+}
+.inv-tab {
+  padding: 8px 20px; border: none; border-radius: var(--raz-radius-sm);
+  background: transparent; font-family: var(--raz-font);
+  font-size: 0.85rem; font-weight: 600; color: var(--raz-text-muted);
+  cursor: pointer; transition: var(--raz-transition);
+  display: flex; align-items: center; gap: 8px;
+}
+.inv-tab:hover { color: var(--raz-text); }
+.inv-tab.active { background: var(--raz-card); color: var(--raz-primary); box-shadow: var(--raz-shadow-sm); }
+.inv-tab .tab-count {
+  background: var(--raz-bg-dark); padding: 2px 8px; border-radius: var(--raz-radius-full);
+  font-size: 0.75rem; font-weight: 700;
+}
+.inv-tab.active .tab-count { background: var(--raz-primary-bg); color: var(--raz-primary); }
+
+/* Tab content */
+.inv-tab-content { display: none; }
+.inv-tab-content.active { display: block; animation: fadeUp 0.3s ease; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+/* === KATEGORI GRID === */
+.cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.cat-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px; background: var(--raz-card);
+  border: 1px solid var(--raz-border); border-radius: var(--raz-radius-md);
+  transition: var(--raz-transition); border-left: 4px solid var(--raz-primary);
+}
+.cat-card:hover { box-shadow: var(--raz-shadow-md); transform: translateY(-2px); }
+.cat-dot {
+  width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+}
+.cat-info { flex: 1; }
+.cat-name { font-weight: 600; font-size: 0.9rem; }
+.cat-count { font-size: 0.78rem; color: var(--raz-text-muted); }
+.cat-actions { display: flex; gap: 4px; }
+
+/* === STOCK BADGE === */
+.stock-ok { color: var(--raz-success); }
+.stock-low { color: var(--raz-warning); }
+.stock-out { color: var(--raz-danger); font-weight: 700; }
+
+/* === ITEM IMAGE di tabel === */
+.inv-item-cell { display: flex; align-items: center; gap: 12px; }
+.inv-item-img {
+  width: 40px; height: 40px; border-radius: var(--raz-radius-sm);
+  object-fit: cover; background: var(--raz-bg); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--raz-text-light); font-size: 1.2rem;
+  border: 1px solid var(--raz-border); overflow: hidden;
+}
+.inv-item-img img { width: 100%; height: 100%; object-fit: cover; }
+.inv-item-name { font-weight: 600; font-size: 0.88rem; }
+.inv-item-sku { font-size: 0.75rem; color: var(--raz-text-muted); font-family: var(--raz-font-mono); }
+
+/* === FORM HARGA (Grid 2 kolom) === */
+.inv-price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.inv-margin-info {
+  margin-top: 8px; padding: 10px 14px;
+  background: var(--raz-success-light); border-radius: var(--raz-radius-sm);
+  font-size: 0.82rem; color: var(--raz-success); font-weight: 600;
+  display: flex; align-items: center; gap: 8px;
+}
+.inv-margin-info.negative { background: var(--raz-danger-light); color: var(--raz-danger); }
+
+/* === FILTER AREA === */
+.inv-filters {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.inv-filter-select {
+  padding: 8px 14px; border: 1.5px solid var(--raz-border);
+  border-radius: var(--raz-radius); font-family: var(--raz-font);
+  font-size: 0.85rem; background: var(--raz-card); outline: none;
+  transition: var(--raz-transition); cursor: pointer;
+}
+.inv-filter-select:focus { border-color: var(--raz-primary); }
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .inv-price-grid { grid-template-columns: 1fr; }
+  .cat-grid { grid-template-columns: 1fr; }
+  .inv-tabs { width: 100%; }
+  .inv-tab { flex: 1; justify-content: center; }
+}

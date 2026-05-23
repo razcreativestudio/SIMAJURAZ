@@ -1,0 +1,83 @@
+/**
+ * RAZUsers.css — Styling Halaman Karyawan SIMAJURAZ
+ * Versi: 1.0.0 | Dibuat: 2026-05-21
+ */
+
+/* === USER STATS === */
+.usr-stats { display: flex; gap: 16px; margin-bottom: 24px; }
+.usr-stat {
+  flex: 1; padding: 20px; background: var(--raz-card);
+  border: 1px solid var(--raz-border); border-radius: var(--raz-radius-md);
+  display: flex; align-items: center; gap: 14px;
+}
+.usr-stat-icon {
+  width: 48px; height: 48px; border-radius: var(--raz-radius);
+  display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+}
+.usr-stat-icon.primary { background: var(--raz-primary-bg); color: var(--raz-primary); }
+.usr-stat-icon.success { background: var(--raz-success-light); color: var(--raz-success); }
+.usr-stat-icon.warning { background: var(--raz-warning-light); color: var(--raz-warning); }
+.usr-stat-value { font-size: 1.4rem; font-weight: 800; }
+.usr-stat-label { font-size: 0.78rem; color: var(--raz-text-muted); }
+
+/* === USER CARD (Grid mode alternatif) === */
+.usr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.usr-card {
+  padding: 20px; background: var(--raz-card); border: 1px solid var(--raz-border);
+  border-radius: var(--raz-radius-md); transition: var(--raz-transition);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.usr-card:hover { box-shadow: var(--raz-shadow-md); transform: translateY(-2px); }
+.usr-card-top { display: flex; align-items: center; gap: 12px; }
+.usr-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--raz-primary-bg); color: var(--raz-primary);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1rem; flex-shrink: 0;
+}
+.usr-avatar.inactive { background: var(--raz-bg); color: var(--raz-text-light); }
+.usr-card-info { flex: 1; min-width: 0; }
+.usr-card-name { font-weight: 600; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.usr-card-user { font-size: 0.78rem; color: var(--raz-text-muted); font-family: var(--raz-font-mono); }
+.usr-card-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 12px; border-top: 1px solid var(--raz-border);
+}
+.usr-card-date { font-size: 0.75rem; color: var(--raz-text-muted); }
+.usr-card-actions { display: flex; gap: 4px; }
+
+/* === STATUS TOGGLE === */
+.usr-toggle {
+  position: relative; width: 42px; height: 24px; cursor: pointer;
+}
+.usr-toggle input { display: none; }
+.usr-toggle-slider {
+  position: absolute; inset: 0; background: var(--raz-border-dark);
+  border-radius: 12px; transition: var(--raz-transition);
+}
+.usr-toggle-slider::before {
+  content: ''; position: absolute; width: 18px; height: 18px;
+  border-radius: 50%; background: #fff; top: 3px; left: 3px;
+  transition: var(--raz-transition); box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.usr-toggle input:checked + .usr-toggle-slider { background: var(--raz-success); }
+.usr-toggle input:checked + .usr-toggle-slider::before { transform: translateX(18px); }
+
+/* === PASSWORD REVEAL === */
+.usr-pw-reveal {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 16px; background: var(--raz-bg);
+  border-radius: var(--raz-radius); margin-top: 12px;
+  font-family: var(--raz-font-mono); font-size: 0.9rem;
+  border: 1px dashed var(--raz-border);
+}
+.usr-pw-reveal .copy-btn {
+  margin-left: auto; background: none; border: none;
+  color: var(--raz-primary); cursor: pointer; font-size: 1rem;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .usr-stats { flex-direction: column; }
+  .usr-grid { grid-template-columns: 1fr; }
+}
