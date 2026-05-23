@@ -344,18 +344,58 @@ let currentTransId = 0; // Simpan ID untuk dibagikan
 
 // (Removed getReceiptTemplateProps as it is now handled by RAZreceipt.php)
 
-function showReceipt(transId) {
+async function showReceipt(transId) {
   currentTransId = transId;
   
-  // Gunakan iframe agar tampilan preview sama persis dengan hasil cetak (RAZreceipt.php)
-  const iframeHtml = `
-    <div style="width:100%; height: 60vh; min-height:400px; display:flex; justify-content:center; background:#f0f0f0; border-radius:8px; overflow:hidden;">
-        <iframe src="RAZreceipt.php?id=${transId}&preview=1" style="width:100%; height:100%; border:none;"></iframe>
-    </div>
-  `;
-  
-  document.getElementById('receiptContent').innerHTML = iframeHtml;
+  const container = document.getElementById('receiptContent');
+  container.innerHTML = '<div style="text-align:center; padding:40px; font-family:sans-serif;">Memuat struk...</div>';
   RAZ.openModal('receiptModal');
+
+  try {
+      const res = await fetch(`RAZreceipt.php?id=${transId}&preview=1`);
+      if (!res.ok) throw new Error('Network response was not ok');
+      const htmlText = await res.text();
+      
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlText, 'text/html');
+      
+      const receiptStyle = doc.querySelector('style')?.innerHTML || '';
+      const receiptWrapper = doc.querySelector('.receipt-wrapper')?.outerHTML || '';
+      
+      if (!receiptWrapper) throw new Error('Invalid receipt format');
+
+      // Ubah selektor body agar tidak bocor ke luar shadow dom
+      const scopedStyle = receiptStyle.replace(/body\s*\{/g, '.shadow-body {');
+      
+      container.innerHTML = '';
+      
+      const host = document.createElement('div');
+      host.style.width = '100%';
+      host.style.display = 'flex';
+      host.style.justifyContent = 'center';
+      host.style.background = '#f0f0f0';
+      host.style.padding = '20px';
+      host.style.borderRadius = '8px';
+      host.style.minHeight = '400px';
+      host.style.maxHeight = '60vh';
+      host.style.overflow = 'auto';
+      
+      const shadowRoot = host.attachShadow({mode: 'open'});
+      shadowRoot.innerHTML = `
+          <style>${scopedStyle}</style>
+          <div class="shadow-body" style="display:flex; justify-content:center; width:100%; min-height:100%;">
+              ${receiptWrapper}
+          </div>
+      `;
+      
+      container.appendChild(host);
+  } catch(error) {
+      console.error("Gagal memuat struk:", error);
+      container.innerHTML = `<div style="text-align:center; padding:40px; color:red; font-family:sans-serif;">
+          <p>Gagal memuat preview struk.</p>
+          <p style="font-size:0.9rem; color:#666;">(Bisa terjadi karena aturan keamanan server. Anda tetap bisa mencetaknya dengan tombol di bawah)</p>
+      </div>`;
+  }
 }
 
 function printReceipt() {

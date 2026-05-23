@@ -13,6 +13,11 @@ require_once __DIR__ . '/RAZconfig.php';
 require_once __DIR__ . '/includes/RAZsession.php';
 require_once __DIR__ . '/includes/RAZhelpers.php';
 
+// Override X-Frame-Options dari konfigurasi server (Apache/Nginx) 
+// agar struk bisa di-load di dalam iframe preview POS
+header_remove('X-Frame-Options');
+header('X-Frame-Options: SAMEORIGIN');
+
 RAZrequireStoreAccess();
 
 $id = intval($_GET['id'] ?? 0);

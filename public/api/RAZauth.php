@@ -104,6 +104,9 @@ function handleLogin($pdo) {
         'store_logo' => $storeLogo,
     ]);
 
+    // Log Activity
+    logActivity($pdo, $user['id'], $user['store_id'], 'LOGIN_SUCCESS', "User logged in");
+
     // Tentukan halaman redirect berdasarkan role
     $redirect = 'RAZdashboard.php';
     if ($user['role'] === 'employee') {
@@ -194,6 +197,9 @@ function handleRegister($pdo) {
             'store_name' => $storeName,
             'store_logo' => '',
         ]);
+
+        // Log Activity
+        logActivity($pdo, $userId, $storeId, 'REGISTER_NEW_STORE', "Store registered: $storeName");
 
         RAZjsonResponse(true, 'Registrasi berhasil! Selamat datang.', [
             'redirect' => 'RAZdashboard.php',

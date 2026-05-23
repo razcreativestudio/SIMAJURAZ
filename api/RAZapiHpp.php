@@ -111,7 +111,7 @@ function updateHpp($pdo, $storeId) {
     if (!$check->fetch()) RAZjsonResponse(false, 'Data tidak ditemukan');
 
     // Update master
-    $stmt = $pdo->prepare("UPDATE hpp_calculations SET product_name=?, portions=?, overhead_pct=?, margin_pct=?, current_sell_price=?, notes=?, updated_at=datetime('now','localtime') WHERE id=? AND store_id=?");
+    $stmt = $pdo->prepare("UPDATE hpp_calculations SET product_name=?, portions=?, overhead_pct=?, margin_pct=?, current_sell_price=?, notes=?, updated_at=? WHERE id=? AND store_id=?");
     $stmt->execute([
         RAZsanitize($input['product_name'] ?? ''),
         max(1, intval($input['portions'] ?? 1)),
@@ -119,6 +119,7 @@ function updateHpp($pdo, $storeId) {
         floatval($input['margin_pct'] ?? 30),
         floatval($input['current_sell_price'] ?? 0),
         RAZsanitize($input['notes'] ?? ''),
+        date('Y-m-d H:i:s'),
         $id, $storeId
     ]);
 

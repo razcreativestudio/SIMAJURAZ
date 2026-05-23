@@ -74,6 +74,10 @@ $currentPage = 'dashboard';
                         <span class="menu-icon"><i class="ph-bold ph-squares-four"></i></span>
                         <span class="menu-text">Dashboard</span>
                     </a></li>
+                    <li><a href="RAZsuperadmin.php">
+                        <span class="menu-icon"><i class="ph-bold ph-shield-check"></i></span>
+                        <span class="menu-text">User Management</span>
+                    </a></li>
                 <?php else: ?>
                     <!-- Menu Owner / Karyawan -->
                     <li class="raz-sidebar-section">Menu Utama</li>

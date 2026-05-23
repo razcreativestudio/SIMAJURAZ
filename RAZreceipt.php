@@ -13,25 +13,57 @@ require_once __DIR__ . '/RAZconfig.php';
 require_once __DIR__ . '/includes/RAZsession.php';
 require_once __DIR__ . '/includes/RAZhelpers.php';
 
-RAZrequireStoreAccess();
+// Override X-Frame-Options dari konfigurasi server (Apache/Nginx) 
+// agar struk bisa di-load di dalam iframe preview POS
+header_remove('X-Frame-Options');
+header('X-Frame-Options: SAMEORIGIN');
 
 $id = intval($_GET['id'] ?? 0);
+$hash = $_GET['hash'] ?? '';
+
 if (!$id) {
     die("ID Transaksi tidak valid.");
 }
 
 $pdo = RAZgetConnection();
-$user = RAZgetCurrentUser();
-$storeId = $user['store_id'];
+$isPublic = false;
 
-// Ambil Transaksi
-$stmt = $pdo->prepare("SELECT t.*, u.full_name as cashier_name FROM transactions t JOIN users u ON t.user_id = u.id WHERE t.id = ? AND t.store_id = ?");
-$stmt->execute([$id, $storeId]);
-$transaction = $stmt->fetch();
+if ($hash) {
+    // Mode Public (Tanpa Login)
+    $stmt = $pdo->prepare("SELECT t.*, u.full_name as cashier_name FROM transactions t JOIN users u ON t.user_id = u.id WHERE t.id = ?");
+    $stmt->execute([$id]);
+    $transaction = $stmt->fetch();
 
-if (!$transaction) {
-    die("Transaksi tidak ditemukan atau Anda tidak memiliki akses.");
+    if (!$transaction) die("Transaksi tidak ditemukan.");
+
+    // Validasi keamanan link struk
+    $expectedHash = md5($transaction['id'] . $transaction['invoice_number'] . $transaction['store_id'] . 'SIMAJURAZ');
+    if ($hash !== $expectedHash) {
+        die("Link struk tidak valid atau tidak memiliki izin akses.");
+    }
+
+    $isPublic = true;
+    $storeId = $transaction['store_id'];
+} else {
+    // Mode Login Kasir / Owner
+    RAZrequireStoreAccess();
+    $user = RAZgetCurrentUser();
+    $storeId = $user['store_id'];
+
+    // Ambil Transaksi
+    $stmt = $pdo->prepare("SELECT t.*, u.full_name as cashier_name FROM transactions t JOIN users u ON t.user_id = u.id WHERE t.id = ? AND t.store_id = ?");
+    $stmt->execute([$id, $storeId]);
+    $transaction = $stmt->fetch();
+
+    if (!$transaction) {
+        die("Transaksi tidak ditemukan atau Anda tidak memiliki akses.");
+    }
 }
+
+// Generate URL Struk Publik
+$shareHash = md5($transaction['id'] . $transaction['invoice_number'] . $transaction['store_id'] . 'SIMAJURAZ');
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$shareUrl = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?id={$transaction['id']}&hash={$shareHash}";
 
 // Ambil Item
 $stmt = $pdo->prepare("SELECT * FROM transaction_items WHERE transaction_id = ?");
@@ -165,8 +197,11 @@ elseif ($tplSep === 'double') $sepBorder = "3px double #000";
 
 <div>
     <div class="no-print">
-        <button class="btn" onclick="window.print()">🖨️ Cetak Struk</button>
+        <button class="btn" onclick="window.print()">🖨️ Cetak</button>
+        <button class="btn" style="background:#10B981" onclick="downloadReceipt()">📥 Download / Share</button>
+        <button class="btn" style="background:#F59E0B" onclick="copyLink()">🔗 Copy Link</button>
         <button class="btn btn-secondary" onclick="window.close()">Tutup</button>
+        <input type="text" id="shareUrl" value="<?= htmlspecialchars($shareUrl) ?>" style="position:absolute; left:-9999px;">
     </div>
 
     <div class="receipt-wrapper" style="<?= (in_array($showLogo, [7, 8]) && $logoUrl) ? "position:relative; z-index:1;" : "" ?>">
@@ -261,9 +296,9 @@ elseif ($tplSep === 'double') $sepBorder = "3px double #000";
     </div>
 </div>
 
-<?php if (!isset($_GET['preview'])): ?>
+<?php if (!isset($_GET['preview']) && !$isPublic): ?>
 <script>
-    // Auto print when loaded directly (not in preview iframe)
+    // Auto print when loaded directly (not in preview iframe, not public mode)
     window.onload = function() {
         setTimeout(function() {
             window.print();
@@ -271,6 +306,54 @@ elseif ($tplSep === 'double') $sepBorder = "3px double #000";
     };
 </script>
 <?php endif; ?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+    function copyLink() {
+        var copyText = document.getElementById("shareUrl");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value).then(function() {
+            alert("Link struk berhasil disalin!");
+        }).catch(function(err) {
+            alert("Gagal menyalin link.");
+        });
+    }
+
+    function downloadReceipt() {
+        const receipt = document.querySelector('.receipt-wrapper');
+        const oldShadow = receipt.style.boxShadow;
+        receipt.style.boxShadow = 'none'; // hapus bayangan agar gambar rapi
+
+        html2canvas(receipt, {
+            scale: 2,
+            backgroundColor: "#ffffff",
+            useCORS: true
+        }).then(canvas => {
+            receipt.style.boxShadow = oldShadow; // kembalikan bayangan
+            const imgData = canvas.toDataURL('image/png');
+            
+            // Cek jika user di mobile, gunakan fitur Share bawaan hp
+            if (navigator.share && /mobile|android|iphone/i.test(navigator.userAgent)) {
+                canvas.toBlob(function(blob) {
+                    const file = new File([blob], 'Struk-<?= htmlspecialchars($transaction['invoice_number']) ?>.png', { type: 'image/png' });
+                    navigator.share({
+                        title: 'Struk Transaksi <?= htmlspecialchars($transaction['invoice_number']) ?>',
+                        files: [file]
+                    }).catch(err => {
+                        console.log("Share dibatalkan:", err);
+                    });
+                });
+            } else {
+                // Download gambar untuk desktop
+                const link = document.createElement('a');
+                link.download = 'Struk-<?= htmlspecialchars($transaction['invoice_number']) ?>.png';
+                link.href = imgData;
+                link.click();
+            }
+        });
+    }
+</script>
 
 </body>
 </html>

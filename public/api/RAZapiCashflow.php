@@ -240,8 +240,8 @@ function closeShift($pdo, $storeId, $user) {
     $closingCash = floatval($input['closing_cash'] ?? 0);
     $notes = RAZsanitize($input['notes'] ?? '');
 
-    $stmt = $pdo->prepare("UPDATE shifts SET closing_cash=?, closed_at=datetime('now','localtime'), notes=? WHERE store_id=? AND user_id=? AND closed_at IS NULL");
-    $result = $stmt->execute([$closingCash, $notes, $storeId, $user['id']]);
+    $stmt = $pdo->prepare("UPDATE shifts SET closing_cash=?, closed_at=?, notes=? WHERE store_id=? AND user_id=? AND closed_at IS NULL");
+    $result = $stmt->execute([$closingCash, date('Y-m-d H:i:s'), $notes, $storeId, $user['id']]);
     if ($stmt->rowCount() === 0) RAZjsonResponse(false, 'Tidak ada shift aktif');
     RAZjsonResponse(true, 'Shift ditutup');
 }

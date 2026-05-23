@@ -253,3 +253,33 @@ function RAZvalidateCsrf($token) {
     }
     return hash_equals($_SESSION['raz_csrf_token'], $token);
 }
+
+/**
+ * Mencatat aktivitas pengguna ke dalam database untuk keperluan audit (Super Admin).
+ * 
+ * @param PDO $pdo Objek koneksi database
+ * @param int|null $user_id ID Pengguna
+ * @param int|null $store_id ID Toko
+ * @param string $action Aksi yang dilakukan (contoh: 'LOGIN', 'DELETE_USER')
+ * @param string $details Detail tambahan dalam format string/JSON
+ */
+function logActivity($pdo, $user_id, $store_id, $action, $details = '') {
+    // Ambil IP Address pengunjung
+    $ip_address = '';
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip_address = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else {
+        $ip_address = $_SERVER['REMOTE_ADDR'] ?? 'UNKNOWN';
+    }
+
+    $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? 'UNKNOWN';
+
+    try {
+        $stmt = $pdo->prepare("INSERT INTO activity_logs (user_id, store_id, action, details, ip_address, user_agent) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$user_id, $store_id, $action, $details, $ip_address, $user_agent]);
+    } catch (PDOException $e) {
+        // Abaikan error log agar tidak mengganggu flow utama aplikasi
+    }
+}
