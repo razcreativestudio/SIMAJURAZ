@@ -427,242 +427,198 @@ $LANG_DICT = [
         'kb_sidebar_8' => 'PDF Report Export',
         
         'kb_c1_title' => 'Registering & Store Settings',
-        'kb_c1_desc' => '<p>Selamat datang di SIMAJURAZ! Sebelum mulai berjualan, mari kita siapkan akun dan profil toko Anda.</p>
-        <h4>A. Cara Mendaftar Akun Toko Baru</h4>
+        'kb_c1_desc' => '<p>Welcome to SIMAJURAZ! Before you start selling, let\'s set up your account and store profile.</p>
+        <h4>A. How to Register a New Store Account</h4>
         <div class="kb-img-container"><img src="assets/images/ss_register.png" alt="Register" class="kb-img-showcase"></div>
         <ol>
-            <li>Buka halaman <strong>Login</strong> dengan mengeklik tombol "Masuk / Login" di pojok kanan atas halaman utama.</li>
-            <li>Pada form login, perhatikan bagian paling bawah dan klik teks bertuliskan <strong>Daftar di sini</strong>. Form akan otomatis berubah menjadi form Pendaftaran.</li>
-            <li><strong>Pengisian Form Pendaftaran:</strong>
-                <ul>
-                    <li><strong>Nama Toko:</strong> Ketikkan nama usaha Anda (misalnya "Kedai Kopi Senja"). Nama ini akan menjadi identitas utama Anda di sistem.</li>
-                    <li><strong>Username:</strong> Buat sebuah nama pengguna tanpa spasi (misalnya <code>kopisenja</code>). Ingat username ini karena akan selalu digunakan setiap kali Anda login!</li>
-                    <li><strong>Password:</strong> Masukkan kata sandi rahasia yang kuat. Jangan beritahukan kepada siapa pun.</li>
-                </ul>
-            </li>
-            <li>Setelah semua terisi, klik tombol biru <strong>Daftar & Mulai</strong>. Anda akan langsung dibawa masuk ke halaman Dashboard!</li>
+            <li>Go to the <strong>Login</strong> page by clicking the "Masuk / Login" button in the top right corner of the main page.</li>
+            <li>On the login form, look at the very bottom and click the text that says <strong>Daftar di sini (Register here)</strong>. The form will automatically change to a Registration form.</li>
+            <li>Fill in your Full Name, Active Email, and create a strong Password.</li>
+            <li>Click the <strong>Daftar (Register)</strong> button. You will be immediately redirected to the main Dashboard of your store. Congratulations, your store is officially established!</li>
         </ol>
-        <h4>B. Mengatur Profil & Invoice Toko</h4>
+        <h4>B. Store Profile & Invoice Settings</h4>
         <div class="kb-img-container"><img src="assets/images/ss_settings_top.png" alt="Settings" class="kb-img-showcase"></div>
         <ol>
-            <li>Setelah masuk (login), lihat panel menu di sebelah kiri layar (Sidebar). Klik menu <strong>Pengaturan Toko</strong> berlogo roda gigi.</li>
-            <li>Di tab <em>Profil Toko</em>, Anda bisa melengkapi:
-                <ul>
-                    <li><strong>Jenis Usaha:</strong> Pilih kategori bisnis Anda (F&B, Ritel, Jasa, dll).</li>
-                    <li><strong>Alamat Lengkap:</strong> Masukkan alamat toko fisik Anda. Alamat ini akan tercetak otomatis di struk belanja pelanggan.</li>
-                    <li><strong>Logo Toko:</strong> Klik kotak "Unggah Logo" untuk memilih file foto logo Anda dari komputer/HP. Logo inilah yang akan menjadi ikon di sudut nota.</li>
-                </ul>
-            </li>
-            <li>Selanjutnya, pindah ke tab <strong>Pengaturan Invoice</strong> di sebelah kanan atas:
-                <ul>
-                    <li><strong>Prefix Invoice:</strong> Ini adalah huruf awalan untuk nomor struk Anda. Jika Anda mengisi <code>INV</code>, maka nota pertama akan bernama <code>INV-2026-001</code>. Jika toko Anda bernama "Senja", Anda bisa memakai prefix <code>SNJ</code>.</li>
-                    <li><strong>Teks Header Struk:</strong> Kalimat sapaan yang muncul di bagian paling atas struk (misal: "Selamat Datang di Kedai Kami").</li>
-                    <li><strong>Teks Footer Struk:</strong> Kalimat penutup di bagian paling bawah struk (misal: "Barang yang sudah dibeli tidak dapat ditukar. Terima Kasih!").</li>
-                    <li><strong>Pilihan Template Struk:</strong> SIMAJURAZ menyediakan beberapa gaya desain struk (Minimalist, Standard, dll). Pilih salah satu, lalu klik tombol abu-abu <strong>Preview Invoice</strong> untuk melihat persis bagaimana struk itu akan dicetak nantinya!</li>
-                </ul>
-            </li>
-            <li>Pastikan Anda mengeklik tombol biru <strong>Simpan Pengaturan</strong> di pojok kanan bawah agar semua data tidak hilang.</li>
+            <li>Now that you are on the Dashboard, look at the left panel and click the <strong>Pengaturan (Settings)</strong> menu.</li>
+            <li>In the <strong>Profil Toko (Store Profile)</strong> tab, you can enter your Store Name, Store Address, and Phone Number. This data will be printed on your customers\' receipts.</li>
+            <li><strong>Upload Store Logo:</strong> Click the logo upload box. Choose an image (JPG/PNG). This logo will appear at the top of your receipt.</li>
+            <li><strong>Invoice Prefix:</strong> Set the initial code for your receipts. For example, if you sell Coffee, type "KOP". Your receipt numbers will look like KOP-0001, KOP-0002, etc.</li>
+            <li><strong>Header & Footer Notes:</strong> Fill in the text you want to display on the receipt. Example Footer: "Thank you for shopping at our store!".</li>
+            <li>Click <strong>Simpan Perubahan (Save Changes)</strong> at the bottom. Done!</li>
         </ol>
-        <h4>C. Mengganti Password & Menambah Karyawan</h4>
+        <h4>C. Changing Password & Adding Employees</h4>
         <div class="kb-img-container"><img src="assets/images/ss_users_add.png" alt="Add Employee" class="kb-img-showcase"></div>
         <ol>
-            <li><strong>Ubah Password Sendiri:</strong> Di menu Pengaturan yang sama, buka tab <em>Akun Saya</em>. Masukkan password lama Anda untuk verifikasi, lalu ketik password baru. Klik Simpan.</li>
-            <li><strong>Mendaftarkan Kasir/Karyawan:</strong> Agar karyawan tidak memakai akun utama Anda (yang bisa melihat rahasia keuangan), buatkan mereka akun sendiri! Buka menu <strong>Karyawan</strong> di panel sebelah kiri.</li>
-            <li>Klik tombol hijau <strong>Tambah Karyawan</strong> di sudut kanan atas. Sebuah jendela (*modal*) akan muncul.</li>
-            <li>Di dalam jendela tersebut, pilih peran karyawan (misal: Kasir). Buatkan username (contoh: <code>kasir1</code>) dan password default (contoh: <code>123456</code>). Berikan kredensial ini kepada karyawan Anda agar ia bisa login di perangkat kasir. (Karyawan nantinya bisa mengubah passwordnya sendiri via menu pengaturan mereka).</li>
+            <li>If you want to change your password, go to the <em>Pengaturan > Akun Anda (Settings > Your Account)</em> tab and enter your new password.</li>
+            <li><strong>Adding Employees:</strong> Do you have a cashier? Don\'t let them use your Owner account! Go to the <strong>Karyawan (Employees)</strong> menu on the left.</li>
+            <li>Click the <strong>Tambah Karyawan (Add Employee)</strong> button.</li>
+            <li>Enter the cashier\'s Name, Email, and Password. Select their Role as "Kasir (Cashier)".</li>
+            <li>Now your cashier can log in using that email, and their access will be strictly limited (they cannot see financial reports or store settings).</li>
         </ol>',
         
         'kb_c2_title' => 'Inventory Management',
-        'kb_c2_desc' => '<p>Inventori adalah otak dari toko Anda. Pastikan Anda mengisi data barang seakurat mungkin sebelum bertransaksi.</p>
-        <h4>A. Menambah & Menghapus Kategori</h4>
+        'kb_c2_desc' => '<p>Inventory is the brain of your store. Make sure you enter item data as accurately as possible before making transactions.</p>
+        <h4>A. Adding & Deleting Categories</h4>
         <ol>
-            <li>Buka menu <strong>Inventori</strong>.</li>
-            <li>Sebelum membuat barang, buatlah "Grup" barang terlebih dahulu. Klik tombol <strong>Tambah Kategori</strong>.</li>
-            <li>Ketik nama kategori (contoh: "Minuman Dingin" atau "Bahan Baku"). Klik Simpan. Kategori akan muncul sebagai "Chip" tombol yang bisa diklik.</li>
-            <li>Jika ada kategori salah ketik, Anda bisa menghapusnya dengan menekan ikon <strong>Tempat Sampah (Tong Sampah) merah</strong> di sebelahnya.</li>
+            <li>Go to the <strong>Inventori (Inventory)</strong> menu.</li>
+            <li>Before creating items, create item "Groups" first. Click the <strong>Tambah Kategori (Add Category)</strong> button.</li>
+            <li>Type the category name (e.g., "Cold Drinks" or "Raw Materials"). Click Save. The category will appear as a clickable "Chip" button.</li>
+            <li>To delete, simply click the (x) mark on the category chip. WARNING: Do not delete a category if there are still items inside it!</li>
         </ol>
-        <h4>B. Menambah Barang Secara Detail</h4>
+        <h4>B. Adding Items in Detail</h4>
         <div class="kb-img-container"><img src="assets/images/ss_inventory_modal.png" alt="Inventory Modal" class="kb-img-showcase"></div>
         <ol>
-            <li>Klik tombol hijau <strong>Tambah Barang</strong>. Sebuah jendela form besar akan menutupi layar. Mari kita isi satu per satu:</li>
-            <li><strong>Unggah Foto Produk:</strong> Di sebelah kiri, klik kotak bergambar kamera. Pilih foto makanan/produk Anda. Foto ini sangat berguna di halaman Kasir agar mata Anda cepat mengenali barang.</li>
-            <li><strong>Nama Barang & Kategori:</strong> Isi nama produk (misal: "Kopi Susu Gula Aren"). Lalu pilih Kategorinya dari daftar yang sudah Anda buat tadi.</li>
-            <li><strong>SKU atau Barcode Scanner:</strong> SKU (Stock Keeping Unit) adalah kode identitas produk. 
+            <li>Click the blue <strong>Tambah Barang Baru (Add New Item)</strong> button. A large form will appear.</li>
+            <li><strong>Name & Category:</strong> Enter the item name (e.g., "Vanilla Latte"). Select the category you created earlier.</li>
+            <li><strong>SKU / Barcode:</strong> This is the unique code of the item. If you use a barcode scanner, put your cursor in this box and scan the product\'s barcode. If it\'s homemade food, just make up a code (e.g., VL-01).</li>
+            <li><strong>HPP (COGS) & Selling Price:</strong>
                 <ul>
-                    <li>Jika toko kelontong: Arahkan kursor (*mouse*) ke kolom ini, lalu <strong>tembak barcode di kemasan jajan menggunakan alat Barcode Scanner</strong>. Angka akan otomatis terisi!</li>
-                    <li>Jika kafe/restoran: Anda bisa mengarang kode sendiri, misalnya <code>KPS-001</code>.</li>
+                    <li><em>HPP (Harga Pokok Penjualan / Cost of Goods Sold):</em> This is your CAPITAL price. How much does it cost you to make/buy this item? Let\'s say Rp 10,000.</li>
+                    <li><em>Selling Price:</em> The price given to the customer. Let\'s say Rp 15,000.</li>
+                    <li>The system will automatically calculate that your Gross Profit for this item is Rp 5,000.</li>
                 </ul>
             </li>
-            <li><strong>HPP (Harga Pokok) vs Harga Jual:</strong> 
-                <ul>
-                    <li><strong>HPP (Harga Pokok Penjualan):</strong> Ini adalah MODAL DASAR barang tersebut. Berapa biaya yang Anda keluarkan untuk membuat/membeli 1 item ini? <em>Jangan dikosongkan dan jangan diisi salah!</em> Jika HPP salah, Laba Rugi Anda tidak akan pernah akurat.</li>
-                    <li><strong>Harga Jual:</strong> Ini adalah harga yang akan dibayarkan oleh pelanggan di kasir.</li>
-                    <li>Setelah mengisi keduanya, lihat ke teks kecil di bawahnya: Sistem akan otomatis menghitung <strong>Margin Keuntungan</strong> Anda (contoh: +30%).</li>
-                </ul>
-            </li>
-            <li><strong>Manajemen Stok:</strong>
-                <ul>
-                    <li><strong>Stok Awal:</strong> Masukkan jumlah barang fisik yang ada di toko/gudang Anda saat ini. Stok ini otomatis BERKURANG SATU setiap kali kasir menekan tombol Bayar!</li>
-                    <li><strong>Batas Minimum Stok:</strong> Angka peringatan. Misalnya diisi `5`. Saat stok barang tersisa 5, tulisan stok akan berubah warna menjadi MERAH. Ini adalah alarm agar Anda segera kulakan/restock.</li>
-                </ul>
-            </li>
-            <li>Periksa kembali semua isian. Jika sudah yakin, klik tombol biru <strong>Simpan Barang</strong> di pojok kanan bawah. Selesai!</li>
+            <li><strong>Stock & Minimum Limit:</strong> Enter the initial amount of stock you have. <em>Minimum Stock</em> is the limit where the system will give you a "Running out of stock" warning (e.g., set it to 5).</li>
+            <li><strong>Product Photo:</strong> Upload an attractive photo so the Cashier display looks beautiful and premium.</li>
+            <li>Click <strong>Simpan (Save)</strong>. The item is now ready to be sold!</li>
         </ol>',
         
         'kb_c3_title' => 'POS Operations',
-        'kb_c3_desc' => '<p>Halaman Kasir (Point of Sale) didesain untuk transaksi super cepat. Tidak boleh ada antrean yang terhambat di sini!</p>
-        <h4>A. Membuka Shift Kasir (Wajib)</h4>
+        'kb_c3_desc' => '<p>The Cashier (Point of Sale) page is designed for super fast transactions. There shouldn\'t be any delayed queues here!</p>
+        <h4>A. Opening Cashier Shift (Mandatory)</h4>
         <ol>
-            <li>Masuk ke menu <strong>Kasir (POS)</strong>. Jika ini adalah transaksi pertama Anda di hari ini, sebuah layar gelap (*modal*) akan memblokir Anda.</li>
-            <li>Ini adalah prosedur keamanan. Anda wajib menekan <strong>Buka Shift</strong>.</li>
-            <li>Di dalam form tersebut, ketikkan <strong>Nominal Uang Kembalian</strong> yang saat ini ada di laci kasir tunai fisik Anda (misalnya Anda menaruh uang receh Rp 100.000).</li>
-            <li>Tujuannya? Saat toko tutup nanti, uang di laci fisik harus sama persis dengan angka di laporan sistem (Modal awal + Total Penjualan Tunai).</li>
+            <li>Go to the <strong>Kasir (POS)</strong> menu. If this is your first transaction today, a dark screen (*modal*) will block you.</li>
+            <li>This is a security procedure. You must click <strong>Buka Shift (Open Shift)</strong>.</li>
+            <li>In the form, type the <strong>Change Amount (Cash Drawer Starting Balance)</strong> currently in your physical cash drawer (e.g., you put Rp 100,000 in change).</li>
+            <li>This initial capital is recorded so that when you close the shop later, the money in the drawer will exactly match the system (Sales + Initial Capital).</li>
         </ol>
-        <h4>B. Menambahkan Item ke Keranjang</h4>
+        <h4>B. Adding Items to Cart</h4>
         <ol>
-            <li>Di sisi kiri layar terdapat etalase barang Anda. Klik kotak bergambar produk tersebut, dan ia akan melompat masuk ke "Keranjang Belanja" di sisi kanan.</li>
-            <li><strong>Penggunaan Barcode:</strong> Anda tidak perlu repot mengeklik! Pastikan kursor (*mouse*) berada di layar, ambil produk fisik pelanggan, dan "TIT!" tembak dengan <strong>Barcode Scanner</strong>. Barang akan langsung masuk keranjang seketika. Sangat cepat!</li>
-            <li><strong>Ubah Kuantitas (Jumlah):</strong> Di panel keranjang kanan, jika pelanggan beli 3 kopi, cukup tekan tombol <code>+</code> di sebelah nama barang sampai angkanya jadi 3. Tekan <code>-</code> jika ingin mengurangi, atau tekan <strong>ikon tong sampah</strong> untuk membatalkan item tersebut.</li>
+            <li><strong>Using Mouse:</strong> Simply click the product photos displayed. Each click will add 1 quantity to the right panel (Cart).</li>
+            <li><strong>Using Barcode Scanner:</strong> Make sure the cursor is blinking in the <em>"Cari Nama / Scan Barcode"</em> search box. Scan the item! It will instantly pop into the Cart.</li>
+            <li>To reduce or increase quantities, click the (-) or (+) buttons next to the item name in the Cart.</li>
         </ol>
-        <h4>C. Melakukan Pembayaran</h4>
+        <h4>C. Making Payments</h4>
         <div class="kb-img-container"><img src="assets/images/ss_pos_payment.png" alt="Payment Modal" class="kb-img-showcase"></div>
         <ol>
-            <li>Jika pesanan sudah sesuai, klik tombol hijau raksasa <strong>BAYAR</strong> di pojok kanan bawah. Jendela Pembayaran akan muncul.</li>
-            <li>Lihat angka besar di tengah: Itu adalah <strong>Total Tagihan</strong> pelanggan.</li>
-            <li><strong>Pilih Metode Pembayaran:</strong>
-                <ul>
-                    <li><strong>Tunai (Cash):</strong> Jika pelanggan menyerahkan uang kertas. Ketikkan jumlah uang yang diberikan (misal: Tagihan Rp 45.000, pelanggan memberi uang Rp 50.000. Ketik "50000" di kolom <em>Nominal Dibayar</em>). Sistem akan otomatis memunculkan tulisan <strong>Kembalian: Rp 5.000</strong>.</li>
-                    <li><strong>Tombol Cepat Uang Pas:</strong> Jika malas mengetik, kami sediakan tombol cepat di bawahnya (Uang Pas, 20.000, 50.000, 100.000). Klik saja tombol tersebut!</li>
-                    <li><strong>Transfer / QRIS / Non-Tunai:</strong> Jika pelanggan bayar via m-banking. Pilih opsi ini. Kolom nominal akan hilang karena pembayaran non-tunai dianggap SELALU PAS (tidak ada kembalian). Uang ini tidak akan tercatat masuk laci kasir fisik, melainkan kas digital.</li>
-                </ul>
-            </li>
-            <li>Klik tombol besar <strong>Proses Bayar</strong>. Transaksi selesai! Stok barang di inventori langsung terpotong.</li>
+            <li>Once the customer finishes ordering, click the large blue <strong>Bayar (Pay)</strong> button at the bottom right.</li>
+            <li>A payment window will appear showing the Total Bill.</li>
+            <li><strong>Payment Method:</strong> Choose whether the customer is paying with Cash, Transfer, or QRIS.</li>
+            <li><strong>Cash Input:</strong> If Cash, type the money given by the customer (e.g., bill is 15rb, given 50rb). The system will automatically display the <strong>Change Amount</strong> (35rb) in red text so you don\'t have to calculate manually!</li>
+            <li>Click <strong>Proses Pembayaran (Process Payment)</strong>.</li>
         </ol>
-        <h4>D. Mencetak & Membagikan Struk</h4>
+        <h4>D. Printing & Sharing Receipts</h4>
         <div class="kb-img-container"><img src="assets/images/ss_pos_receipt.png" alt="Receipt Modal" class="kb-img-showcase"></div>
         <ol>
-            <li>Setelah "Proses Bayar" ditekan, jendela baru akan muncul menampilkan wujud asli struk (lengkap dengan logo toko Anda!).</li>
-            <li>Di bawah gambar struk tersebut, ada 3 tombol:</li>
-            <li>Tombol <strong>Cetak Struk:</strong> Akan menyambungkan layar ke Printer Thermal Bluetooth/USB Anda. Struk fisik akan keluar.</li>
-            <li>Tombol <strong>Bagikan:</strong> Akan membuat file struk digital yang bisa langsung Anda kirim via WhatsApp ke nomor pelanggan. Go Green!</li>
-            <li>Tombol <strong>Tutup:</strong> Jika pelanggan tidak butuh struk. Layar kasir akan bersih kembali siap untuk pelanggan berikutnya.</li>
+            <li>After successful payment, a digital receipt will appear perfectly on the screen.</li>
+            <li>To print using a Bluetooth/Thermal Printer, click the <strong>Print Struk</strong> button.</li>
+            <li>To send it to a customer\'s WhatsApp (paperless), simply screenshot the screen, or use the PDF Export feature in the Transactions report menu later.</li>
+            <li>Click <strong>Tutup (Close)</strong> to serve the next customer.</li>
         </ol>',
         
         'kb_c4_title' => 'Finance & Cash Flow',
-        'kb_c4_desc' => '<p>Modul Keuangan memantau aliran darah bisnis Anda (uang masuk dan keluar). Arus Kas ini berinteraksi langsung dengan Laba Rugi akhir.</p>
-        <h4>A. Membaca Laporan Laba Rugi</h4>
+        'kb_c4_desc' => '<p>The Finance Module monitors the lifeblood of your business (money coming in and going out). This Cash Flow interacts directly with the final Profit and Loss.</p>
+        <h4>A. Reading the Profit and Loss Report</h4>
         <ol>
-            <li>Buka menu <strong>Laporan > Laba Rugi</strong>.</li>
-            <li>Di sini, Anda tidak perlu menghitung manual lagi. Rumus cerdas kami bekerja 24 jam: <code>(Semua Uang Penjualan Barang)</code> DIKURANGI <code>(Total HPP / Modal Barang Tersebut)</code> DIKURANGI <code>(Semua Pengeluaran Ekstra Toko)</code>.</li>
-            <li>Hasil akhirnya akan tampil besar di kotak <strong>Laba Bersih</strong>. Laba ini menunjukkan keuntungan riil Anda setelah dipotong beban operasional.</li>
-            <li>Gunakan ikon Kalender di atas untuk memfilter: Apakah Anda ingin melihat Laba hari ini saja? Laba seminggu ini? Atau bulan lalu?</li>
+            <li>Go to the <strong>Laporan > Laba Rugi (Reports > Profit and Loss)</strong> menu.</li>
+            <li>Here, you no longer need to calculate manually. Our smart formula works 24 hours: <code>(All Sales Revenue)</code> MINUS <code>(Total COGS / Capital of those Items)</code> MINUS <code>(All Extra Store Expenses)</code>.</li>
+            <li>The final result will be displayed large in the <strong>Laba Bersih (Net Profit)</strong> box. This profit shows your real earnings after deducting operational expenses.</li>
         </ol>
-        <h4>B. Menginput Pemasukan Lain (Selain Jualan)</h4>
+        <h4>B. Inputting Other Income (Non-Sales)</h4>
         <div class="kb-img-container"><img src="assets/images/ss_finance_in.png" alt="Income Modal" class="kb-img-showcase"></div>
         <ol>
-            <li>Buka menu <strong>Keuangan</strong>. Anda akan berada di tab <em>Arus Kas (Buku Kas)</em>.</li>
-            <li>Jika ada uang masuk yang BUKAN dari jualan kasir (contoh: Uang hasil jual kardus bekas minuman, atau uang parkir), klik tombol hijau <strong>Pemasukan</strong>.</li>
-            <li>Di form yang muncul: Ketikkan <strong>Nominal</strong> (contoh: 25000) dan <strong>Deskripsi</strong> (contoh: "Jual kardus bekas"). Klik Simpan. Uang ini akan mendongkrak Laba Bersih Anda.</li>
+            <li>What if someone tips the cashier or there is income outside of selling items?</li>
+            <li>Go to the <strong>Keuangan (Finance)</strong> menu (Arus Kas / Cash Flow tab).</li>
+            <li>Click <strong>Pemasukan Lain (Other Income)</strong>.</li>
+            <li>Enter the Nominal, Date, and Description (e.g., "Parking fee revenue"). This money will add to your total store balance.</li>
         </ol>
-        <h4>C. Menginput Pengeluaran Toko</h4>
+        <h4>C. Inputting Store Expenses</h4>
         <div class="kb-img-container"><img src="assets/images/ss_finance_out.png" alt="Expense Modal" class="kb-img-showcase"></div>
         <ol>
-            <li>Ini fitur SANGAT PENTING. Setiap uang yang keluar dari laci untuk operasional toko harus dicatat! Jika tidak, Laba Bersih Anda akan terlihat palsu (seolah besar padahal banyak hutang listrik).</li>
-            <li>Klik tombol merah <strong>Pengeluaran</strong>.</li>
-            <li>Di form yang muncul: Ketikkan <strong>Nominal</strong> (contoh: 150000) dan <strong>Deskripsi</strong> (contoh: "Beli Gas Elpiji 3Kg" atau "Bayar Tukang Sampah"). Klik Simpan.</li>
-            <li>Uang ini akan otomatis mengurangi Laba Bersih di Laporan Akhir.</li>
-        </ol>
-        <h4>D. Menghapus / Mengedit Catatan yang Salah</h4>
-        <ol>
-            <li>Di bawah tombol tadi, ada Tabel Riwayat Buku Kas yang menampilkan list semua uang masuk & keluar.</li>
-            <li>Cari catatan yang salah (misal typo mengetik 150.000 padahal 15.000).</li>
-            <li>Lihat ke ujung paling kanan baris tabel tersebut, di bawah kolom "Aksi".</li>
-            <li>Klik ikon <strong>Pensil (Edit)</strong> untuk mengubah nominalnya, ATAU klik ikon <strong>Tempat Sampah Merah (Hapus)</strong> untuk menghapus catatan tersebut sepenuhnya dari sistem.</li>
+            <li>Did you run out of LPG gas? Bought a broom? Paid the electricity bill?</li>
+            <li>On the same page, click <strong>Catat Pengeluaran (Record Expense)</strong>.</li>
+            <li>Enter the Nominal, Date, and Description (e.g., "Bought 2 LPG Gas cylinders").</li>
+            <li>This expense is CRITICAL. It will directly deduct your Profit in the Profit and Loss report so you don\'t think the business is profitable when it\'s actually losing money due to wasteful expenses!</li>
         </ol>',
 
         'kb_c5_title' => 'Employee Payroll',
-        'kb_c5_desc' => '<p>SIMAJURAZ memiliki modul Payroll cerdas. Gaji yang Anda bayarkan ke karyawan akan langsung tercatat sebagai pengeluaran toko tanpa perlu mencatat dua kali di buku!</p>
-        <h4>A. Memproses Penggajian</h4>
+        'kb_c5_desc' => '<p>SIMAJURAZ has a smart Payroll module. The salaries you pay to employees will be directly recorded as store expenses without needing to record them twice in the books!</p>
+        <h4>A. Processing Payroll</h4>
         <div class="kb-img-container"><img src="assets/images/ss_payroll_modal.png" alt="Payroll Modal" class="kb-img-showcase"></div>
         <ol>
-            <li>Buka menu <strong>Karyawan</strong> di panel sebelah kiri.</li>
-            <li>Abaikan tab Daftar Karyawan, klik tab di sebelahnya: <strong>Penggajian (Payroll)</strong>.</li>
-            <li>Di sana terdapat tombol hijau terang bertuliskan <strong>Bayar Gaji</strong>. Klik tombol tersebut! Jendela *Form Slip Gaji* akan muncul.</li>
-            <li><strong>Pengisian Rincian Gaji:</strong>
-                <ul>
-                    <li><strong>Pilih Karyawan:</strong> Klik dropdown dan pilih nama kasir/staf yang akan digaji. (Otomatis mengambil data dari Daftar Karyawan).</li>
-                    <li><strong>Gaji Pokok:</strong> Masukkan gaji dasar bulanan/hariannya. Misal: 2000000.</li>
-                    <li><strong>Bonus:</strong> Jika target penjualannya bagus, berikan ia bonus. Masukkan nominalnya (opsional). Misal: 100000.</li>
-                    <li><strong>Potongan / Kasbon:</strong> Jika karyawan tersebut punya kebiasaan mengutang barang dagangan atau utang kasbon, masukkan total utangnya di form ini. Ini akan memotong gajinya. Misal: 50000.</li>
-                </ul>
-            </li>
-            <li>Perhatikan teks tebal di bawahnya! Sistem telah menghitung <strong>Total Gaji Bersih</strong> secara *live* (Gaji + Bonus - Kasbon).</li>
-            <li>Klik tombol <strong>Simpan & Bayar</strong>. Selesai! Uang tersebut telah masuk ke buku Arus Kas toko sebagai beban Pengeluaran Gaji.</li>
+            <li>Go to the <strong>Karyawan (Employees)</strong> menu on the left panel.</li>
+            <li>Ignore the Employee List tab, click the tab next to it: <strong>Penggajian (Payroll)</strong>.</li>
+            <li>Click the blue <strong>Buat Penggajian (Create Payroll)</strong> button.</li>
+            <li>A form will appear. Select the <strong>Employee Name</strong> you want to pay.</li>
+            <li>Enter their <strong>Basic Salary</strong> (e.g., Rp 2,000,000).</li>
+            <li>Does the employee have a debt/cash advance? Enter it in the <strong>Deductions</strong> box. Did they perform well? Enter it in the <strong>Bonus/Allowances</strong> box.</li>
+            <li>The system will automatically calculate the <em>Net Salary</em>.</li>
+            <li>Click Save. BAM! This salary is instantly injected into your Store Expenses and automatically deducts the Net Profit of the month. Very integrated!</li>
         </ol>
-        <h4>B. Cetak Bukti Slip Gaji</h4>
+        <h4>B. Printing Employee Payslips</h4>
         <ol>
-            <li>Karyawan Anda butuh bukti tertulis? Bisa! Setelah ditekan simpan tadi, lihat ke "Tabel Riwayat Penggajian" di bawahnya.</li>
-            <li>Cari catatan gajinya, geser ke paling kanan pada kolom Aksi, lalu klik tombol biru bertuliskan <strong>Download Slip</strong>.</li>
-            <li>Browser akan langsung mengunduh file PDF profesional yang menampilkan rincian persis potongan dan bonus gajinya, lengkap dengan logo toko Anda di atasnya!</li>
+            <li>After saving, the salary history will appear in the table.</li>
+            <li>At the far right of the table, click the blue <strong>Download Slip</strong> button.</li>
+            <li>The browser will instantly download a professional PDF file showing the exact details of deductions and bonuses, complete with your store logo at the top!</li>
         </ol>',
         
         'kb_c6_title' => 'Premium COGS Calculator',
-        'kb_c6_desc' => '<p>Fitur rahasia para pengusaha F&B (Kafe/Resto). Kalkulator ini akan membongkar Harga Modal (*Food Cost*) asli dari sebuah resep secara terperinci.</p>
-        <h4>Cara Simulasi Harga Racikan Makanan:</h4>
+        'kb_c6_desc' => '<p>The secret feature of F&B (Cafe/Resto) entrepreneurs. This calculator will break down the original Capital Price (*Food Cost*) of a recipe in detail.</p>
+        <h4>How to Simulate Recipe Prices:</h4>
         <div class="kb-img-container"><img src="assets/images/ss_hpp.png" alt="HPP Calculator" class="kb-img-showcase"></div>
         <ol>
-            <li>Buka menu <strong>Kalkulator HPP</strong>.</li>
-            <li>Klik tombol besar <strong>Buat Perhitungan Baru</strong>. Anda akan dihadapkan pada satu halaman form panjang yang terbagi 4 Tahapan. Mari kita isi dari atas ke bawah:</li>
-            <li><strong>Tahap 1 (Info Dasar):</strong> Beri nama resep ini. Misalnya: "Kopi Susu Gula Aren Cup Medium". Masukkan juga target jumlah porsi jika resep ini dibuat masal (biasanya 1 porsi saja).</li>
-            <li><strong>Tahap 2 (Input Bahan Baku Utama):</strong> Ini adalah bagian terseru. Klik tombol <strong>+ Tambah Bahan</strong>.
+            <li>Go to the <strong>Kalkulator HPP (COGS Calculator)</strong> menu.</li>
+            <li>Click the large <strong>Buat Perhitungan Baru (Create New Calculation)</strong> button. You will face a long form divided into 4 Stages. Let\'s fill it from top to bottom:</li>
+            <li><strong>Stage 1 (Basic Info):</strong> Name this recipe. Example: "Medium Cup Palm Sugar Milk Coffee". Also enter the target number of portions if this recipe is made in bulk (usually just 1 portion).</li>
+            <li><strong>Stage 2 (Input Main Raw Materials):</strong> This is the fun part. Click the <strong>+ Tambah Bahan (+ Add Ingredient)</strong> button.
                 <ul>
-                    <li>Nama Bahan: Ketik "Biji Kopi Arabica".</li>
-                    <li>Harga Beli Mentah: Berapa Anda beli 1 bungkusnya? Misal: Rp 100.000.</li>
-                    <li>Berat Total Mentah: 1 bungkus itu berapa isinya? Misal: 1000 Gram (1 Kg).</li>
-                    <li>Takaran Untuk 1 Porsi: Untuk bikin 1 cup kopi, butuh berapa gram? Misal: 15 Gram.</li>
-                    <li><em>AJAIB!</em> Kalkulator akan memecah harga Rp 100rb/kg tadi dan menyimpulkan bahwa modal kopi untuk 1 cup tersebut hanyalah <strong>Rp 1.500 perak</strong>! Lakukan hal yang sama untuk Susu UHT dan Gula Aren.</li>
+                    <li>Ingredient Name: Type "Arabica Coffee Beans".</li>
+                    <li>Raw Purchase Price: How much did you buy 1 pack for? Example: Rp 100,000.</li>
+                    <li>Total Raw Weight: How much is inside 1 pack? Example: 1000 Grams (1 Kg).</li>
+                    <li>Amount for 1 Portion: To make 1 cup of coffee, how many grams are needed? Example: 15 Grams.</li>
+                    <li><em>MAGIC!</em> The calculator will break down the Rp 100k/kg price earlier and conclude that the coffee capital for that 1 cup is only <strong>Rp 1,500</strong>! Do the same for UHT Milk and Palm Sugar.</li>
                 </ul>
             </li>
-            <li><strong>Tahap 3 (Input Bahan Kemasan & Ekstra):</strong>
+            <li><strong>Stage 3 (Input Packaging & Extra Materials):</strong>
                 <ul>
-                    <li>Klik tombol tambah di form bahan kemasan. Masukkan item seperti "Gelas Cup Plastik" (misal: Beli 50pcs harga 20rb, berarti 1pcs modalnya Rp 400). Masukkan sedotan, kantong plastik, dll.</li>
-                    <li>Jangan lupa biaya gas elpiji dan tenaga listrik barista per porsi agar tidak bocor alus!</li>
+                    <li>Click the add button in the packaging materials form. Enter items like "Plastic Cup" (e.g., Bought 50pcs for 20k, meaning 1pcs capital is Rp 400). Enter straws, plastic bags, etc.</li>
+                    <li>Don\'t forget LPG gas and barista electricity costs per portion so there are no hidden leaks!</li>
                 </ul>
             </li>
-            <li><strong>Tahap 4 (Kalkulasi Target Margin):</strong>
+            <li><strong>Stage 4 (Calculate Target Margin):</strong>
                 <ul>
-                    <li>Setelah sistem menghitung total keseluruhan modal dari Tahap 2 & 3 (misalnya Total HPP racikan = Rp 5.000), saatnya menentukan untung!</li>
-                    <li>Di kolom Target Margin, ketik berapa persen untung yang Anda inginkan. Misal: 50%.</li>
-                    <li>Sistem akan menyimpulkan: Untuk dapat untung 50%, Anda <strong>HARUS menjual produk ini di harga minimal Rp 10.000</strong>! Ini adalah fungsi <em>Rekomendasi Harga Jual</em>.</li>
+                    <li>After the system calculates the total overall capital from Stages 2 & 3 (e.g., Total Recipe COGS = Rp 5,000), it\'s time to determine the profit!</li>
+                    <li>In the Target Margin column, type what percentage of profit you want. Example: 50%.</li>
+                    <li>The system will conclude: To get a 50% profit, you <strong>MUST sell this product for at least Rp 10,000</strong>! This is the <em>Recommended Selling Price</em> function.</li>
                 </ul>
             </li>
-            <li>Setelah puas melihat hasilnya, Anda bisa keluar. Jika Anda menjual produk ini, jangan lupa mendaftarkannya di menu **Inventori** dan masukkan nilai Rp 5000 di kolom HPP, dan Rp 10000 di kolom Harga Jual!</li>
+            <li>Once satisfied with the results, you can exit. If you sell this product, don\'t forget to register it in the **Inventori** menu and enter the value Rp 5000 in the HPP column, and Rp 10000 in the Selling Price column!</li>
         </ol>',
 
         'kb_c7_title' => 'Profit Sharing (Investors)',
-        'kb_c7_desc' => '<p>Membuka toko dengan modal patungan teman/saudara? Jangan berantem masalah persentase untung! Gunakan fitur ini agar perhitungannya *fair* dan transparan.</p>
-        <h4>A. Mendaftarkan Nama Investor</h4>
+        'kb_c7_desc' => '<p>Opening a store with joint capital from friends/relatives? Don\'t fight over profit percentages! Use this feature so the calculations are *fair* and transparent.</p>
+        <h4>A. Registering Investor Names</h4>
         <div class="kb-img-container"><img src="assets/images/ss_profitshare_tab.png" alt="Profit Share" class="kb-img-showcase"></div>
         <ol>
-            <li>Buka menu <strong>Keuangan</strong>. Abaikan tab Arus Kas, klik tab di sebelahnya: <strong>Bagi Hasil (Profit Share)</strong>.</li>
-            <li>Di bawah tulisan Distribusi Bagi Hasil, klik tombol tambah (ikon orang+). Jendela modal akan muncul.</li>
-            <li><strong>Form Investor:</strong>
+            <li>Go to the <strong>Keuangan (Finance)</strong> menu. Ignore the Cash Flow tab, click the tab next to it: <strong>Bagi Hasil (Profit Share)</strong>.</li>
+            <li>Under the Profit Distribution text, click the add button (person+ icon). A modal window will appear.</li>
+            <li><strong>Investor Form:</strong>
                 <ul>
-                    <li><strong>Nama Investor:</strong> Masukkan nama partner bisnis Anda (misal: Bapak Budi).</li>
-                    <li><strong>Porsi / Persentase:</strong> Berapa kesepakatan jatah bersihnya? Ketik angkanya saja (misal: 30 untuk 30%). Pastikan total porsi semua investor tidak lebih dari 100%.</li>
+                    <li><strong>Investor Name:</strong> Enter the name of your business partner (e.g., Mr. Budi).</li>
+                    <li><strong>Portion / Percentage:</strong> What is the agreed net share? Type the number only (e.g., 30 for 30%). Ensure the total portion of all investors does not exceed 100%.</li>
                 </ul>
             </li>
-            <li>Klik Simpan. Nama Bapak Budi kini muncul di tabel investor dengan persentase 30%.</li>
+            <li>Click Save. Mr. Budi\'s name now appears in the investor table with a 30% percentage.</li>
         </ol>
-        <h4>B. Menghitung Pencairan Laba Bulanan</h4>
+        <h4>B. Calculating Monthly Profit Disbursement</h4>
         <ol>
-            <li>Setiap menjelang awal bulan tutup buku (tanggal 30/31), masuk kembali ke halaman ini.</li>
-            <li>Lihat panel <em>Riwayat Laporan Bagi Hasil</em>. Klik tombol biru <strong>Generate Laporan Bagi Hasil</strong>.</li>
-            <li>Sebuah jendela kalender akan muncul. Pilih <strong>Rentang Tanggal</strong> (Pilih tanggal 1 sampai tanggal 30/31 di bulan tersebut).</li>
-            <li>Klik <strong>Proses & Kalkulasi</strong>.</li>
-            <li><strong>Apa yang terjadi?</strong> Sistem akan berlari memeriksa total Laba Bersih Anda pada bulan tersebut (Total Penjualan - HPP - Beli Gas - Gaji Karyawan). Misalkan laba bersih final adalah Rp 10.000.000.</li>
-            <li>Sistem akan memecahkan uang 10 Juta itu secara otomatis! Sistem mencatat: Jatah Bapak Budi (30%) adalah Rp 3.000.000, Jatah Owner (Sisa 70%) adalah Rp 7.000.000.</li>
-            <li>Riwayat pembagian ini akan abadi di tabel. Anda bisa klik <strong>Cetak PDF</strong> untuk diserahkan ke Bapak Budi sebagai bukti transparansi. Jika uang sudah ditransfer, klik tombol <strong>Tandai Sudah Dibayar</strong> agar laporannya berstatus hijau (Lunas).</li>
+            <li>Every time approaching the beginning of the book-closing month (date 30/31), return to this page.</li>
+            <li>Look at the <em>Riwayat Laporan Bagi Hasil (Profit Share Report History)</em> panel. Click the blue <strong>Generate Laporan Bagi Hasil</strong> button.</li>
+            <li>A calendar window will appear. Select the <strong>Date Range</strong> (Select date 1 to date 30/31 in that month).</li>
+            <li>Click <strong>Proses & Kalkulasi (Process & Calculate)</strong>.</li>
+            <li><strong>What happens?</strong> The system will run to check your total Net Profit in that month (Total Sales - COGS - Buy Gas - Employee Salaries). Suppose the final net profit is Rp 10,000,000.</li>
+            <li>The system will automatically split that 10 Million! The system records: Mr. Budi\'s Share (30%) is Rp 3,000,000, Owner\'s Share (Remaining 70%) is Rp 7,000,000.</li>
+            <li>This distribution history will be immortalized in the table. You can click <strong>Cetak PDF (Print PDF)</strong> to hand over to Mr. Budi as proof of transparency. If the money has been transferred, click the <strong>Tandai Sudah Dibayar (Mark as Paid)</strong> button so the report status turns green (Paid).</li>
         </ol>',
         
         'kb_c8_title' => 'PDF Report Export',

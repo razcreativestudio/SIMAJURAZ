@@ -78,11 +78,11 @@ if (!RAZisInstalled()) {
         <div class="hero-badge">
             <i class="ph-bold ph-star"></i> <?= t('hero_badge') ?>
         </div>
-        <h1><?= t('hero_title_1') ?><br><?= t('hero_title_2') ?> <span>SIMAJURAZ</span></h1>
-        <p><?= t('hero_desc') ?></p>
+        <h1 class="reveal"><?= t('hero_title_1') ?><br><?= t('hero_title_2') ?> <span>SIMAJURAZ</span></h1>
+        <p class="reveal reveal-delay-1"><?= t('hero_desc') ?></p>
         
-        <div class="hero-cta">
-            <a href="RAZlogin.php" class="btn-primary">
+        <div class="hero-cta reveal reveal-delay-2">
+            <a href="RAZlogin.php" class="btn-primary pulse">
                 <?= t('hero_btn_start') ?>
             </a>
             <a href="#fitur" class="btn-outline">
@@ -101,22 +101,22 @@ if (!RAZisInstalled()) {
 
     <!-- Teknologi Section -->
     <section class="features" id="teknologi" style="background: rgba(0,0,0,0.2);">
-        <h2 class="section-title"><?= t('tech_title') ?></h2>
+        <h2 class="section-title reveal"><?= t('tech_title') ?></h2>
         <p style="text-align: center; max-width: 800px; margin: -40px auto 60px; color: var(--l-text-muted);"><?= t('tech_desc') ?></p>
         <div class="features-grid">
-            <div class="feature-card" style="text-align: center;">
+            <div class="feature-card reveal" style="text-align: center;">
                 <i class="ph-bold ph-file-code" style="font-size: 3rem; color: var(--l-primary); margin-bottom: 16px;"></i>
                 <h3 style="font-size:1.2rem;"><?= t('tech_php') ?></h3>
             </div>
-            <div class="feature-card" style="text-align: center;">
+            <div class="feature-card reveal" style="text-align: center;">
                 <i class="ph-bold ph-database" style="font-size: 3rem; color: var(--l-accent); margin-bottom: 16px;"></i>
                 <h3 style="font-size:1.2rem;"><?= t('tech_db') ?></h3>
             </div>
-            <div class="feature-card" style="text-align: center;">
+            <div class="feature-card reveal" style="text-align: center;">
                 <i class="ph-bold ph-paint-brush" style="font-size: 3rem; color: #10b981; margin-bottom: 16px;"></i>
                 <h3 style="font-size:1.2rem;"><?= t('tech_css') ?></h3>
             </div>
-            <div class="feature-card" style="text-align: center;">
+            <div class="feature-card reveal" style="text-align: center;">
                 <i class="ph-bold ph-lightning" style="font-size: 3rem; color: #f43f5e; margin-bottom: 16px;"></i>
                 <h3 style="font-size:1.2rem;"><?= t('tech_js') ?></h3>
             </div>
@@ -125,10 +125,10 @@ if (!RAZisInstalled()) {
 
     <!-- Extended Visual Showcase (Zig-Zag Layout) -->
     <section class="features" style="padding-top:60px;">
-        <h2 class="section-title"><?= t('showcase_title') ?></h2>
+        <h2 class="section-title reveal"><?= t('showcase_title') ?></h2>
         
         <!-- Showcase 1: POS -->
-        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-bottom: 80px; max-width: 1200px; margin-left: auto; margin-right: auto;">
+        <div class="reveal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-bottom: 80px; max-width: 1200px; margin-left: auto; margin-right: auto;">
             <div style="flex: 1; min-width: 300px;">
                 <div style="background: var(--l-card-bg); border: 1px solid var(--l-border); border-radius: 16px; padding: 8px;">
                     <img src="assets/images/ss_pos.png" alt="POS Kasir" style="width: 100%; border-radius: 8px; background: #e2e8f0; min-height: 250px; object-fit: cover;">
@@ -141,7 +141,7 @@ if (!RAZisInstalled()) {
         </div>
 
         <!-- Showcase 2: Finance -->
-        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-bottom: 80px; max-width: 1200px; margin-left: auto; margin-right: auto; flex-direction: row-reverse;">
+        <div class="reveal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-bottom: 80px; max-width: 1200px; margin-left: auto; margin-right: auto; flex-direction: row-reverse;">
             <div style="flex: 1; min-width: 300px;">
                 <div style="background: var(--l-card-bg); border: 1px solid var(--l-border); border-radius: 16px; padding: 8px;">
                     <img src="assets/images/ss_finance.png" alt="Laporan Keuangan" style="width: 100%; border-radius: 8px; background: #e2e8f0; min-height: 250px; object-fit: cover;">
@@ -154,7 +154,7 @@ if (!RAZisInstalled()) {
         </div>
 
         <!-- Showcase 3: HPP Calculator -->
-        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-bottom: 80px; max-width: 1200px; margin-left: auto; margin-right: auto;">
+        <div class="reveal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-bottom: 80px; max-width: 1200px; margin-left: auto; margin-right: auto;">
             <div style="flex: 1; min-width: 300px;">
                 <div style="background: var(--l-card-bg); border: 1px solid var(--l-border); border-radius: 16px; padding: 8px;">
                     <img src="assets/images/ss_hpp.png" alt="Kalkulator HPP" style="width: 100%; border-radius: 8px; background: #e2e8f0; min-height: 250px; object-fit: cover;">
@@ -167,7 +167,7 @@ if (!RAZisInstalled()) {
         </div>
 
         <!-- Showcase 4: Inventory & Reports -->
-        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-bottom: 80px; max-width: 1200px; margin-left: auto; margin-right: auto; flex-direction: row-reverse;">
+        <div class="reveal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-bottom: 80px; max-width: 1200px; margin-left: auto; margin-right: auto; flex-direction: row-reverse;">
             <div style="flex: 1; min-width: 300px;">
                 <div style="background: var(--l-card-bg); border: 1px solid var(--l-border); border-radius: 16px; padding: 8px;">
                     <img src="assets/images/ss_reports.png" alt="Laporan & Ekspor" style="width: 100%; border-radius: 8px; background: #e2e8f0; min-height: 250px; object-fit: cover;">
@@ -182,44 +182,44 @@ if (!RAZisInstalled()) {
 
     <!-- Fitur Section Grid Lengkap -->
     <section class="features" id="fitur" style="background: var(--l-bg-nav);">
-        <h2 class="section-title"><?= t('feat_title') ?></h2>
+        <h2 class="section-title reveal"><?= t('feat_title') ?></h2>
         <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-            <div class="feature-card">
+            <div class="feature-card reveal">
                 <div class="feature-icon"><i class="ph-bold ph-chart-pie-slice"></i></div>
                 <h3><?= t('feat_1_title') ?></h3>
                 <p><?= t('feat_1_desc') ?></p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal">
                 <div class="feature-icon"><i class="ph-bold ph-package"></i></div>
                 <h3><?= t('feat_2_title') ?></h3>
                 <p><?= t('feat_2_desc') ?></p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal">
                 <div class="feature-icon"><i class="ph-bold ph-shopping-cart"></i></div>
                 <h3><?= t('feat_3_title') ?></h3>
                 <p><?= t('feat_3_desc') ?></p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal">
                 <div class="feature-icon"><i class="ph-bold ph-chart-line-up"></i></div>
                 <h3><?= t('feat_4_title') ?></h3>
                 <p><?= t('feat_4_desc') ?></p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal">
                 <div class="feature-icon"><i class="ph-bold ph-money"></i></div>
                 <h3><?= t('feat_5_title') ?></h3>
                 <p><?= t('feat_5_desc') ?></p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal">
                 <div class="feature-icon"><i class="ph-bold ph-calculator"></i></div>
                 <h3><?= t('feat_6_title') ?></h3>
                 <p><?= t('feat_6_desc') ?></p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal">
                 <div class="feature-icon"><i class="ph-bold ph-file-pdf"></i></div>
                 <h3><?= t('feat_7_title') ?></h3>
                 <p><?= t('feat_7_desc') ?></p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal">
                 <div class="feature-icon"><i class="ph-bold ph-users-three"></i></div>
                 <h3><?= t('feat_8_title') ?></h3>
                 <p><?= t('feat_8_desc') ?></p>
