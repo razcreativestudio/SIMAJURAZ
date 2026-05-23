@@ -347,15 +347,35 @@ let currentTransId = 0; // Simpan ID untuk dibagikan
 function showReceipt(transId) {
   currentTransId = transId;
   
-  // Gunakan iframe agar tampilan preview sama persis dengan hasil cetak (RAZreceipt.php)
+  // Gunakan iframe tanpa src, lalu inject content via fetch untuk membypass X-Frame-Options
   const iframeHtml = `
-    <div style="width:100%; height: 60vh; min-height:400px; display:flex; justify-content:center; background:#f0f0f0; border-radius:8px; overflow:hidden;">
-        <iframe src="RAZreceipt.php?id=${transId}&preview=1" style="width:100%; height:100%; border:none;"></iframe>
+    <div style="width:100%; height: 60vh; min-height:400px; display:flex; justify-content:center; background:#f0f0f0; border-radius:8px; overflow:hidden; position:relative;">
+        <div id="receiptLoader" style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); color:#888;"><i class="ph-bold ph-spinner ph-spin" style="font-size:2rem;"></i></div>
+        <iframe id="receiptIframe" style="width:100%; height:100%; border:none; opacity:0; transition:opacity 0.3s;"></iframe>
     </div>
   `;
   
   document.getElementById('receiptContent').innerHTML = iframeHtml;
   RAZ.openModal('receiptModal');
+
+  fetch(`RAZreceipt.php?id=${transId}&preview=1`)
+    .then(res => res.text())
+    .then(html => {
+        const iframe = document.getElementById('receiptIframe');
+        if (iframe) {
+            iframe.contentDocument.open();
+            iframe.contentDocument.write(html);
+            iframe.contentDocument.close();
+            
+            // Tunggu sedikit agar CSS render, lalu tampilkan
+            setTimeout(() => {
+                document.getElementById('receiptLoader').style.display = 'none';
+                iframe.style.opacity = '1';
+            }, 300);
+        }
+    }).catch(err => {
+        console.error('Failed to load receipt:', err);
+    });
 }
 
 function printReceipt() {
@@ -363,10 +383,22 @@ function printReceipt() {
   window.open('RAZreceipt.php?id=' + currentTransId, '_blank', 'width=400,height=600');
 }
 
-function shareReceipt() {
-  if (!currentTransId) return;
-  // Dapatkan URL struk publik
-  const url = window.location.origin + window.location.pathname.replace('RAZpos.php', '') + 'RAZreceipt.php?id=' + currentTransId;
-  const text = encodeURIComponent(`Halo! Berikut adalah e-struk / resi pembelian Anda:\n\n` + url + `\n\nTerima kasih telah berbelanja!`);
-  window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+function downloadReceipt() {
+  const iframe = document.getElementById('receiptIframe');
+  if (iframe && iframe.contentWindow && iframe.contentWindow.downloadReceipt) {
+      iframe.contentWindow.downloadReceipt();
+  }
 }
+
+function shareReceipt() {
+  const iframe = document.getElementById('receiptIframe');
+  if (iframe && iframe.contentWindow && iframe.contentWindow.shareReceipt) {
+      iframe.contentWindow.shareReceipt();
+  } else {
+      if (!currentTransId) return;
+      const url = window.location.origin + window.location.pathname.replace('RAZpos.php', '') + 'RAZreceipt.php?id=' + currentTransId;
+      const text = encodeURIComponent(`Halo! Berikut adalah e-struk / resi pembelian Anda:\n\n` + url + `\n\nTerima kasih telah berbelanja!`);
+      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+  }
+}
+

@@ -110,7 +110,7 @@ elseif ($tplSep === 'double') $sepBorder = "3px double #000";
         .receipt-wrapper {
             background: #fff;
             width: <?= $cssWidth ?>;
-            min-height: calc(100vh - 40px);
+            margin: 0 auto;
             padding: 20px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             position: relative;
@@ -166,10 +166,14 @@ elseif ($tplSep === 'double') $sepBorder = "3px double #000";
 <body>
 
 <div>
-    <div class="no-print">
-        <button class="btn" onclick="window.print()">🖨️ Cetak Struk</button>
+    <?php if (!isset($_GET['preview'])): ?>
+    <div class="no-print" style="display:flex; justify-content:center; gap:8px; margin-bottom: 20px; flex-wrap:wrap;">
+        <button class="btn" onclick="window.print()">🖨️ Cetak</button>
+        <button class="btn" style="background:#10B981;" onclick="downloadReceipt()">⬇️ Unduh</button>
+        <button class="btn" style="background:#25D366;" onclick="shareReceipt()">🔗 Bagikan</button>
         <button class="btn btn-secondary" onclick="window.close()">Tutup</button>
     </div>
+    <?php endif; ?>
 
     <div class="receipt-wrapper" style="<?= (in_array($showLogo, [7, 8]) && $logoUrl) ? "position:relative; z-index:1;" : "" ?>">
         <?php if ($logoUrl && in_array($showLogo, [7, 8])): ?>
@@ -263,6 +267,7 @@ elseif ($tplSep === 'double') $sepBorder = "3px double #000";
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <?php if (!isset($_GET['preview'])): ?>
 <script>
     // Auto print when loaded directly (not in preview iframe)
@@ -274,5 +279,79 @@ elseif ($tplSep === 'double') $sepBorder = "3px double #000";
 </script>
 <?php endif; ?>
 
+<script>
+    function downloadReceipt() {
+        const receipt = document.querySelector('.receipt-wrapper');
+        const origBoxShadow = receipt.style.boxShadow;
+        receipt.style.boxShadow = 'none'; // Remove shadow for clean image
+        
+        html2canvas(receipt, {
+            scale: 2, // High resolution
+            backgroundColor: '#ffffff'
+        }).then(canvas => {
+            receipt.style.boxShadow = origBoxShadow; // Restore shadow
+            const link = document.createElement('a');
+            link.download = 'Struk_<?= htmlspecialchars($transaction['invoice_number']) ?>.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+    }
+
+    function shareReceipt() {
+        let btn = null;
+        let originalText = '';
+        try {
+            if (window.event && window.event.currentTarget) {
+                btn = window.event.currentTarget;
+                originalText = btn.innerHTML;
+                btn.innerHTML = '⏳ Menyiapkan...';
+                btn.disabled = true;
+            }
+        } catch (e) {}
+
+        const receipt = document.querySelector('.receipt-wrapper');
+        const origBoxShadow = receipt.style.boxShadow;
+        receipt.style.boxShadow = 'none';
+        
+        html2canvas(receipt, {
+            scale: 2,
+            backgroundColor: '#ffffff'
+        }).then(canvas => {
+            receipt.style.boxShadow = origBoxShadow;
+            
+            canvas.toBlob(blob => {
+                const file = new File([blob], 'Struk_<?= htmlspecialchars($transaction['invoice_number']) ?>.png', { type: 'image/png' });
+                const url = window.location.href;
+                const text = `Halo! Berikut adalah e-struk pembelian Anda.\n\nTerima kasih telah berbelanja!`;
+                
+                if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+                    navigator.share({
+                        title: 'Struk Pembelian',
+                        text: text,
+                        files: [file]
+                    }).then(() => {
+                        if (btn) { btn.innerHTML = originalText; btn.disabled = false; }
+                    }).catch(err => {
+                        console.error('Share failed:', err);
+                        if (btn) { btn.innerHTML = originalText; btn.disabled = false; }
+                    });
+                } else if (navigator.share) {
+                    // Fallback to text sharing if file sharing is not supported
+                    navigator.share({
+                        title: 'Struk Pembelian',
+                        text: text + '\n\n' + url
+                    }).finally(() => {
+                        if (btn) { btn.innerHTML = originalText; btn.disabled = false; }
+                    });
+                } else {
+                    // Fallback to WhatsApp text
+                    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text + '\n\n' + url)}`, '_blank');
+                    if (btn) { btn.innerHTML = originalText; btn.disabled = false; }
+                }
+            }, 'image/png');
+        });
+    }
+</script>
 </body>
 </html>
+

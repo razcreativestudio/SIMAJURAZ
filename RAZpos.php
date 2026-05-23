@@ -204,8 +204,9 @@ $currentPage = 'pos';
             <button class="raz-modal-close" onclick="RAZ.closeModal('receiptModal')"><i class="ph-bold ph-x"></i></button>
         </div>
         <div class="raz-modal-body" id="receiptContent"></div>
-        <div class="raz-modal-footer" style="justify-content:center;">
+        <div class="raz-modal-footer" style="justify-content:center; flex-wrap:wrap; gap:8px;">
             <button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('receiptModal')"><i class="ph-bold ph-x"></i> <?= t('pos_btn_close') ?></button>
+            <button class="raz-btn" style="background:#10B981; color:white; border-color:#10B981;" onclick="downloadReceipt()"><i class="ph-bold ph-download-simple"></i> Unduh</button>
             <button class="raz-btn raz-btn-success" onclick="shareReceipt()"><i class="ph-bold ph-whatsapp-logo"></i> <?= t('pos_btn_share') ?></button>
             <button class="raz-btn raz-btn-primary" onclick="printReceipt()"><i class="ph-bold ph-printer"></i> <?= t('pos_btn_print') ?></button>
         </div>
