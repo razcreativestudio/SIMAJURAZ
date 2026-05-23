@@ -109,7 +109,7 @@ function renderItemsTable() {
     tbody.innerHTML = `<tr><td colspan="7">
       <div class="raz-table-empty">
         <div class="empty-icon"><i class="ph-bold ph-package"></i></div>
-        <div class="empty-title">Belum Ada Barang</div>
+        <div class="empty-title">${window.INV_LANG ? window.INV_LANG.empty_items : 'Belum Ada Barang'}</div>
         <div class="empty-desc">Klik tombol "Tambah Barang" untuk memulai.</div>
       </div>
     </td></tr>`;
@@ -156,7 +156,7 @@ function renderPagination(data) {
 
   const info = container.querySelector('.raz-pagination-info');
   const btns = container.querySelector('.raz-pagination-buttons');
-  if (info) info.textContent = `Halaman ${data.page} dari ${data.pages} (${data.total} barang)`;
+  if (info) info.textContent = (window.INV_LANG ? window.INV_LANG.page_info.replace('{page}', data.page).replace('{pages}', data.pages).replace('{total}', data.total) : `Halaman ${data.page} dari ${data.pages} (${data.total} barang)`);
 
   if (btns && data.pages > 1) {
     let html = `<button ${data.page<=1?'disabled':''} onclick="goPage(${data.page-1})"><i class="ph-bold ph-caret-left"></i></button>`;
@@ -203,7 +203,7 @@ function renderCategoryGrid() {
   const grid = document.getElementById('catGrid');
   if (!grid) return;
   if (!INV.categories.length) {
-    grid.innerHTML = '<div class="raz-table-empty"><div class="empty-icon"><i class="ph-bold ph-tag"></i></div><div class="empty-title">Belum Ada Kategori</div></div>';
+    grid.innerHTML = `<div class="raz-table-empty"><div class="empty-icon"><i class="ph-bold ph-tag"></i></div><div class="empty-title">${window.INV_LANG ? window.INV_LANG.empty_cat : 'Belum Ada Kategori'}</div></div>`;
     return;
   }
   grid.innerHTML = INV.categories.map(c => `
@@ -222,7 +222,7 @@ function renderCategoryGrid() {
 // MODAL BARANG (Tambah / Edit)
 // ========================
 function openAddItem() {
-  document.getElementById('itemFormTitle').textContent = 'Tambah Barang';
+  document.getElementById('itemFormTitle').textContent = (window.INV_LANG ? window.INV_LANG.add_item : 'Tambah Barang');
   document.getElementById('itemForm').reset();
   document.getElementById('itemId').value = '';
   document.getElementById('marginInfo').style.display = 'none';
@@ -234,7 +234,7 @@ async function editItem(id) {
   if (!data.success) return;
   const item = data.data;
 
-  document.getElementById('itemFormTitle').textContent = 'Edit Barang';
+  document.getElementById('itemFormTitle').textContent = (window.INV_LANG ? window.INV_LANG.edit_item : 'Edit Barang');
   document.getElementById('itemId').value = item.id;
   document.getElementById('itemName').value = item.name;
   document.getElementById('itemSku').value = item.sku || '';
@@ -266,7 +266,7 @@ async function saveItem() {
 }
 
 async function deleteItem(id, name) {
-  const ok = await RAZ.confirm({ title: 'Hapus Barang?', message: `"${name}" akan dinonaktifkan.`, confirmText: 'Ya, Hapus' });
+  const ok = await RAZ.confirm({ title: (window.INV_LANG ? window.INV_LANG.del_title : 'Hapus Barang?'), message: (window.INV_LANG ? window.INV_LANG.del_msg.replace('{name}', name) : `"" akan dinonaktifkan.`), confirmText: (window.INV_LANG ? window.INV_LANG.btn_yes : 'Ya, Hapus') });
   if (!ok) return;
   const res = await RAZ.api('api/RAZapiItems.php?action=delete', { method: 'POST', body: { id } });
   if (res.success) { RAZ.success('Dihapus', res.message); loadItems(); }
@@ -311,7 +311,7 @@ async function saveCategory() {
 }
 
 async function deleteCategory(id, name) {
-  const ok = await RAZ.confirm({ title: 'Hapus Kategori?', message: `"${name}" akan dihapus. Barang di kategori ini akan menjadi tanpa kategori.`, type: 'warning', confirmText: 'Ya, Hapus' });
+  const ok = await RAZ.confirm({ title: (window.INV_LANG ? window.INV_LANG.del_cat_title : 'Hapus Kategori?'), message: (window.INV_LANG ? window.INV_LANG.del_cat_msg.replace('{name}', name) : `"" akan dihapus. Barang di kategori ini akan menjadi tanpa kategori.`), type: 'warning', confirmText: (window.INV_LANG ? window.INV_LANG.btn_yes : 'Ya, Hapus') });
   if (!ok) return;
   const res = await RAZ.api('api/RAZapiItems.php?action=delete_cat', { method: 'POST', body: { id } });
   if (res.success) { RAZ.success('Dihapus', res.message); loadCategories(); loadItems(); }

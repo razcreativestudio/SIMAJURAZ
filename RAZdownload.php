@@ -49,7 +49,7 @@ if (!RAZisInstalled()) {
             <a href="RAZdownload.php" style="color:var(--l-primary-light); font-weight:600;"><i class="ph-bold ph-download-simple"></i> Download</a>
         </div>
         <div class="nav-actions" style="display: flex; gap: 12px; align-items: center;">
-            <a href="?lang=<?= $current_lang === 'id' ? 'en' : 'id' ?>" class="nav-action-icon" style="color:var(--l-text); font-size:1.1rem; font-weight:700; text-decoration:none; display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; border:1px solid var(--l-border);">
+            <a href="?lang=<?= $current_lang === 'id' ? 'en' : 'id' ?>" class="nav-action-icon" style="color:var(--l-text); font-size:1.1rem; font-weight:700; text-decoration:none; display:none; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; border:1px solid var(--l-border);">
                 <?= strtoupper($current_lang === 'id' ? 'en' : 'id') ?>
             </a>
             <a href="#" id="theme-toggle" class="nav-action-icon" style="color:var(--l-text); font-size:1.2rem; text-decoration:none;">
@@ -317,3 +317,4 @@ if (!RAZisInstalled()) {
     </footer>
 </body>
 </html>
+

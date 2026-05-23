@@ -113,7 +113,7 @@ function renderProducts() {
       ${img}
       <div class="pos-item-name">${p.name}</div>
       <div class="pos-item-price">${RAZ.formatRupiah(p.sell_price)}</div>
-      <div class="pos-item-stock">${p.stock <= 0 ? 'Habis' : 'Stok: ' + p.stock}</div>
+      <div class="pos-item-stock">${p.stock <= 0 ? (window.POS_LANG ? window.POS_LANG.out_stock : 'Habis') : (window.POS_LANG ? window.POS_LANG.stock : 'Stok') + ': ' + p.stock}</div>
     </div>`;
   }).join('');
 }
@@ -121,7 +121,7 @@ function renderProducts() {
 function renderCategoryChips() {
   const container = document.getElementById('posCats');
   if (!container) return;
-  let html = `<button class="pos-cat-chip ${!POS.categoryFilter ? 'active' : ''}" onclick="filterCategory('')">Semua</button>`;
+  let html = `<button class="pos-cat-chip ${!POS.categoryFilter ? 'active' : ''}" onclick="filterCategory('')">${window.POS_LANG ? window.POS_LANG.all : 'Semua'}</button>`;
   html += POS.categories.map(c =>
     `<button class="pos-cat-chip ${POS.categoryFilter == c.id ? 'active' : ''}" onclick="filterCategory('${c.id}')">${c.name}</button>`
   ).join('');
@@ -143,7 +143,7 @@ function addToCart(productId) {
   const existing = POS.cart.find(c => c.id === productId);
   if (existing) {
     if (existing.qty >= product.stock) {
-      RAZ.warning('Stok Limit', `Stok "${product.name}" hanya tersisa ${product.stock}`);
+      RAZ.warning(window.POS_LANG ? window.POS_LANG.stock_limit : 'Stok Limit', `${window.POS_LANG ? window.POS_LANG.stock_warning : 'Stok'} "${product.name}" ${window.POS_LANG ? window.POS_LANG.only_left : 'hanya tersisa'} ${product.stock}`);
       return;
     }
     existing.qty++;
@@ -164,7 +164,7 @@ function updateQty(productId, delta) {
   if (item.qty <= 0) { POS.cart = POS.cart.filter(c => c.id !== productId); }
   else if (item.qty > item.maxStock) {
     item.qty = item.maxStock;
-    RAZ.warning('Stok Limit', 'Melebihi stok tersedia');
+    RAZ.warning(window.POS_LANG ? window.POS_LANG.stock_limit : 'Stok Limit', window.POS_LANG ? window.POS_LANG.exceed_stock : 'Melebihi stok tersedia');
   }
   renderCart();
 }
@@ -178,7 +178,7 @@ function clearCart() {
   if (!POS.cart.length) return;
   POS.cart = [];
   renderCart();
-  RAZ.info('Keranjang Dikosongkan', '');
+  RAZ.info(window.POS_LANG ? window.POS_LANG.cart_cleared : 'Keranjang Dikosongkan', '');
 }
 
 // ========================
@@ -196,7 +196,7 @@ function renderCart() {
   if (countEl) countEl.textContent = totalItems;
 
   if (!POS.cart.length) {
-    container.innerHTML = `<div class="pos-cart-empty"><i class="ph-bold ph-shopping-cart"></i><p>Keranjang kosong</p></div>`;
+    container.innerHTML = `<div class="pos-cart-empty"><i class="ph-bold ph-shopping-cart"></i><p>${window.POS_LANG ? window.POS_LANG.cart_empty : 'Keranjang kosong'}</p></div>`;
     if (summary) summary.style.display = 'none';
     return;
   }

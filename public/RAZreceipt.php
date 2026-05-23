@@ -13,11 +13,6 @@ require_once __DIR__ . '/RAZconfig.php';
 require_once __DIR__ . '/includes/RAZsession.php';
 require_once __DIR__ . '/includes/RAZhelpers.php';
 
-// Override X-Frame-Options dari konfigurasi server (Apache/Nginx) 
-// agar struk bisa di-load di dalam iframe preview POS
-header_remove('X-Frame-Options');
-header('X-Frame-Options: SAMEORIGIN');
-
 RAZrequireStoreAccess();
 
 $id = intval($_GET['id'] ?? 0);
@@ -98,22 +93,24 @@ elseif ($tplSep === 'double') $sepBorder = "3px double #000";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Struk - <?= htmlspecialchars($transaction['invoice_number']) ?></title>
     <style>
-        /* Reset & Base */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             <?= $cssFont ?>
             font-size: 12px;
             color: #000;
             background: #f0f0f0;
+            padding: 20px;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding: 20px;
+            align-items: flex-start;
         }
 
         /* Thermal Printer Wrapper */
         .receipt-wrapper {
             background: #fff;
             width: <?= $cssWidth ?>;
+            min-height: calc(100vh - 40px);
             padding: 20px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             position: relative;

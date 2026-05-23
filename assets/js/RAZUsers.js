@@ -41,7 +41,7 @@ function renderUserGrid(users) {
   if (!users.length) {
     grid.innerHTML = `<div style="grid-column:1/-1;"><div class="raz-table-empty">
       <div class="empty-icon"><i class="ph-bold ph-users"></i></div>
-      <div class="empty-title">Belum Ada Karyawan</div>
+      <div class="empty-title">${window.USR_LANG ? window.USR_LANG.empty_emp : 'Belum Ada Karyawan'}</div>
       <div class="empty-desc">Klik "Tambah Karyawan" untuk membuat akun baru.</div>
     </div></div>`;
     return;
@@ -84,7 +84,7 @@ function renderUserGrid(users) {
 // TAMBAH KARYAWAN
 // ========================
 function openAddUser() {
-  document.getElementById('userFormTitle').textContent = 'Tambah Karyawan';
+  document.getElementById('userFormTitle').textContent = window.USR_LANG ? window.USR_LANG.user_new : 'Tambah Karyawan';
   document.getElementById('userId').value = '';
   document.getElementById('userName').value = '';
   document.getElementById('userUsername').value = '';
@@ -102,7 +102,7 @@ async function editUser(id) {
   if (!data.success) return;
   const u = data.data;
 
-  document.getElementById('userFormTitle').textContent = 'Edit Karyawan';
+  document.getElementById('userFormTitle').textContent = window.USR_LANG ? window.USR_LANG.user_edit : 'Edit Karyawan';
   document.getElementById('userId').value = u.id;
   document.getElementById('userName').value = u.full_name;
   document.getElementById('userUsername').value = u.username;
@@ -271,7 +271,7 @@ async function loadSalaries() {
 
 function openAddSalary() {
     document.getElementById('salaryId').value = '';
-    document.getElementById('salaryFormTitle').textContent = 'Pembayaran Gaji Baru';
+    document.getElementById('salaryFormTitle').textContent = window.USR_LANG ? window.USR_LANG.salary_new : 'Pembayaran Gaji Baru';
     document.getElementById('salaryPeriod').value = 'Bulanan';
     document.getElementById('salaryBase').value = '';
     document.getElementById('salaryBonus').value = '';

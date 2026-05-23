@@ -386,6 +386,45 @@ const RAZ = {
   init() {
     this.initSidebar();
 
+    // Theme Switcher Logic
+    const themeBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Check localStorage or cookie for saved theme
+    let savedTheme = localStorage.getItem('raz_theme');
+    
+    // Read from cookies as fallback
+    if (!savedTheme) {
+        const match = document.cookie.match(new RegExp('(^| )raz_theme=([^;]+)'));
+        if (match) savedTheme = match[2];
+    }
+
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        if (themeBtn) themeBtn.innerHTML = '<i class="ph-bold ph-sun"></i>';
+    } else {
+        if (themeBtn) themeBtn.innerHTML = '<i class="ph-bold ph-moon"></i>';
+    }
+
+    // Event Delegation for Theme Switcher (works even if DOM renders late)
+    document.body.addEventListener('click', (e) => {
+        const btn = e.target.closest('#theme-toggle');
+        if (btn) {
+            e.preventDefault();
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('raz_theme', 'light');
+                document.cookie = "raz_theme=light; path=/; max-age=2592000";
+                btn.innerHTML = '<i class="ph-bold ph-moon"></i>';
+            } else {
+                body.classList.add('dark-mode');
+                localStorage.setItem('raz_theme', 'dark');
+                document.cookie = "raz_theme=dark; path=/; max-age=2592000";
+                btn.innerHTML = '<i class="ph-bold ph-sun"></i>';
+            }
+        }
+    });
+
     // Tutup dropdown saat klik di luar
     document.addEventListener('click', (e) => {
       document.querySelectorAll('.raz-dropdown.show').forEach(dd => {
@@ -398,4 +437,18 @@ const RAZ = {
 };
 
 // Jalankan inisialisasi saat DOM siap
-document.addEventListener('DOMContentLoaded', () => RAZ.init());
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => RAZ.init());
+} else {
+    RAZ.init();
+}
+
+// ============================================================
+// GLOBAL UI TOGGLES (Digunakan di banyak halaman backend)
+// ============================================================
+function toggleUserDropdown() {
+  const dd = document.getElementById('userDropdown');
+  if (dd) {
+    dd.classList.toggle('show');
+  }
+}

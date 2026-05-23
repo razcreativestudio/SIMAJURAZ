@@ -137,7 +137,7 @@ async function loadProfitLoss() {
     <tr class="pl-section"><td colspan="2">PENDAPATAN</td></tr>
     <tr><td class="pl-indent">Penjualan (${r.sales_count} transaksi)</td><td class="text-right text-success">${RAZ.formatRupiah(r.sales_total)}</td></tr>
     <tr><td class="pl-indent">Pemasukan Lain</td><td class="text-right text-success">${RAZ.formatRupiah(r.other_income)}</td></tr>
-    <tr class="pl-total"><td>Total Pendapatan</td><td class="text-right text-success">${RAZ.formatRupiah(r.sales_total + r.other_income)}</td></tr>
+    <tr class="pl-total"><td>${window.RPT_LANG ? window.RPT_LANG.lbl_total_in : (window.RPT_LANG && window.RPT_LANG.total_income) ? window.RPT_LANG.total_income : 'Total Income'}</td><td class="text-right text-success">${RAZ.formatRupiah(r.sales_total + r.other_income)}</td></tr>
     <tr class="pl-section"><td colspan="2">BEBAN</td></tr>
     <tr><td class="pl-indent">Harga Pokok Penjualan (HPP)</td><td class="text-right text-danger">${RAZ.formatRupiah(r.hpp_total)}</td></tr>`;
 
@@ -203,7 +203,7 @@ async function exportPDF() {
 
     const d = data.data;
     const store = d.store;
-    const reportTitles = { transactions: 'Laporan Transaksi', cashflow: 'Laporan Arus Kas', profit_loss: 'Laporan Laba Rugi', inventory: 'Laporan Inventori' };
+    const reportTitles = { transactions: (window.RPT_LANG ? window.RPT_LANG.title_trx : 'Laporan Transaksi'), cashflow: (window.RPT_LANG ? window.RPT_LANG.title_cashflow : 'Laporan Arus Kas'), profit_loss: (window.RPT_LANG ? window.RPT_LANG.title_profit_loss : 'Laporan Laba Rugi'), inventory: (window.RPT_LANG ? window.RPT_LANG.title_inventory : 'Laporan Inventori') };
 
     let htmlContent = '';
 
@@ -216,16 +216,16 @@ async function exportPDF() {
                 <tr><th style="width: 70%">Keterangan</th><th style="width: 30%; text-align:right">Jumlah (Rp)</th></tr>
             </thead>
             <tbody>
-                <tr class="group-header"><td colspan="2">1. PENDAPATAN</td></tr>
-                <tr><td class="pl-3">Pendapatan Penjualan (${r.sales_count} transaksi)</td><td class="text-right text-success">${RAZ.formatRupiah(r.sales_total)}</td></tr>
-                <tr><td class="pl-3">Pemasukan Lain-lain</td><td class="text-right text-success">${RAZ.formatRupiah(r.other_income)}</td></tr>
-                <tr class="subtotal-row"><td>Total Pendapatan</td><td class="text-right text-success">${RAZ.formatRupiah(r.sales_total + r.other_income)}</td></tr>
+                <tr class="group-header"><td colspan="2">1. ${window.RPT_LANG ? window.RPT_LANG.lbl_income : 'PENDAPATAN'}</td></tr>
+                <tr><td class="pl-3">${window.RPT_LANG ? window.RPT_LANG.lbl_sales : 'Pendapatan Penjualan'} (${r.sales_count} transaksi)</td><td class="text-right text-success">${RAZ.formatRupiah(r.sales_total)}</td></tr>
+                <tr><td class="pl-3">${window.RPT_LANG ? window.RPT_LANG.lbl_other : 'Pemasukan Lain-lain'}</td><td class="text-right text-success">${RAZ.formatRupiah(r.other_income)}</td></tr>
+                <tr class="subtotal-row"><td>${window.RPT_LANG ? window.RPT_LANG.lbl_total_in : (window.RPT_LANG && window.RPT_LANG.total_income) ? window.RPT_LANG.total_income : 'Total Income'}</td><td class="text-right text-success">${RAZ.formatRupiah(r.sales_total + r.other_income)}</td></tr>
                 
-                <tr class="group-header"><td colspan="2">2. HARGA POKOK PENJUALAN (HPP)</td></tr>
-                <tr><td class="pl-3">HPP Barang Terjual & Rusak</td><td class="text-right text-danger">${RAZ.formatRupiah(r.hpp_total)}</td></tr>
+                <tr class="group-header"><td colspan="2">2. ${window.RPT_LANG ? window.RPT_LANG.lbl_cogs : 'HARGA POKOK PENJUALAN'}</td></tr>
+                <tr><td class="pl-3">${window.RPT_LANG ? window.RPT_LANG.lbl_cogs_desc : 'HPP Barang Terjual & Rusak'}</td><td class="text-right text-danger">${RAZ.formatRupiah(r.hpp_total)}</td></tr>
                 <tr class="subtotal-row"><td>Total HPP</td><td class="text-right text-danger">${RAZ.formatRupiah(r.hpp_total)}</td></tr>
 
-                <tr class="gross-profit"><td>LABA KOTOR (Gross Profit)</td><td class="text-right">${RAZ.formatRupiah(grossProfit + r.other_income)}</td></tr>
+                <tr class="gross-profit"><td>${window.RPT_LANG ? window.RPT_LANG.lbl_gross : 'LABA KOTOR'}</td><td class="text-right">${RAZ.formatRupiah(grossProfit + r.other_income)}</td></tr>
 
                 <tr class="group-header"><td colspan="2">3. PENGELUARAN OPERASIONAL</td></tr>
                 `;
@@ -236,9 +236,9 @@ async function exportPDF() {
         }
         
         htmlContent += `
-                <tr class="subtotal-row"><td>Total Pengeluaran</td><td class="text-right text-danger">${RAZ.formatRupiah(r.expense_total)}</td></tr>
+                <tr class="subtotal-row"><td>${window.RPT_LANG ? window.RPT_LANG.lbl_total_out : 'Total Pengeluaran'}</td><td class="text-right text-danger">${RAZ.formatRupiah(r.expense_total)}</td></tr>
                 
-                <tr class="net-profit"><td>LABA BERSIH (Net Profit)</td><td class="text-right ${r.net_profit >= 0 ? 'text-success' : 'text-danger'}">${RAZ.formatRupiah(r.net_profit)}</td></tr>
+                <tr class="net-profit"><td>${window.RPT_LANG ? window.RPT_LANG.lbl_net : 'LABA BERSIH'}</td><td class="text-right ${r.net_profit >= 0 ? 'text-success' : 'text-danger'}">${RAZ.formatRupiah(r.net_profit)}</td></tr>
             </tbody>
         </table>`;
     } 
@@ -281,7 +281,7 @@ async function exportPDF() {
         htmlContent = `
         <div class="summary-box">
             <div class="summary-item"><strong>Total Pemasukan:</strong> <span class="text-success">${RAZ.formatRupiah(totalIn)}</span></div>
-            <div class="summary-item"><strong>Total Pengeluaran:</strong> <span class="text-danger">${RAZ.formatRupiah(totalOut)}</span></div>
+            <div class="summary-item"><strong>${window.RPT_LANG ? window.RPT_LANG.lbl_total_out : 'Total Pengeluaran'}:</strong> <span class="text-danger">${RAZ.formatRupiah(totalOut)}</span></div>
             <div class="summary-item"><strong>Saldo Bersih Periode:</strong> <span>${RAZ.formatRupiah(totalIn - totalOut)}</span></div>
         </div>
         <table class="data-table">
@@ -419,17 +419,17 @@ async function exportPDF() {
             </div>
             
             <div class="meta-info">
-                <span><strong>Periode:</strong> ${d.period.from} s/d ${d.period.to}</span>
-                <span><strong>Dicetak pada:</strong> ${d.generated_at}</span>
+                <span><strong>${window.RPT_LANG ? window.RPT_LANG.lbl_period : 'Periode'}:</strong> ${d.period.from} s/d ${d.period.to}</span>
+                <span><strong>${window.RPT_LANG ? window.RPT_LANG.lbl_print_date : 'Dicetak pada'}:</strong> ${d.generated_at}</span>
             </div>
             
             ${htmlContent}
             
             <div class="signature-section">
                 <div class="signature-box">
-                    <div class="signature-title">Mengetahui,</div>
+                    <div class="signature-title">${window.RPT_LANG ? window.RPT_LANG.lbl_sign : 'Mengetahui'},</div>
                     <div class="signature-name">${d.generated_by}</div>
-                    <div class="signature-role">Manajemen / Owner</div>
+                    <div class="signature-role">${window.RPT_LANG ? window.RPT_LANG.lbl_owner : 'Manajemen / Owner'}</div>
                 </div>
             </div>
             

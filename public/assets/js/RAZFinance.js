@@ -89,7 +89,7 @@ async function loadCashflows() {
   if (!tbody) return;
 
   if (!data.data.cashflows.length) {
-    tbody.innerHTML = `<tr><td colspan="6"><div class="raz-table-empty"><div class="empty-icon"><i class="ph-bold ph-wallet"></i></div><div class="empty-title">Belum Ada Arus Kas</div><div class="empty-desc">Klik "Catat Kas" untuk menambah data.</div></div></td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6"><div class="raz-table-empty"><div class="empty-icon"><i class="ph-bold ph-wallet"></i></div><div class="empty-title">${window.FIN_LANG ? window.FIN_LANG.empty_cf_title : 'Belum Ada Arus Kas'}</div><div class="empty-desc">${window.FIN_LANG ? window.FIN_LANG.empty_cf_desc : 'Klik "Catat Kas" untuk menambah data.'}</div></div></td></tr>`;
     return;
   }
 
@@ -208,7 +208,7 @@ async function loadCapitalFlows() {
     if (!data || !data.success || !tbody) return;
 
     if (data.data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="2" class="raz-text-center">Belum ada riwayat modal awal</td></tr>';
+        tbody.innerHTML = `<tr><td colspan="2" class="raz-text-center">${window.FIN_LANG ? window.FIN_LANG.empty_cap : 'Belum ada riwayat modal awal'}</td></tr>`;
         return;
     }
 
@@ -275,7 +275,7 @@ async function loadSpoilages() {
     if (!data || !data.success || !tbody) return;
 
     if (data.data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="2" class="raz-text-center">Belum ada laporan barang rusak</td></tr>';
+        tbody.innerHTML = `<tr><td colspan="2" class="raz-text-center">${window.FIN_LANG ? window.FIN_LANG.empty_spoil : 'Belum ada laporan barang rusak'}</td></tr>`;
         return;
     }
 
@@ -306,7 +306,7 @@ async function loadAdditionalExpenses() {
     if (!data || !data.success || !tbody) return;
 
     if (data.data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="2" class="raz-text-center">Belum ada pengeluaran tambahan</td></tr>';
+        tbody.innerHTML = `<tr><td colspan="2" class="raz-text-center">${window.FIN_LANG ? window.FIN_LANG.empty_exp : 'Belum ada pengeluaran tambahan'}</td></tr>`;
         return;
     }
 

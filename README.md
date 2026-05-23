@@ -36,8 +36,10 @@ SIMAJURAZ dirancang tidak hanya sebagai mesin kasir, melainkan sebagai "**Otak B
 
 ---
 
-### 🆕 Update Terbaru (Mei 2026)
-- **Globalisasi Bahasa:** Integrasi *multi-language* (ID/EN) yang komprehensif pada keseluruhan `index.php`, `RAZknowledgebase.php`, dan `RAZdownload.php` menggunakan global helper `t()`.
+### 🚀 Update Terbaru (Mei 2026) - Versi 1.2.0
+- **Ekspansi Bahasa Menyeluruh:** Integrasi *multi-language* (ID/EN) kini mencakup halaman inti aplikasi seperti `RAZdashboard.php` dan `RAZpos.php` menggunakan helper `t()`.
+- **UI Responsif Tema (Adaptive Logo):** *Logo SVG* utama kini memiliki kemampuan inversi warna otomatis menyesuaikan dengan Mode Terang dan Mode Gelap aplikasi tanpa merusak integritas warna *gradient* premiumnya.
+- **Penyelesaian Bug Kritis:** Perbaikan isu *Mojibake* (karakter *corrupt* seperti `Y'<` akibat *encoding*) pada sapaan Dashboard menjadi emoji 👋 yang ramah. Resolusi isu hilangnya menu Super Admin dan Pengaturan akibat dependensi tak termuat.
 - **Ekspansi Cloud:** Penambahan direktori Cloud Hosting khusus di laman muka agar UMKM dapat langsung memakai layanan gratis kami tanpa instalasi server.
 - **Penyempurnaan Antarmuka:** Tata letak grid yang lebih rapi (350px) dan tombol yang stabil (nowrap) pada *landing page*.
 ---

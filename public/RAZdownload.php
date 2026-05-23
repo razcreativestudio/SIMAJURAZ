@@ -49,6 +49,9 @@ if (!RAZisInstalled()) {
             <a href="RAZdownload.php" style="color:var(--l-primary-light); font-weight:600;"><i class="ph-bold ph-download-simple"></i> Download</a>
         </div>
         <div class="nav-actions" style="display: flex; gap: 12px; align-items: center;">
+            <a href="?lang=<?= $current_lang === 'id' ? 'en' : 'id' ?>" class="nav-action-icon" style="color:var(--l-text); font-size:1.1rem; font-weight:700; text-decoration:none; display:none; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; border:1px solid var(--l-border);">
+                <?= strtoupper($current_lang === 'id' ? 'en' : 'id') ?>
+            </a>
             <a href="#" id="theme-toggle" class="nav-action-icon" style="color:var(--l-text); font-size:1.2rem; text-decoration:none;">
                 <i class="ph-bold ph-sun"></i>
             </a>
@@ -65,14 +68,14 @@ if (!RAZisInstalled()) {
 
     <!-- Hero Download -->
     <section class="features" style="padding-top: 40px; padding-bottom: 40px;">
-        <h1 class="section-title reveal" style="font-size: 3rem; margin-bottom: 20px;">Unduh <span style="color:var(--l-primary-light);">SIMAJURAZ</span></h1>
+        <h1 class="section-title reveal" style="font-size: 3rem; margin-bottom: 20px;"><?= t('dl_title') ?></h1>
         <p class="reveal reveal-delay-1" style="text-align: center; max-width: 800px; margin: 0 auto 40px; color: var(--l-text-muted); font-size: 1.2rem; line-height: 1.6;">
-            Aplikasi Point of Sale, Manajemen Inventori, dan Keuangan yang dibangun untuk mendukung transformasi digital UMKM Indonesia. 100% Gratis dan Open Source.
+            <?= t('dl_desc') ?>
         </p>
 
         <div style="text-align: center; margin-bottom: 60px;" class="reveal reveal-delay-2">
             <a href="https://github.com/razcreativestudio/SIMAJURAZ" target="_blank" class="btn-primary" style="display:inline-flex; align-items:center; gap:8px; font-size: 1.1rem; padding: 16px 32px;">
-                <i class="ph-bold ph-github-logo" style="font-size: 1.4rem;"></i> Unduh Source Code di GitHub
+                <i class="ph-bold ph-github-logo" style="font-size: 1.4rem;"></i> <?= t('dl_btn') ?>
             </a>
             <p style="margin-top: 16px; color: var(--l-text-muted); font-size: 0.9rem;">
                 Lisensi MIT - Bebas dikembangkan dan dimodifikasi untuk kebutuhan personal maupun komersial.
@@ -122,8 +125,8 @@ if (!RAZisInstalled()) {
             <div style="background: var(--l-card-bg); border: 1px solid var(--l-border); border-radius: 16px; padding: 30px 20px; text-align: center; width: 320px; display: flex; flex-direction: column;">
                 <div style="flex-grow: 1;">
                     <i class="ph-bold ph-whatsapp-logo" style="font-size: 3rem; color: #10b981; margin-bottom: 16px;"></i>
-                    <h3>WhatsApp Pribadi</h3>
-                    <p style="color: var(--l-text-muted); margin-bottom: 20px;">Respon paling cepat untuk diskusi ringan dan janji temu.</p>
+                    <h3><?= t('dl_wa_1') ?></h3>
+                    <p style="color: var(--l-text-muted); margin-bottom: 20px;"><?= t('dl_wa_1_desc') ?></p>
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                     <a href="https://wa.me/6282392925488" target="_blank" class="btn-primary" style="background: #10b981; color: #fff; padding: 10px; font-size: 0.9rem; white-space: nowrap;"><i class="ph-bold ph-whatsapp-logo"></i> +62 823-9292-5488</a>
@@ -134,8 +137,8 @@ if (!RAZisInstalled()) {
             <div style="background: var(--l-card-bg); border: 1px solid var(--l-border); border-radius: 16px; padding: 30px 20px; text-align: center; width: 320px; display: flex; flex-direction: column;">
                 <div style="flex-grow: 1;">
                     <i class="ph-bold ph-envelope-simple" style="font-size: 3rem; color: var(--l-accent); margin-bottom: 16px;"></i>
-                    <h3>Email Resmi</h3>
-                    <p style="color: var(--l-text-muted); margin-bottom: 20px;">Kirimkan detail proposal penawaran atau kerjasama bisnis.</p>
+                    <h3><?= t('dl_email') ?></h3>
+                    <p style="color: var(--l-text-muted); margin-bottom: 20px;"><?= t('dl_email_desc') ?></p>
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 10px; justify-content: flex-end;">
                     <a href="mailto:razcreativestudio@gmail.com" class="btn-outline" style="padding: 10px; font-size: 0.85rem; white-space: nowrap;"><i class="ph-bold ph-envelope-simple"></i> razcreativestudio@gmail.com</a>
@@ -145,8 +148,8 @@ if (!RAZisInstalled()) {
             <div style="background: var(--l-card-bg); border: 1px solid var(--l-border); border-radius: 16px; padding: 30px 20px; text-align: center; width: 320px; display: flex; flex-direction: column;">
                 <div style="flex-grow: 1;">
                     <i class="ph-bold ph-globe" style="font-size: 3rem; color: var(--l-primary-light); margin-bottom: 16px;"></i>
-                    <h3>Kunjungi Website</h3>
-                    <p style="color: var(--l-text-muted); margin-bottom: 20px;">Lihat profil, layanan lain, serta portofolio agensi kami.</p>
+                    <h3><?= t('dl_web') ?></h3>
+                    <p style="color: var(--l-text-muted); margin-bottom: 20px;"><?= t('dl_web_desc') ?></p>
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 10px; justify-content: flex-end;">
                     <a href="https://raz.my.id" target="_blank" class="btn-outline" style="padding: 10px; font-size: 0.9rem; white-space: nowrap;"><i class="ph-bold ph-globe"></i> Kunjungi raz.my.id</a>
@@ -156,31 +159,31 @@ if (!RAZisInstalled()) {
 
         <!-- Form Kontak (Redirect WhatsApp) -->
         <div class="reveal reveal-delay-1" style="max-width: 800px; margin: 60px auto 0; background: var(--l-card-bg); border: 1px solid var(--l-border); border-radius: 16px; padding: 40px; text-align: left;">
-            <h3 style="font-size: 1.5rem; margin-bottom: 8px; text-align: center;">Tulis Pesan Anda</h3>
-            <p style="text-align: center; color: var(--l-text-muted); margin-bottom: 30px; font-size: 0.95rem;">Pesan ini akan otomatis dikirimkan langsung ke WhatsApp tim kami.</p>
+            <h3 style="font-size: 1.5rem; margin-bottom: 8px; text-align: center;"><?= t('dl_form_title') ?></h3>
+            <p style="text-align: center; color: var(--l-text-muted); margin-bottom: 30px; font-size: 0.95rem;"><?= t('dl_form_desc') ?></p>
             
             <form id="contactForm" style="display: flex; flex-direction: column; gap: 20px;" onsubmit="sendToWhatsApp(event)">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                     <div>
                         <label style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">Nama Anda <span style="color:#f43f5e">*</span></label>
-                        <input type="text" id="cf_name" required placeholder="Masukkan nama lengkap" style="width: 100%; padding: 12px 16px; background: rgba(0,0,0,0.2); border: 1px solid var(--l-border); border-radius: 8px; color: var(--l-text); outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--l-primary)'" onblur="this.style.borderColor='var(--l-border)'">
+                        <input type="text" id="cf_name" required placeholder="<?= t('dl_form_name_ph') ?>" style="width: 100%; padding: 12px 16px; background: rgba(0,0,0,0.2); border: 1px solid var(--l-border); border-radius: 8px; color: var(--l-text); outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--l-primary)'" onblur="this.style.borderColor='var(--l-border)'">
                     </div>
                     <div>
                         <label style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">Subjek Pesan <span style="color:#f43f5e">*</span></label>
                         <select id="cf_subject" required style="width: 100%; padding: 12px 16px; background: rgba(0,0,0,0.2); border: 1px solid var(--l-border); border-radius: 8px; color: var(--l-text); outline: none; transition: border-color 0.2s; appearance: none; cursor: pointer;" onfocus="this.style.borderColor='var(--l-primary)'" onblur="this.style.borderColor='var(--l-border)'">
-                            <option value="Tanya Jasa Instalasi / Hosting" style="background:var(--l-bg);color:var(--l-text)">Tanya Jasa Instalasi / Hosting</option>
-                            <option value="Kustomisasi Fitur SIMAJURAZ" style="background:var(--l-bg);color:var(--l-text)">Kustomisasi Fitur SIMAJURAZ</option>
-                            <option value="Kerjasama Bisnis & Layanan Lain" style="background:var(--l-bg);color:var(--l-text)">Kerjasama Bisnis & Layanan Lain</option>
-                            <option value="Lainnya" style="background:var(--l-bg);color:var(--l-text)">Lainnya...</option>
+                            <option value="Tanya Jasa Instalasi / Hosting" style="background:var(--l-bg);color:var(--l-text)"><?= t('dl_opt_1') ?></option>
+                            <option value="Kustomisasi Fitur SIMAJURAZ" style="background:var(--l-bg);color:var(--l-text)"><?= t('dl_opt_2') ?></option>
+                            <option value="Kerjasama Bisnis & Layanan Lain" style="background:var(--l-bg);color:var(--l-text)"><?= t('dl_opt_3') ?></option>
+                            <option value="Lainnya" style="background:var(--l-bg);color:var(--l-text)"><?= t('dl_opt_4') ?></option>
                         </select>
                     </div>
                 </div>
                 <div>
                     <label style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">Detail Pesan <span style="color:#f43f5e">*</span></label>
-                    <textarea id="cf_message" rows="5" placeholder="Jelaskan kebutuhan bisnis atau pertanyaan Anda di sini secara detail..." required style="width: 100%; padding: 12px 16px; background: rgba(0,0,0,0.2); border: 1px solid var(--l-border); border-radius: 8px; color: var(--l-text); outline: none; resize: vertical; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--l-primary)'" onblur="this.style.borderColor='var(--l-border)'"></textarea>
+                    <textarea id="cf_message" rows="5" placeholder="<?= t('dl_form_msg_ph') ?>" required style="width: 100%; padding: 12px 16px; background: rgba(0,0,0,0.2); border: 1px solid var(--l-border); border-radius: 8px; color: var(--l-text); outline: none; resize: vertical; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--l-primary)'" onblur="this.style.borderColor='var(--l-border)'"></textarea>
                 </div>
                 <button type="submit" class="btn-primary" style="align-self: center; padding: 14px 40px; font-size: 1.1rem; margin-top: 10px; cursor:pointer; display:inline-flex; align-items:center; gap:8px; border:none;">
-                    <i class="ph-bold ph-paper-plane-tilt"></i> Kirim Pesan Sekarang
+                    <i class="ph-bold ph-paper-plane-tilt"></i> <?= t('dl_form_btn') ?>
                 </button>
             </form>
         </div>
@@ -314,3 +317,4 @@ if (!RAZisInstalled()) {
     </footer>
 </body>
 </html>
+

@@ -148,7 +148,7 @@ async function loadRecentTransactions() {
   if (!tbody) return;
 
   if (!data.success || !data.data.length) {
-    tbody.innerHTML = `<tr><td colspan="4" class="dash-empty"><p>Belum ada transaksi</p></td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="4" class="dash-empty"><p>${window.DASH_LANG ? window.DASH_LANG.empty_trx : 'Belum ada transaksi'}</p></td></tr>`;
     return;
   }
 
@@ -171,7 +171,7 @@ async function loadTopItems() {
   if (!tbody) return;
 
   if (!data.success || !data.data.length) {
-    tbody.innerHTML = `<tr><td colspan="3" class="dash-empty"><p>Belum ada data</p></td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="3" class="dash-empty"><p>${window.DASH_LANG ? window.DASH_LANG.empty_data : 'Belum ada data'}</p></td></tr>`;
     return;
   }
 
@@ -212,10 +212,4 @@ async function loadAdminDashboard() {
   }
 }
 
-// ============================================================
-// USER DROPDOWN TOGGLE
-// ============================================================
-function toggleUserDropdown() {
-  const dd = document.getElementById('userDropdown');
-  if (dd) dd.classList.toggle('show');
-}
+

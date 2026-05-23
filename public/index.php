@@ -50,9 +50,10 @@ if (!RAZisInstalled()) {
             <img src="assets/images/logo.svg" alt="SIMAJURAZ">
         </div>
         <div class="nav-links">
-            <a href="#fitur"><?= t('nav_features') ?></a>
-            <a href="#teknologi"><?= t('nav_tech') ?></a>
+            <a href="index.php#fitur"><?= t('nav_features') ?></a>
+            <a href="index.php#teknologi"><?= t('nav_tech') ?></a>
             <a href="RAZknowledgebase.php"><?= t('nav_kb') ?></a>
+            <a href="RAZdownload.php" style="color:var(--l-primary-light); font-weight:600;"><i class="ph-bold ph-download-simple"></i> Download</a>
         </div>
         <div class="nav-actions" style="display: flex; gap: 12px; align-items: center;">
             <!-- Language Switcher -->
@@ -225,12 +226,70 @@ if (!RAZisInstalled()) {
                 <p><?= t('feat_8_desc') ?></p>
             </div>
         </div>
-    </section>
+      </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; <?= date('Y') ?> <?= t('footer_text') ?> <br> <a href="https://raz.my.id/" target="_blank" style="color: var(--l-primary-light); text-decoration: none; font-weight: bold; margin-top: 10px; display: inline-block;">RAZ Creative Studio Official</a></p>
-    </footer>
+      <!-- Cloud Banner -->
+      <section style="background: rgba(244, 63, 94, 0.05); padding: 80px 20px; border-top: 1px solid rgba(244, 63, 94, 0.2);">
+          <div style="max-width: 900px; margin: 0 auto; text-align: center;" class="reveal">
+              <i class="ph-bold ph-cloud" style="font-size: 5rem; color: #f43f5e; margin-bottom: 24px;"></i>
+              <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: var(--l-text);"><?= t('banner_cloud_title') ?></h2>
+              <p style="color: var(--l-text-muted); font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                  <?= t('banner_cloud_desc') ?>
+              </p>
+              <a href="RAZlogin.php" class="btn-primary" style="display:inline-flex; align-items:center; gap:12px; padding: 16px 36px; font-size: 1.2rem; background: #f43f5e; color: #fff; border: none; border-radius: 12px; box-shadow: 0 10px 25px rgba(244, 63, 94, 0.3); transition: all 0.3s;">
+                  <i class="ph-bold ph-rocket-launch"></i> <?= t('banner_cloud_btn') ?>
+              </a>
+          </div>
+      </section>
+
+      <!-- Open Source & Download Section -->
+      <section class="features" id="download" style="background: var(--l-bg); border-top: 1px solid var(--l-border);">
+          <h2 class="section-title reveal"><?= t('os_title') ?></h2>
+          <p style="text-align: center; max-width: 800px; margin: -40px auto 40px; color: var(--l-text-muted);">
+              <?= t('os_desc') ?>
+          </p>
+          
+          <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+              <!-- Github & Download -->
+              <div class="feature-card reveal" style="text-align: center; border-top: 4px solid var(--l-primary);">
+                  <i class="ph-bold ph-github-logo" style="font-size: 3rem; color: var(--l-text); margin-bottom: 16px;"></i>
+                  <h3><?= t('os_c1_title') ?></h3>
+                  <p style="margin-bottom: 20px;"><?= t('os_c1_desc') ?></p>
+                  <a href="RAZdownload.php" class="btn-primary" style="display:inline-flex; align-items:center; gap:8px; white-space:nowrap;">
+                      <i class="ph-bold ph-download-simple"></i> <?= t('os_c1_btn') ?>
+                  </a>
+              </div>
+
+              <!-- Donation -->
+              <div class="feature-card reveal" style="text-align: center; border-top: 4px solid #10b981;">
+                  <i class="ph-bold ph-coffee" style="font-size: 3rem; color: #10b981; margin-bottom: 16px;"></i>
+                  <h3><?= t('os_c2_title') ?></h3>
+                  <p style="margin-bottom: 16px;"><?= t('os_c2_desc') ?></p>
+                  <div style="background: var(--l-card-bg); border: 1px solid var(--l-border); border-radius: 12px; padding: 16px; text-align: left; font-size: 0.95rem; line-height: 1.6;">
+                      <strong style="color:var(--l-primary-light);"><i class="ph-bold ph-bank"></i> BNI</strong><br>
+                      No. Rek: <span style="user-select:all; font-family:monospace; font-size:1.1rem; color:var(--l-text);">0394123433</span><br>
+                      A/n: Rasyid Marwah<br><br>
+                      
+                      <strong style="color:#f59e0b;"><i class="ph-bold ph-bank"></i> Bank Jago Syariah</strong><br>
+                      No. Rek: <span style="user-select:all; font-family:monospace; font-size:1.1rem; color:var(--l-text);">503190567398</span><br>
+                      A/n: ZULHENDRI<br><br>
+                      
+                      <strong style="color:#10b981;"><i class="ph-bold ph-wallet"></i> DANA (E-Wallet)</strong><br>
+                      Atas Nama: ZULHENDRI
+                  </div>
+              </div>
+              
+              <!-- Contact -->
+              <div class="feature-card reveal" style="text-align: center; border-top: 4px solid var(--l-accent);">
+                  <i class="ph-bold ph-envelope-simple" style="font-size: 3rem; color: var(--l-accent); margin-bottom: 16px;"></i>
+                  <h3><?= t('os_c3_title') ?></h3>
+                  <p style="margin-bottom: 20px;"><?= t('os_c3_desc') ?></p>
+                  <a href="https://raz.my.id/hubungi-raz.html" target="_blank" class="btn-outline" style="display:inline-flex; align-items:center; gap:8px; white-space:nowrap;">
+                      <i class="ph-bold ph-globe"></i> <?= t('os_c3_btn') ?>
+                  </a>
+              </div>
+          </div>
+      </section>
 
     <!-- RAZ Creative Studio External Footer -->
     <style>
@@ -309,10 +368,10 @@ if (!RAZisInstalled()) {
         <div class="footer-grid">
             <div class="footer-col footer-about">
                 <img src="https://raz.my.id/img/raz-logo.png" alt="RAZ Logo" style="max-width:160px;height:auto;margin-bottom:16px;">
-                <p>RAZ Creative Studio adalah agensi IT & kreatif digital yang mengintegrasikan teknologi, desain, dan inovasi untuk menghasilkan solusi digital bernilai komersial.</p>
+                <p><?= t('footer_ext_about') ?></p>
             </div>
             <div class="footer-col">
-                <h4>Quick Links</h4>
+                <h4><?= t('footer_ext_links') ?></h4>
                 <ul>
                     <li><a href="https://raz.my.id/about-raz.html">Tentang Kami</a></li>
                     <li><a href="https://raz.my.id/raz-services.html">Layanan</a></li>
@@ -322,7 +381,7 @@ if (!RAZisInstalled()) {
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Layanan</h4>
+                <h4><?= t('footer_ext_services') ?></h4>
                 <ul>
                     <li><a href="https://raz.my.id/raz-services.html">Web Development</a></li>
                     <li><a href="https://raz.my.id/raz-services.html">Graphic Design</a></li>
@@ -331,7 +390,7 @@ if (!RAZisInstalled()) {
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Tools Online</h4>
+                <h4><?= t('footer_ext_tools') ?></h4>
                 <ul>
                     <li><a href="https://raz.my.id/tools.html">Semua Tools</a></li>
                     <li><a href="https://raz.my.id/bikincv/index.html">CV Maker</a></li>
@@ -341,7 +400,7 @@ if (!RAZisInstalled()) {
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 RAZ Creative Studio. Hak Cipta Dilindungi.</p>
+            <p>&copy; <?= date('Y') ?> <?= t('footer_ext_copy') ?></p>
             <div class="social-links">
                 <a href="https://www.instagram.com/raz_studio.id/" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@razcreativestudio" aria-label="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
@@ -351,4 +410,5 @@ if (!RAZisInstalled()) {
     </footer>
 </body>
 </html>
+
 

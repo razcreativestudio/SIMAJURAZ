@@ -113,7 +113,7 @@ function renderProducts() {
       ${img}
       <div class="pos-item-name">${p.name}</div>
       <div class="pos-item-price">${RAZ.formatRupiah(p.sell_price)}</div>
-      <div class="pos-item-stock">${p.stock <= 0 ? 'Habis' : 'Stok: ' + p.stock}</div>
+      <div class="pos-item-stock">${p.stock <= 0 ? (window.POS_LANG ? window.POS_LANG.out_stock : 'Habis') : (window.POS_LANG ? window.POS_LANG.stock : 'Stok') + ': ' + p.stock}</div>
     </div>`;
   }).join('');
 }
@@ -121,7 +121,7 @@ function renderProducts() {
 function renderCategoryChips() {
   const container = document.getElementById('posCats');
   if (!container) return;
-  let html = `<button class="pos-cat-chip ${!POS.categoryFilter ? 'active' : ''}" onclick="filterCategory('')">Semua</button>`;
+  let html = `<button class="pos-cat-chip ${!POS.categoryFilter ? 'active' : ''}" onclick="filterCategory('')">${window.POS_LANG ? window.POS_LANG.all : 'Semua'}</button>`;
   html += POS.categories.map(c =>
     `<button class="pos-cat-chip ${POS.categoryFilter == c.id ? 'active' : ''}" onclick="filterCategory('${c.id}')">${c.name}</button>`
   ).join('');
@@ -143,7 +143,7 @@ function addToCart(productId) {
   const existing = POS.cart.find(c => c.id === productId);
   if (existing) {
     if (existing.qty >= product.stock) {
-      RAZ.warning('Stok Limit', `Stok "${product.name}" hanya tersisa ${product.stock}`);
+      RAZ.warning(window.POS_LANG ? window.POS_LANG.stock_limit : 'Stok Limit', `${window.POS_LANG ? window.POS_LANG.stock_warning : 'Stok'} "${product.name}" ${window.POS_LANG ? window.POS_LANG.only_left : 'hanya tersisa'} ${product.stock}`);
       return;
     }
     existing.qty++;
@@ -164,7 +164,7 @@ function updateQty(productId, delta) {
   if (item.qty <= 0) { POS.cart = POS.cart.filter(c => c.id !== productId); }
   else if (item.qty > item.maxStock) {
     item.qty = item.maxStock;
-    RAZ.warning('Stok Limit', 'Melebihi stok tersedia');
+    RAZ.warning(window.POS_LANG ? window.POS_LANG.stock_limit : 'Stok Limit', window.POS_LANG ? window.POS_LANG.exceed_stock : 'Melebihi stok tersedia');
   }
   renderCart();
 }
@@ -178,7 +178,7 @@ function clearCart() {
   if (!POS.cart.length) return;
   POS.cart = [];
   renderCart();
-  RAZ.info('Keranjang Dikosongkan', '');
+  RAZ.info(window.POS_LANG ? window.POS_LANG.cart_cleared : 'Keranjang Dikosongkan', '');
 }
 
 // ========================
@@ -196,7 +196,7 @@ function renderCart() {
   if (countEl) countEl.textContent = totalItems;
 
   if (!POS.cart.length) {
-    container.innerHTML = `<div class="pos-cart-empty"><i class="ph-bold ph-shopping-cart"></i><p>Keranjang kosong</p></div>`;
+    container.innerHTML = `<div class="pos-cart-empty"><i class="ph-bold ph-shopping-cart"></i><p>${window.POS_LANG ? window.POS_LANG.cart_empty : 'Keranjang kosong'}</p></div>`;
     if (summary) summary.style.display = 'none';
     return;
   }
@@ -344,58 +344,18 @@ let currentTransId = 0; // Simpan ID untuk dibagikan
 
 // (Removed getReceiptTemplateProps as it is now handled by RAZreceipt.php)
 
-async function showReceipt(transId) {
+function showReceipt(transId) {
   currentTransId = transId;
   
-  const container = document.getElementById('receiptContent');
-  container.innerHTML = '<div style="text-align:center; padding:40px; font-family:sans-serif;">Memuat struk...</div>';
+  // Gunakan iframe agar tampilan preview sama persis dengan hasil cetak (RAZreceipt.php)
+  const iframeHtml = `
+    <div style="width:100%; height: 60vh; min-height:400px; display:flex; justify-content:center; background:#f0f0f0; border-radius:8px; overflow:hidden;">
+        <iframe src="RAZreceipt.php?id=${transId}&preview=1" style="width:100%; height:100%; border:none;"></iframe>
+    </div>
+  `;
+  
+  document.getElementById('receiptContent').innerHTML = iframeHtml;
   RAZ.openModal('receiptModal');
-
-  try {
-      const res = await fetch(`RAZreceipt.php?id=${transId}&preview=1`);
-      if (!res.ok) throw new Error('Network response was not ok');
-      const htmlText = await res.text();
-      
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(htmlText, 'text/html');
-      
-      const receiptStyle = doc.querySelector('style')?.innerHTML || '';
-      const receiptWrapper = doc.querySelector('.receipt-wrapper')?.outerHTML || '';
-      
-      if (!receiptWrapper) throw new Error('Invalid receipt format');
-
-      // Ubah selektor body agar tidak bocor ke luar shadow dom
-      const scopedStyle = receiptStyle.replace(/body\s*\{/g, '.shadow-body {');
-      
-      container.innerHTML = '';
-      
-      const host = document.createElement('div');
-      host.style.width = '100%';
-      host.style.display = 'flex';
-      host.style.justifyContent = 'center';
-      host.style.background = '#f0f0f0';
-      host.style.padding = '20px';
-      host.style.borderRadius = '8px';
-      host.style.minHeight = '400px';
-      host.style.maxHeight = '60vh';
-      host.style.overflow = 'auto';
-      
-      const shadowRoot = host.attachShadow({mode: 'open'});
-      shadowRoot.innerHTML = `
-          <style>${scopedStyle}</style>
-          <div class="shadow-body" style="display:flex; justify-content:center; width:100%; min-height:100%;">
-              ${receiptWrapper}
-          </div>
-      `;
-      
-      container.appendChild(host);
-  } catch(error) {
-      console.error("Gagal memuat struk:", error);
-      container.innerHTML = `<div style="text-align:center; padding:40px; color:red; font-family:sans-serif;">
-          <p>Gagal memuat preview struk.</p>
-          <p style="font-size:0.9rem; color:#666;">(Bisa terjadi karena aturan keamanan server. Anda tetap bisa mencetaknya dengan tombol di bawah)</p>
-      </div>`;
-  }
 }
 
 function printReceipt() {

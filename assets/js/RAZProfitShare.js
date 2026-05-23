@@ -62,7 +62,7 @@ function renderSharesList() {
   if (!container) return;
 
   if (!PS.shares.length) {
-    container.innerHTML = '<div class="ps-empty"><i class="ph-bold ph-users-three"></i><p>Belum ada penerima bagi hasil.<br>Klik tombol di bawah untuk menambahkan.</p></div>';
+    container.innerHTML = `<div class="ps-empty"><i class="ph-bold ph-users-three"></i><p>${window.FIN_LANG ? window.FIN_LANG.empty_shares : 'Belum ada penerima bagi hasil.<br>Klik tombol di bawah untuk menambahkan.'}</p></div>`;
     document.getElementById('btnSaveShares').style.display = 'none';
     return;
   }
@@ -253,7 +253,7 @@ async function loadProfitReports() {
   if (!container) return;
 
   if (!data.data.length) {
-    container.innerHTML = '<div class="ps-empty-sm"><i class="ph-bold ph-file-dashed"></i> Belum ada laporan</div>';
+    container.innerHTML = `<div class="ps-empty-sm"><i class="ph-bold ph-file-dashed"></i> ${window.FIN_LANG ? window.FIN_LANG.empty_report : 'Belum ada laporan'}</div>`;
     return;
   }
 

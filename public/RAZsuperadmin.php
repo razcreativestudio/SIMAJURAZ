@@ -71,7 +71,7 @@ $activityLogs = $logsStmt->fetchAll();
             </div>
             <ul class="raz-sidebar-menu">
                 <li class="raz-sidebar-section">Administrasi</li>
-                <li><a href="RAZdashboard.php"><span class="menu-icon"><i class="ph-bold ph-squares-four"></i></span><span class="menu-text">Dashboard</span></a></li>
+                <li><a href="RAZdashboard.php"><span class="menu-icon"><i class="ph-bold ph-squares-four"></i></span><span class="menu-text"><?= t('menu_dashboard') ?></span></a></li>
                 <li><a href="RAZsuperadmin.php" class="active"><span class="menu-icon"><i class="ph-bold ph-shield-check"></i></span><span class="menu-text">User Management</span></a></li>
                 <li><a href="RAZlogout.php"><span class="menu-icon"><i class="ph-bold ph-sign-out"></i></span><span class="menu-text">Logout</span></a></li>
             </ul>
@@ -84,7 +84,14 @@ $activityLogs = $logsStmt->fetchAll();
                     <button class="raz-btn raz-btn-ghost raz-btn-icon-only raz-btn-sm" onclick="RAZ.toggleMobileSidebar()" id="mobileMenuBtn" style="display:none;"><i class="ph-bold ph-list"></i></button>
                     <h1 class="raz-topbar-title">Command Center</h1>
                 </div>
-                <div class="raz-topbar-right">
+                <div class="raz-topbar-right" style="display:flex; align-items:center;">
+                    <!-- Language & Theme Shortcuts -->
+                    <a href="?lang=<?= (isset($current_lang) && $current_lang === 'id') ? 'en' : 'id' ?>" class="nav-action-icon raz-btn-icon" style="color:var(--raz-text); font-size:1rem; font-weight:700; text-decoration:none; display:none; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; border:1px solid var(--raz-border); margin-right: 8px;">
+                        <?= strtoupper((isset($current_lang) && $current_lang === 'id') ? 'en' : 'id') ?>
+                    </a>
+                    <a href="#" id="theme-toggle" class="nav-action-icon raz-btn-icon" style="color:var(--raz-text); font-size:1.2rem; text-decoration:none; display:none; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; border:1px solid var(--raz-border); margin-right: 16px;">
+                        <i class="ph-bold ph-sun"></i>
+                    </a>
                     <!-- User Dropdown -->
                     <div style="position:relative;">
                         <button class="raz-topbar-user" onclick="toggleUserDropdown()">
@@ -97,7 +104,7 @@ $activityLogs = $logsStmt->fetchAll();
                         </button>
                         <div class="raz-dropdown" id="userDropdown">
                             <a href="RAZlogout.php" class="danger">
-                                <i class="ph-bold ph-sign-out"></i> Keluar
+                                <i class="ph-bold ph-sign-out"></i> <?= t('topbar_logout') ?>
                             </a>
                         </div>
                     </div>
@@ -248,13 +255,9 @@ $activityLogs = $logsStmt->fetchAll();
         </div>
     </div>
 
-    <script src="assets/js/RAZMain.js"></script>
+    <script src="assets/js/RAZMain.js?v=<?= time() ?>"></script>
     <script>
-        // User Dropdown
-        function toggleUserDropdown() {
-            const dd = document.getElementById('userDropdown');
-            if (dd) dd.classList.toggle('show');
-        }
+
 
         document.addEventListener('click', function(event) {
             const btn = document.querySelector('.raz-topbar-user');

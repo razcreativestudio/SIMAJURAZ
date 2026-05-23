@@ -12,6 +12,8 @@
  * ============================================================
  */
 
+require_once __DIR__ . '/RAZlang.php';
+
 /**
  * Format angka menjadi format Rupiah Indonesia.
  * Contoh: 150000 → "Rp 150.000"

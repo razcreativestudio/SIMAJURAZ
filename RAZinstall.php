@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 id {$autoInc},
                 store_id INT NOT NULL,
                 user_id INT NOT NULL,
-                invoice_number VARCHAR(30) NOT NULL UNIQUE,
+                invoice_number VARCHAR(30) NOT NULL,
                 subtotal {$decimalType} DEFAULT 0,
                 discount_amount {$decimalType} DEFAULT 0,
                 tax_amount {$decimalType} DEFAULT 0,
@@ -147,7 +147,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 amount_paid {$decimalType} DEFAULT 0,
                 change_amount {$decimalType} DEFAULT 0,
                 status {$enumStatus} DEFAULT 'completed',
-                created_at {$timestamp}
+                created_at {$timestamp},
+                UNIQUE(store_id, invoice_number)
             )");
 
             // Tabel Transaction Items (Detail Transaksi)

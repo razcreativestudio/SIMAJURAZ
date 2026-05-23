@@ -10,6 +10,7 @@
 require_once __DIR__ . '/RAZconfig.php';
 require_once __DIR__ . '/includes/RAZsession.php';
 require_once __DIR__ . '/includes/RAZhelpers.php';
+require_once __DIR__ . '/includes/RAZlang.php';
 RAZrequireOwner();
 $user = RAZgetCurrentUser();
 $currentPage = 'finance';
@@ -25,7 +26,7 @@ $currentPage = 'finance';
     <link rel="stylesheet" href="assets/css/RAZModal.css">
     <link rel="stylesheet" href="assets/css/RAZFinance.css">
 </head>
-<body>
+<body class="<?= (isset($_COOKIE['raz_theme']) && $_COOKIE['raz_theme'] === 'dark') ? 'dark-mode' : '' ?>">
 <div class="raz-app">
     <!-- SIDEBAR -->
     <aside class="raz-sidebar" id="sidebar">
@@ -38,15 +39,15 @@ $currentPage = 'finance';
             <span><?= htmlspecialchars($user['store_name'] ?: 'SIMAJURAZ') ?></span>
         </div>
         <ul class="raz-sidebar-menu">
-            <li class="raz-sidebar-section">Menu Utama</li>
-            <li><a href="RAZdashboard.php"><span class="menu-icon"><i class="ph-bold ph-squares-four"></i></span><span class="menu-text">Dashboard</span></a></li>
-            <li><a href="RAZpos.php"><span class="menu-icon"><i class="ph-bold ph-shopping-cart"></i></span><span class="menu-text">Kasir (POS)</span></a></li>
-            <li><a href="RAZsettings.php"><span class="menu-icon"><i class="ph-bold ph-gear"></i></span><span class="menu-text">Pengaturan Toko</span></a></li>
-            <li class="raz-sidebar-section">Manajemen</li>
-            <li><a href="RAZinventory.php"><span class="menu-icon"><i class="ph-bold ph-package"></i></span><span class="menu-text">Inventori</span></a></li>
-            <li><a href="RAZfinance.php" class="active"><span class="menu-icon"><i class="ph-bold ph-wallet"></i></span><span class="menu-text">Keuangan</span></a></li>
-            <li><a href="RAZreports.php"><span class="menu-icon"><i class="ph-bold ph-chart-bar"></i></span><span class="menu-text">Laporan</span></a></li>
-            <li><a href="RAZusers.php"><span class="menu-icon"><i class="ph-bold ph-users"></i></span><span class="menu-text">Karyawan</span></a></li>
+            <li class="raz-sidebar-section"><?= t('menu_main') ?></li>
+            <li><a href="RAZdashboard.php"><span class="menu-icon"><i class="ph-bold ph-squares-four"></i></span><span class="menu-text"><?= t('menu_dashboard') ?></span></a></li>
+            <li><a href="RAZpos.php"><span class="menu-icon"><i class="ph-bold ph-shopping-cart"></i></span><span class="menu-text"><?= t('menu_pos') ?></span></a></li>
+            <li><a href="RAZsettings.php"><span class="menu-icon"><i class="ph-bold ph-gear"></i></span><span class="menu-text"><?= t('menu_settings') ?></span></a></li>
+            <li class="raz-sidebar-section"><?= t('menu_manage') ?></li>
+            <li><a href="RAZinventory.php"><span class="menu-icon"><i class="ph-bold ph-package"></i></span><span class="menu-text"><?= t('menu_inventory') ?></span></a></li>
+            <li><a href="RAZfinance.php" class="active"><span class="menu-icon"><i class="ph-bold ph-wallet"></i></span><span class="menu-text"><?= t('menu_finance') ?></span></a></li>
+            <li><a href="RAZreports.php"><span class="menu-icon"><i class="ph-bold ph-chart-bar"></i></span><span class="menu-text"><?= t('menu_reports') ?></span></a></li>
+            <li><a href="RAZusers.php"><span class="menu-icon"><i class="ph-bold ph-users"></i></span><span class="menu-text"><?= t('menu_employees') ?></span></a></li>
         </ul>
         <div class="raz-sidebar-toggle"><button onclick="RAZ.toggleSidebar()"><i class="ph-bold ph-sidebar-simple"></i></button></div>
     </aside>
@@ -55,15 +56,22 @@ $currentPage = 'finance';
         <header class="raz-topbar">
             <div class="raz-topbar-left">
                 <button class="raz-btn raz-btn-ghost raz-btn-icon-only raz-btn-sm" onclick="RAZ.toggleMobileSidebar()" id="mobileMenuBtn" style="display:none;"><i class="ph-bold ph-list"></i></button>
-                <h1 class="raz-topbar-title">Keuangan</h1>
+                <h1 class="raz-topbar-title"><?= t('menu_finance') ?></h1>
             </div>
-            <div class="raz-topbar-right">
+            <div class="raz-topbar-right" style="display:flex; align-items:center;">
+                    <!-- Language & Theme Shortcuts -->
+                    <a href="?lang=<?= (isset($current_lang) && $current_lang === 'id') ? 'en' : 'id' ?>" class="nav-action-icon raz-btn-icon" style="color:var(--raz-text); font-size:1rem; font-weight:700; text-decoration:none; display:none; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; border:1px solid var(--raz-border); margin-right: 8px;">
+                        <?= strtoupper((isset($current_lang) && $current_lang === 'id') ? 'en' : 'id') ?>
+                    </a>
+                    <a href="#" id="theme-toggle" class="nav-action-icon raz-btn-icon" style="color:var(--raz-text); font-size:1.2rem; text-decoration:none; display:none; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; border:1px solid var(--raz-border); margin-right: 16px;">
+                        <i class="ph-bold ph-sun"></i>
+                    </a>
                 <div style="position:relative;">
                     <button class="raz-topbar-user" onclick="toggleUserDropdown()">
                         <div class="raz-topbar-avatar"><?= strtoupper(substr($user['full_name'],0,2)) ?></div>
                         <div class="raz-topbar-info"><span class="raz-topbar-name"><?= htmlspecialchars($user['full_name']) ?></span><span class="raz-topbar-role"><?= $user['role'] ?></span></div>
                     </button>
-                    <div class="raz-dropdown" id="userDropdown"><a href="RAZlogout.php" class="danger"><i class="ph-bold ph-sign-out"></i> Keluar</a></div>
+                    <div class="raz-dropdown" id="userDropdown"><a href="RAZlogout.php" class="danger"><i class="ph-bold ph-sign-out"></i> <?= t('topbar_logout') ?></a></div>
                 </div>
             </div>
         </header>
@@ -74,36 +82,36 @@ $currentPage = 'finance';
 
             <!-- Tabs -->
             <div class="fin-tabs">
-                <button class="fin-tab active" data-tab="tabSummary"><i class="ph-bold ph-chart-pie"></i> Ringkasan</button>
-                <button class="fin-tab" data-tab="tabCashflow"><i class="ph-bold ph-arrows-left-right"></i> Arus Kas</button>
-                <button class="fin-tab" data-tab="tabProfit"><i class="ph-bold ph-hand-coins"></i> Bagi Hasil</button>
-                <a href="RAZhpp.php" class="fin-tab" style="text-decoration:none;color:inherit;"><i class="ph-bold ph-calculator"></i> Kalkulator HPP</a>
+                <button class="fin-tab active" data-tab="tabSummary"><i class="ph-bold ph-chart-pie"></i> <?= t('fin_tab_summary') ?></button>
+                <button class="fin-tab" data-tab="tabCashflow"><i class="ph-bold ph-arrows-left-right"></i> <?= t('fin_tab_cashflow') ?></button>
+                <button class="fin-tab" data-tab="tabProfit"><i class="ph-bold ph-hand-coins"></i> <?= t('fin_tab_profit') ?></button>
+                <a href="RAZhpp.php" class="fin-tab" style="text-decoration:none;color:inherit;"><i class="ph-bold ph-calculator"></i> <?= t('fin_tab_cogs') ?></a>
             </div>
 
             <!-- ===== TAB: Ringkasan Laba Rugi ===== -->
             <div class="fin-tab-content active" id="tabSummary">
                 <div class="fin-filter-bar">
                     <div class="fin-period-chips">
-                        <button class="fin-period-chip" data-period="today">Hari Ini</button>
-                        <button class="fin-period-chip" data-period="week">7 Hari</button>
-                        <button class="fin-period-chip active" data-period="month">Bulan Ini</button>
-                        <button class="fin-period-chip" data-period="year">Tahun Ini</button>
+                        <button class="fin-period-chip" data-period="today"><?= t('fin_period_today') ?></button>
+                        <button class="fin-period-chip" data-period="week"><?= t('fin_period_week') ?></button>
+                        <button class="fin-period-chip active" data-period="month"><?= t('fin_period_month') ?></button>
+                        <button class="fin-period-chip" data-period="year"><?= t('fin_period_year') ?></button>
                     </div>
                     <span id="finPeriodRange" style="font-size:0.78rem;color:var(--raz-text-muted);margin-left:auto;"></span>
                 </div>
                 <div class="fin-summary">
-                    <div class="fin-summary-card"><div class="fin-label">Penjualan</div><div class="fin-value income" id="finSales">Rp 0</div></div>
-                    <div class="fin-summary-card"><div class="fin-label">HPP (Harga Pokok)</div><div class="fin-value expense" id="finHpp">Rp 0</div></div>
-                    <div class="fin-summary-card"><div class="fin-label">Laba Kotor</div><div class="fin-value profit" id="finGross">Rp 0</div></div>
-                    <div class="fin-summary-card"><div class="fin-label">Pemasukan Lain</div><div class="fin-value income" id="finOtherIncome">Rp 0</div></div>
-                    <div class="fin-summary-card"><div class="fin-label">Pengeluaran Kas Umum</div><div class="fin-value expense" id="finExpense">Rp 0</div></div>
-                    <div class="fin-summary-card"><div class="fin-label">Kerugian Barang Rusak</div><div class="fin-value danger" id="finSpoilage" style="color:var(--raz-danger)">Rp 0</div></div>
-                    <div class="fin-summary-card" style="border:2px solid var(--raz-primary)"><div class="fin-label"><strong>LABA BERSIH</strong></div><div class="fin-value profit" id="finNet">Rp 0</div></div>
+                    <div class="fin-summary-card"><div class="fin-label"><?= t('fin_lbl_sales') ?></div><div class="fin-value income" id="finSales">Rp 0</div></div>
+                    <div class="fin-summary-card"><div class="fin-label"><?= t('fin_lbl_hpp') ?></div><div class="fin-value expense" id="finHpp">Rp 0</div></div>
+                    <div class="fin-summary-card"><div class="fin-label"><?= t('fin_lbl_gross') ?></div><div class="fin-value profit" id="finGross">Rp 0</div></div>
+                    <div class="fin-summary-card"><div class="fin-label"><?= t('fin_lbl_other_income') ?></div><div class="fin-value income" id="finOtherIncome">Rp 0</div></div>
+                    <div class="fin-summary-card"><div class="fin-label"><?= t('fin_lbl_expense') ?></div><div class="fin-value expense" id="finExpense">Rp 0</div></div>
+                    <div class="fin-summary-card"><div class="fin-label"><?= t('fin_lbl_spoilage') ?></div><div class="fin-value danger" id="finSpoilage" style="color:var(--raz-danger)">Rp 0</div></div>
+                    <div class="fin-summary-card" style="border:2px solid var(--raz-primary)"><div class="fin-label"><strong><?= t('fin_lbl_net') ?></strong></div><div class="fin-value profit" id="finNet">Rp 0</div></div>
                 </div>
                 
                 <div class="fin-summary" style="margin-top:20px;">
-                    <div class="fin-summary-card"><div class="fin-label">Total Modal Dimasukkan</div><div class="fin-value income" id="finCapIn">Rp 0</div></div>
-                    <div class="fin-summary-card"><div class="fin-label">Sisa Modal Aktual (Barang & Uang)</div><div class="fin-value profit" id="finCapRemain">Rp 0</div></div>
+                    <div class="fin-summary-card"><div class="fin-label"><?= t('fin_lbl_cap_in') ?></div><div class="fin-value income" id="finCapIn">Rp 0</div></div>
+                    <div class="fin-summary-card"><div class="fin-label"><?= t('fin_lbl_cap_remain') ?></div><div class="fin-value profit" id="finCapRemain">Rp 0</div></div>
                 </div>
             </div>
 
@@ -112,18 +120,18 @@ $currentPage = 'finance';
                 <div class="raz-card">
                     <div class="raz-table-header">
                         <div class="raz-table-header-left">
-                            <select class="inv-filter-select" id="cfTypeFilter"><option value="">Semua Tipe</option><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select>
-                            <span class="raz-badge success" style="font-size:0.8rem">Masuk: <span id="cfSumIncome">Rp 0</span></span>
-                            <span class="raz-badge danger" style="font-size:0.8rem">Keluar: <span id="cfSumExpense">Rp 0</span></span>
+                            <select class="inv-filter-select" id="cfTypeFilter"><option value=""><?= t('fin_filter_all') ?></option><option value="income"><?= t('fin_type_income') ?></option><option value="expense"><?= t('fin_type_expense') ?></option></select>
+                            <span class="raz-badge success" style="font-size:0.8rem"><?= t('fin_lbl_in') ?>: <span id="cfSumIncome">Rp 0</span></span>
+                            <span class="raz-badge danger" style="font-size:0.8rem"><?= t('fin_lbl_out') ?>: <span id="cfSumExpense">Rp 0</span></span>
                         </div>
                         <div class="raz-table-header-right">
-                            <button class="raz-btn raz-btn-success raz-btn-sm" onclick="openAddCashflow('income')"><i class="ph-bold ph-arrow-down-left"></i> Pemasukan</button>
-                            <button class="raz-btn raz-btn-danger raz-btn-sm" onclick="openAddCashflow('expense')"><i class="ph-bold ph-arrow-up-right"></i> Pengeluaran</button>
+                            <button class="raz-btn raz-btn-success raz-btn-sm" onclick="openAddCashflow('income')"><i class="ph-bold ph-arrow-down-left"></i> <?= t('fin_type_income') ?></button>
+                            <button class="raz-btn raz-btn-danger raz-btn-sm" onclick="openAddCashflow('expense')"><i class="ph-bold ph-arrow-up-right"></i> <?= t('fin_type_expense') ?></button>
                         </div>
                     </div>
                     <div class="raz-table-wrapper">
                         <table class="raz-table">
-                            <thead><tr><th>Tanggal</th><th>Tipe</th><th>Kategori</th><th>Nominal</th><th>Keterangan</th><th class="col-action">Aksi</th></tr></thead>
+                            <thead><tr><th><?= t('fin_table_date') ?></th><th><?= t('fin_table_type') ?></th><th><?= t('inv_table_category') ?></th><th><?= t('fin_table_amount') ?></th><th><?= t('fin_table_desc') ?></th><th class="col-action"><?= t('inv_table_actions') ?></th></tr></thead>
                             <tbody id="cfBody"><tr><td colspan="6"><div class="raz-skeleton raz-skeleton-table-row"></div></td></tr></tbody>
                         </table>
                     </div>
@@ -149,7 +157,7 @@ $currentPage = 'finance';
                         </div>
                         <div class="raz-table-wrapper" style="max-height: 250px; overflow-y: auto;">
                             <table class="raz-table">
-                                <thead><tr><th>Tgl/Sumber</th><th>Nominal</th></tr></thead>
+                                <thead><tr><th>Tgl/Sumber</th><th><?= t('fin_table_amount') ?></th></tr></thead>
                                 <tbody id="capBody"><tr><td colspan="2"><div class="raz-skeleton raz-skeleton-table-row"></div></td></tr></tbody>
                             </table>
                         </div>
@@ -185,7 +193,7 @@ $currentPage = 'finance';
                         </div>
                         <div class="raz-table-wrapper" style="max-height: 250px; overflow-y: auto;">
                             <table class="raz-table">
-                                <thead><tr><th>Keterangan/Potong</th><th>Nominal</th></tr></thead>
+                                <thead><tr><th>Keterangan/Potong</th><th><?= t('fin_table_amount') ?></th></tr></thead>
                                 <tbody id="addExpenseBody"><tr><td colspan="2"><div class="raz-skeleton raz-skeleton-table-row"></div></td></tr></tbody>
                             </table>
                         </div>
@@ -200,10 +208,10 @@ $currentPage = 'finance';
                         Pendapatan <span id="psRevenue">Rp 0</span> &minus; Biaya <span id="psCost">Rp 0</span>
                     </div>
                     <div class="ps-period-chips">
-                        <button class="ps-chip" data-period="today">Hari Ini</button>
-                        <button class="ps-chip active" data-period="month">Bulan Ini</button>
-                        <button class="ps-chip" data-period="week">7 Hari</button>
-                        <button class="ps-chip" data-period="year">Tahun Ini</button>
+                        <button class="ps-chip" data-period="today"><?= t('fin_period_today') ?></button>
+                        <button class="ps-chip active" data-period="month"><?= t('fin_period_month') ?></button>
+                        <button class="ps-chip" data-period="week"><?= t('fin_period_week') ?></button>
+                        <button class="ps-chip" data-period="year"><?= t('fin_period_year') ?></button>
                     </div>
                 </div>
 
@@ -219,7 +227,7 @@ $currentPage = 'finance';
                         <!-- Daftar Penerima -->
                         <div id="psSharesList" class="ps-shares-list">
                             <!-- Diisi oleh JavaScript -->
-                            <div class="ps-empty"><i class="ph-bold ph-users-three"></i><p>Belum ada penerima bagi hasil.<br>Klik tombol di bawah untuk menambahkan.</p></div>
+                            <div class="ps-empty"><i class="ph-bold ph-users-three"></i><p><?= t('fin_empty_shares') ?></p></div>
                         </div>
 
                         <!-- Progress Total -->
@@ -235,8 +243,8 @@ $currentPage = 'finance';
 
                         <!-- Action Buttons -->
                         <div class="ps-actions">
-                            <button class="raz-btn raz-btn-primary raz-btn-sm" onclick="openAddShareModal()"><i class="ph-bold ph-plus"></i> Tambah Penerima</button>
-                            <button class="raz-btn raz-btn-success raz-btn-sm" onclick="saveAllShares()" id="btnSaveShares" style="display:none;"><i class="ph-bold ph-floppy-disk"></i> Simpan Persentase</button>
+                            <button class="raz-btn raz-btn-primary raz-btn-sm" onclick="openAddShareModal()"><i class="ph-bold ph-plus"></i> <?= t('fin_btn_add_share') ?></button>
+                            <button class="raz-btn raz-btn-success raz-btn-sm" onclick="saveAllShares()" id="btnSaveShares" style="display:none;"><i class="ph-bold ph-floppy-disk"></i> <?= t('fin_btn_save_share') ?></button>
                         </div>
                     </div>
                 </div>
@@ -249,7 +257,7 @@ $currentPage = 'finance';
                     </div>
                     <div class="raz-card-body">
                         <div id="psReportsList" class="ps-reports-list">
-                            <div class="ps-empty-sm"><i class="ph-bold ph-file-dashed"></i> Belum ada laporan</div>
+                            <div class="ps-empty-sm"><i class="ph-bold ph-file-dashed"></i> <?= t('fin_empty_report') ?></div>
                         </div>
                     </div>
                 </div>
@@ -263,7 +271,7 @@ $currentPage = 'finance';
 <div class="raz-modal-overlay" id="addShareModal">
     <div class="raz-modal modal-sm">
         <div class="raz-modal-header">
-            <div class="raz-modal-title"><i class="ph-bold ph-user-plus modal-icon"></i> Tambah Penerima</div>
+            <div class="raz-modal-title"><i class="ph-bold ph-user-plus modal-icon"></i> <?= t('fin_modal_add_share') ?></div>
             <button class="raz-modal-close" onclick="RAZ.closeModal('addShareModal')"><i class="ph-bold ph-x"></i></button>
         </div>
         <div class="raz-modal-body">
@@ -288,8 +296,8 @@ $currentPage = 'finance';
             </div>
         </div>
         <div class="raz-modal-footer">
-            <button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('addShareModal')"><i class="ph-bold ph-x"></i> Batal</button>
-            <button class="raz-btn raz-btn-primary" id="btnAddShare" onclick="submitAddShare()"><i class="ph-bold ph-plus"></i> Tambah</button>
+            <button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('addShareModal')"><i class="ph-bold ph-x"></i> <?= t('inv_btn_cancel') ?></button>
+            <button class="raz-btn raz-btn-primary" id="btnAddShare" onclick="submitAddShare()"><i class="ph-bold ph-plus"></i> <?= t('btn_add') ?? 'Tambah' ?></button>
         </div>
     </div>
 </div>
@@ -302,7 +310,7 @@ $currentPage = 'finance';
             <button class="raz-modal-close" onclick="RAZ.closeModal('generateReportModal')"><i class="ph-bold ph-x"></i></button>
         </div>
         <div class="raz-modal-body">
-            <p style="font-size:0.85rem;color:var(--raz-text-muted);margin-bottom:16px;">Laporan bagi hasil akan disimpan sebagai snapshot dan bisa didownload kapan saja.</p>
+            <p style="font-size:0.85rem;color:var(--raz-text-muted);margin-bottom:16px;"><?= t('fin_share_helper') ?></p>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
                 <div class="raz-form-group">
                     <label class="raz-form-label">Dari Tanggal</label>
@@ -319,8 +327,8 @@ $currentPage = 'finance';
             </div>
         </div>
         <div class="raz-modal-footer">
-            <button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('generateReportModal')">Batal</button>
-            <button class="raz-btn raz-btn-primary" id="btnGenReport" onclick="submitGenerateReport()"><i class="ph-bold ph-file-pdf"></i> Generate & Simpan</button>
+            <button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('generateReportModal')"><?= t('inv_btn_cancel') ?? 'Batal' ?></button>
+            <button class="raz-btn raz-btn-primary" id="btnGenReport" onclick="submitGenerateReport()"><i class="ph-bold ph-file-pdf"></i> <?= t('fin_btn_generate') ?></button>
         </div>
     </div>
 </div>
@@ -339,24 +347,24 @@ $currentPage = 'finance';
                 <input type="text" id="cfCategory" class="raz-form-input" placeholder="Contoh: Listrik, Gaji, dll">
             </div>
             <div class="raz-form-group">
-                <label class="raz-form-label">Nominal (Rp) <span class="required">*</span></label>
+                <label class="raz-form-label"><?= t('fin_lbl_cap_amount') ?> <span class="required">*</span></label>
                 <input type="number" id="cfAmount" class="raz-form-input" placeholder="0" min="0">
             </div>
             <div class="raz-form-group" id="cfDeductWrapper" style="display:none;">
                 <label class="raz-form-label">Potong dari Jatah Keuntungan?</label>
                 <select id="cfDeductShare" class="raz-form-input">
-                    <option value="">-- Potong dari Kas Umum (Memengaruhi Laba Bersih) --</option>
+                    <option value=""><?= t('fin_opt_cut_cash') ?></option>
                 </select>
-                <small style="color:var(--raz-text-muted);font-size:0.75rem;">Pilih jika pengeluaran ini dibebankan pada entitas spesifik (misal Owner) setelah laba bersih dihitung.</small>
+                <small style="color:var(--raz-text-muted);font-size:0.75rem;"><?= t('fin_helper_cut_cash') ?></small>
             </div>
             <div class="raz-form-group">
-                <label class="raz-form-label">Keterangan Tambahan</label>
+                <label class="raz-form-label"><?= t('fin_lbl_notes') ?></label>
                 <input type="text" id="cfDesc" class="raz-form-input" placeholder="Opsional">
             </div>
         </div>
         <div class="raz-modal-footer">
-            <button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('cfModal')"><i class="ph-bold ph-x"></i> Batal</button>
-            <button class="raz-btn raz-btn-primary" id="btnSaveCf" onclick="saveCashflow()"><i class="ph-bold ph-floppy-disk"></i> Simpan</button>
+            <button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('cfModal')"><i class="ph-bold ph-x"></i> <?= t('inv_btn_cancel') ?></button>
+            <button class="raz-btn raz-btn-primary" id="btnSaveCf" onclick="saveCashflow()"><i class="ph-bold ph-floppy-disk"></i> <?= t('inv_btn_save') ?></button>
         </div>
     </div>
 </div>
@@ -366,9 +374,9 @@ $currentPage = 'finance';
     <div class="raz-modal modal-sm">
         <div class="raz-modal-header"><div class="raz-modal-title"><i class="ph-bold ph-play modal-icon"></i> Buka Shift</div><button class="raz-modal-close" onclick="RAZ.closeModal('openShiftModal')"><i class="ph-bold ph-x"></i></button></div>
         <div class="raz-modal-body">
-            <div class="raz-form-group"><label class="raz-form-label">Modal Awal Kas</label><input type="number" id="shiftOpenCash" class="raz-form-input" placeholder="0" min="0"></div>
+            <div class="raz-form-group"><label class="raz-form-label"><?= t('fin_lbl_open_cash') ?></label><input type="number" id="shiftOpenCash" class="raz-form-input" placeholder="0" min="0"></div>
         </div>
-        <div class="raz-modal-footer"><button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('openShiftModal')">Batal</button><button class="raz-btn raz-btn-primary" onclick="submitOpenShift()"><i class="ph-bold ph-play"></i> Buka</button></div>
+        <div class="raz-modal-footer"><button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('openShiftModal')"><?= t('inv_btn_cancel') ?? 'Batal' ?></button><button class="raz-btn raz-btn-primary" onclick="submitOpenShift()"><i class="ph-bold ph-play"></i> <?= t('fin_btn_open') ?></button></div>
     </div>
 </div>
 
@@ -380,40 +388,50 @@ $currentPage = 'finance';
             <div class="raz-form-group"><label class="raz-form-label">Kas Akhir</label><input type="number" id="shiftCloseCash" class="raz-form-input" placeholder="Hitung uang di laci" min="0"></div>
             <div class="raz-form-group"><label class="raz-form-label">Catatan</label><input type="text" id="shiftNotes" class="raz-form-input" placeholder="Catatan opsional"></div>
         </div>
-        <div class="raz-modal-footer"><button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('closeShiftModal')">Batal</button><button class="raz-btn raz-btn-warning" onclick="submitCloseShift()"><i class="ph-bold ph-lock"></i> Tutup Shift</button></div>
+        <div class="raz-modal-footer"><button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('closeShiftModal')"><?= t('inv_btn_cancel') ?? 'Batal' ?></button><button class="raz-btn raz-btn-warning" onclick="submitCloseShift()"><i class="ph-bold ph-lock"></i> <?= t('fin_btn_close_shift') ?></button></div>
     </div>
 </div>
 
-<script src="assets/js/RAZMain.js"></script>
+<script src="assets/js/RAZMain.js?v=<?= time() ?>"></script>
 <script src="assets/js/RAZFinance.js"></script>
 <script src="assets/js/RAZProfitShare.js"></script>
-<script>const checkMobile=()=>{const b=document.getElementById('mobileMenuBtn');if(b)b.style.display=window.innerWidth<=1024?'flex':'none';};checkMobile();window.addEventListener('resize',checkMobile);</script>
+<script>
+window.FIN_LANG = {
+    empty_shares: '<?= t('fin_empty_shares') ?>',
+    empty_report: '<?= t('fin_empty_report') ?>',
+    empty_hpp: '<?= t('fin_empty_hpp') ?>',
+    empty_cf_title: '<?= t('fin_empty_cf_title') ?>',
+    empty_cf_desc: '<?= t('fin_empty_cf_desc') ?>',
+    empty_cap: '<?= t('fin_empty_cap') ?>',
+    empty_spoil: '<?= t('fin_empty_spoil') ?>',
+    empty_exp: '<?= t('fin_empty_exp') ?>'
+};const checkMobile=()=>{const b=document.getElementById('mobileMenuBtn');if(b)b.style.display=window.innerWidth<=1024?'flex':'none';};checkMobile();window.addEventListener('resize',checkMobile);</script>
 <!-- MODAL: Tambah Modal -->
 <div class="raz-modal-overlay" id="addCapitalModal">
     <div class="raz-modal modal-sm">
-        <div class="raz-modal-header"><div class="raz-modal-title"><i class="ph-bold ph-bank modal-icon"></i> <span id="capFormTitle">Tambah Modal</span></div><button class="raz-modal-close" onclick="RAZ.closeModal('addCapitalModal')"><i class="ph-bold ph-x"></i></button></div>
+        <div class="raz-modal-header"><div class="raz-modal-title"><i class="ph-bold ph-bank modal-icon"></i> <span id="capFormTitle"><?= t('fin_modal_add_cap') ?></span></div><button class="raz-modal-close" onclick="RAZ.closeModal('addCapitalModal')"><i class="ph-bold ph-x"></i></button></div>
         <div class="raz-modal-body">
             <input type="hidden" id="capId"><input type="hidden" id="capType">
-            <div class="raz-form-group"><label class="raz-form-label">Sumber / Keterangan <span class="required">*</span></label><input type="text" id="capSource" class="raz-form-input" placeholder="Misal: Dana Pribadi, Investor X"></div>
-            <div class="raz-form-group"><label class="raz-form-label">Nominal (Rp) <span class="required">*</span></label><input type="number" id="capAmount" class="raz-form-input" placeholder="0" min="0"></div>
-            <div class="raz-form-group"><label class="raz-form-label">Catatan Tambahan</label><input type="text" id="capNotes" class="raz-form-input" placeholder="Opsional"></div>
+            <div class="raz-form-group"><label class="raz-form-label"><?= t('fin_lbl_cap_source') ?> <span class="required">*</span></label><input type="text" id="capSource" class="raz-form-input" placeholder="Misal: Dana Pribadi, Investor X"></div>
+            <div class="raz-form-group"><label class="raz-form-label"><?= t('fin_lbl_cap_amount') ?> <span class="required">*</span></label><input type="number" id="capAmount" class="raz-form-input" placeholder="0" min="0"></div>
+            <div class="raz-form-group"><label class="raz-form-label"><?= t('fin_lbl_cap_notes') ?></label><input type="text" id="capNotes" class="raz-form-input" placeholder="Opsional"></div>
         </div>
-        <div class="raz-modal-footer"><button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('addCapitalModal')">Batal</button><button class="raz-btn raz-btn-primary" id="btnSaveCap" onclick="saveCapital()"><i class="ph-bold ph-floppy-disk"></i> Simpan</button></div>
+        <div class="raz-modal-footer"><button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('addCapitalModal')"><?= t('inv_btn_cancel') ?? 'Batal' ?></button><button class="raz-btn raz-btn-primary" id="btnSaveCap" onclick="saveCapital()"><i class="ph-bold ph-floppy-disk"></i> <?= t('inv_btn_save') ?></button></div>
     </div>
 </div>
 
 <!-- MODAL: Barang Rusak / Basi -->
 <div class="raz-modal-overlay" id="addSpoilageModal">
     <div class="raz-modal modal-sm">
-        <div class="raz-modal-header"><div class="raz-modal-title"><i class="ph-bold ph-trash modal-icon"></i> Catat Barang Rusak</div><button class="raz-modal-close" onclick="RAZ.closeModal('addSpoilageModal')"><i class="ph-bold ph-x"></i></button></div>
+        <div class="raz-modal-header"><div class="raz-modal-title"><i class="ph-bold ph-trash modal-icon"></i> <?= t('fin_modal_spoil') ?></div><button class="raz-modal-close" onclick="RAZ.closeModal('addSpoilageModal')"><i class="ph-bold ph-x"></i></button></div>
         <div class="raz-modal-body">
-            <input type="hidden" id="spoilId"><div class="raz-form-group"><label class="raz-form-label">Pilih Item dari Inventori <span class="required">*</span></label>
+            <input type="hidden" id="spoilId"><div class="raz-form-group"><label class="raz-form-label"><?= t('fin_lbl_spoil_item') ?> <span class="required">*</span></label>
                 <select id="spoilItem" class="raz-form-input"></select>
             </div>
             <div class="raz-form-group"><label class="raz-form-label">Jumlah (Qty) yang Rusak <span class="required">*</span></label><input type="number" id="spoilQty" class="raz-form-input" placeholder="0" min="1"></div>
-            <div class="raz-form-group"><label class="raz-form-label">Keterangan / Alasan</label><input type="text" id="spoilNotes" class="raz-form-input" placeholder="Misal: Basi, jatuh, dll"></div>
+            <div class="raz-form-group"><label class="raz-form-label"><?= t('fin_lbl_spoil_notes') ?></label><input type="text" id="spoilNotes" class="raz-form-input" placeholder="Misal: Basi, jatuh, dll"></div>
         </div>
-        <div class="raz-modal-footer"><button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('addSpoilageModal')">Batal</button><button class="raz-btn raz-btn-danger" id="btnSaveSpoil" onclick="saveSpoilage()"><i class="ph-bold ph-warning"></i> Simpan & Kurangi Stok</button></div>
+        <div class="raz-modal-footer"><button class="raz-btn raz-btn-secondary" onclick="RAZ.closeModal('addSpoilageModal')"><?= t('inv_btn_cancel') ?? 'Batal' ?></button><button class="raz-btn raz-btn-danger" id="btnSaveSpoil" onclick="saveSpoilage()"><i class="ph-bold ph-warning"></i> <?= t('fin_btn_save_spoil') ?></button></div>
     </div>
 </div>
 </body>

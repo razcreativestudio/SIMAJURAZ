@@ -405,3 +405,7 @@ h4 { font-size: 1.125rem; }
   .raz-stats { grid-template-columns: 1fr; }
   .raz-topbar { padding: 0 16px; }
 }
+
+
+/* Adaptive Logo for Light/Dark Theme */
+body:not(.dark-mode) img[src*="logo.svg"] { filter: invert(1) hue-rotate(180deg) brightness(0.9); }

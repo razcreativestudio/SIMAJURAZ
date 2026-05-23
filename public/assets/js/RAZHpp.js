@@ -20,7 +20,7 @@ async function loadHppList() {
   if (!data || !data.success || !container) return;
 
   if (!data.data.length) {
-    container.innerHTML = '<div class="hpp-list-empty"><i class="ph-bold ph-calculator"></i>Belum ada kalkulasi HPP.<br>Buat yang pertama!</div>';
+    container.innerHTML = `<div class="hpp-list-empty"><i class="ph-bold ph-calculator"></i>${window.FIN_LANG ? window.FIN_LANG.empty_hpp : 'Belum ada kalkulasi HPP.<br>Buat yang pertama!'}</div>`;
     return;
   }
 

@@ -65,24 +65,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    // Scroll Reveal Animation
-    const revealOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
-    };
-
-    const revealOnScroll = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Optional: stop observing once revealed
-            }
-        });
-    }, revealOptions);
-
-    document.querySelectorAll('.reveal').forEach(element => {
-        revealOnScroll.observe(element);
-    });
-
 });
