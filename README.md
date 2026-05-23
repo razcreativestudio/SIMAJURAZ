@@ -29,9 +29,17 @@ SIMAJURAZ dirancang tidak hanya sebagai mesin kasir, melainkan sebagai "**Otak B
    Solusi transparan bagi toko dengan modal patungan. Secara otomatis membagi dividen Laba Bersih bulanan berdasarkan persentase (*share*) masing-masing investor tanpa harus repot menghitung kalkulator.
 7. **📄 Laporan Ekspor PDF Profesional**
    Setiap lini sistem dilengkapi dengan fitur cetak PDF (*Invoice, Laporan Laba Rugi, Opname Stok, Slip Gaji, dll*) berstempel logo toko pengguna.
-8. **🌐 Bilingual Knowledge Base**
-   Dilengkapi dengan Buku Panduan Digital interaktif (Indonesia & English) dengan dukungan visual yang siap membimbing pemilik toko langkah demi langkah secara mandiri.
+8. **🌐 Sistem Multi-Bahasa (Bilingual Ecosystem)**
+   Seluruh antarmuka utama mulai dari *Landing Page*, Pusat Unduhan (Download Center), hingga Buku Panduan Digital (*Knowledge Base*) telah mendukung integrasi Multi-Bahasa (Indonesia & Inggris) secara penuh untuk menjangkau pengguna global.
+9. **☁️ Integrasi SIMAJURAZ Cloud Gratis**
+   Bagi pengguna yang tidak ingin repot melakukan konfigurasi *server* dan *database* secara mandiri, sistem kini terintegrasi langsung dengan portal pendaftaran akun toko di server *Cloud* publik kami secara 100% gratis dan selalu online 24/7.
 
+---
+
+### 🆕 Update Terbaru (Mei 2026)
+- **Globalisasi Bahasa:** Integrasi *multi-language* (ID/EN) yang komprehensif pada keseluruhan `index.php`, `RAZknowledgebase.php`, dan `RAZdownload.php` menggunakan global helper `t()`.
+- **Ekspansi Cloud:** Penambahan direktori Cloud Hosting khusus di laman muka agar UMKM dapat langsung memakai layanan gratis kami tanpa instalasi server.
+- **Penyempurnaan Antarmuka:** Tata letak grid yang lebih rapi (350px) dan tombol yang stabil (nowrap) pada *landing page*.
 ---
 
 ## 🛠️ Teknologi yang Digunakan

@@ -1,7 +1,7 @@
-<?php
+﻿<?php
 /**
  * ============================================================
- * RAZfinance.php — Manajemen Keuangan SIMAJURAZ
+ * RAZfinance.php Ã¢â‚¬â€ Manajemen Keuangan SIMAJURAZ
  * ============================================================
  * Versi: 1.0.0 | Dibuat: 2026-05-21 | Diupdate: 2026-05-21
  * Deskripsi: Arus kas, shift, laba rugi, profit share.
@@ -18,7 +18,7 @@ $currentPage = 'finance';
 <html lang="id">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keuangan — SIMAJURAZ</title>
+    <title>Keuangan Ã¢â‚¬â€ SIMAJURAZ</title>
     <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
     <link rel="stylesheet" href="assets/css/RAZMain.css">
     <link rel="stylesheet" href="assets/css/RAZComponents.css">

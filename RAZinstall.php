@@ -171,32 +171,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 category VARCHAR(50),
                 amount {$decimalType} NOT NULL DEFAULT 0,
                 description {$textType},
-                deduct_from_share_id INT DEFAULT NULL,
-                created_at {$timestamp}
-            )");
-
-            // Tabel Capital Flows (Modal)
-            $pdo->exec("CREATE TABLE IF NOT EXISTS capital_flows (
-                id {$autoInc},
-                store_id INT NOT NULL,
-                type VARCHAR(10) NOT NULL,
-                source_name VARCHAR(100) NOT NULL,
-                amount {$decimalType} NOT NULL DEFAULT 0,
-                notes {$textType},
-                created_by INT NOT NULL,
-                created_at {$timestamp}
-            )");
-
-            // Tabel Spoilages (Barang Rusak)
-            $pdo->exec("CREATE TABLE IF NOT EXISTS spoilages (
-                id {$autoInc},
-                store_id INT NOT NULL,
-                item_id INT NOT NULL,
-                qty INT NOT NULL DEFAULT 1,
-                hpp_value {$decimalType} NOT NULL DEFAULT 0,
-                total_loss {$decimalType} NOT NULL DEFAULT 0,
-                notes {$textType},
-                created_by INT NOT NULL,
                 created_at {$timestamp}
             )");
 

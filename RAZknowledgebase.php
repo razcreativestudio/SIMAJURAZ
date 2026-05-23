@@ -147,6 +147,7 @@ require_once __DIR__ . '/includes/RAZlang.php'; // Include i18n
             <a href="index.php#fitur"><?= t('nav_features') ?></a>
             <a href="index.php#teknologi"><?= t('nav_tech') ?></a>
             <a href="RAZknowledgebase.php" style="color:var(--l-primary-light);"><?= t('nav_kb') ?></a>
+            <a href="RAZdownload.php" style="color:var(--l-text); font-weight:600;"><i class="ph-bold ph-download-simple"></i> Download</a>
         </div>
         <div class="nav-actions" style="display: flex; gap: 12px; align-items: center;">
             <a href="?lang=<?= $current_lang === 'id' ? 'en' : 'id' ?>" class="nav-action-icon" style="color:var(--l-text); text-decoration:none; font-weight:bold; font-size:14px; border:1px solid var(--l-border); padding:4px 8px; border-radius:8px;">
@@ -169,7 +170,13 @@ require_once __DIR__ . '/includes/RAZlang.php'; // Include i18n
         <!-- Sidebar Navigation -->
         <aside class="kb-sidebar">
             <h3 style="margin-bottom:16px; padding-left:12px; font-size:1.1rem; color:var(--l-text);"><?= t('kb_title') ?></h3>
-            <a href="#install" class="active"><?= t('kb_sidebar_1') ?></a>
+            <a href="#about-opensource" class="active"><?= t('kb_nav_about') ?></a>
+            <a href="#tech-stack"><?= t('kb_nav_tech') ?></a>
+            <a href="#installation"><?= t('kb_nav_install') ?></a>
+            <a href="#raz-services" style="color:var(--l-primary-light);"><?= t('kb_nav_raz') ?></a>
+            <a href="#cloud-version" style="color:#f43f5e; font-weight: 600;"><?= t('kb_nav_cloud') ?></a>
+            <hr style="border:0; border-top:1px solid var(--l-border); margin: 12px 0;">
+            <a href="#install"><?= t('kb_sidebar_1') ?></a>
             <a href="#inventory"><?= t('kb_sidebar_2') ?></a>
             <a href="#pos"><?= t('kb_sidebar_3') ?></a>
             <a href="#finance"><?= t('kb_sidebar_4') ?></a>
@@ -184,6 +191,111 @@ require_once __DIR__ . '/includes/RAZlang.php'; // Include i18n
             <div style="margin-bottom: 40px;">
                 <h1 style="font-size: 2.5rem; margin-bottom:12px;"><?= t('kb_title') ?></h1>
                 <p style="color:var(--l-text-muted); font-size:1.1rem;"><?= t('kb_desc') ?></p>
+            </div>
+
+            <div class="kb-section" id="about-opensource">
+                <h2><?= t('kb_about_os_title') ?></h2>
+                <p><?= t('kb_about_os_p1') ?></p>
+                <p style="margin-top: 16px;">Proyek ini dikerjakan, disponsori, dan dikelola langsung oleh tim dari <strong><a href="https://raz.my.id" target="_blank" style="color:var(--l-primary-light); text-decoration:none;">RAZ Creative Studio</a></strong>. Kami merilis keseluruhan basis kode (<i>source code</i>) aplikasi ini ke publik dengan lisensi <strong>Open Source (MIT)</strong>. Ini berarti Anda bebas mengunduh, mempelajari, memodifikasi, dan menggunakan aplikasi ini untuk keperluan pribadi maupun bisnis (komersial) secara 100% gratis.</p>
+            </div>
+
+            <div class="kb-section" id="tech-stack">
+                <h2><?= t('kb_nav_tech') ?></h2>
+                <p><?= t('kb_tech_p1') ?></p>
+                <ul class="kb-list" style="margin-left: 20px; line-height: 1.8; margin-bottom: 20px; margin-top: 12px; color: var(--l-text-muted);">
+                    <li><?= t('kb_tech_l1') ?></li>
+                    <li><?= t('kb_tech_l2') ?></li>
+                    <li><?= t('kb_tech_l3') ?></li>
+                    <li><?= t('kb_tech_l4') ?></li>
+                    <li><?= t('kb_tech_l5') ?></li>
+                </ul>
+                
+                <h3 style="margin-top:30px; margin-bottom:12px; color:var(--l-accent);">Struktur Folder Utama (Project Structure)</h3>
+                <div style="background:rgba(0,0,0,0.3); padding:16px; border-radius:8px; border:1px solid var(--l-border); font-family:monospace; color:#a0a0a0; line-height:1.6; overflow-x:auto;">
+<span style="color:#10b981;">SIMAJURAZ/</span><br>
+├── <span style="color:#3b82f6;">api/</span>          <span style="color:#6b7280;"># Kumpulan endpoint (Logika pemrosesan data, AJAX, Backend)</span><br>
+├── <span style="color:#3b82f6;">assets/</span>       <span style="color:#6b7280;"># File CSS utama, JavaScript interaktif, Font, dan Gambar</span><br>
+├── <span style="color:#3b82f6;">includes/</span>     <span style="color:#6b7280;"># File bantuan seperti fungsi i18n (Bahasa) dan library eksternal</span><br>
+├── index.php     <span style="color:#6b7280;"># Landing page dan antarmuka depan pengguna publik</span><br>
+├── RAZconfig.php <span style="color:#6b7280;"># File konfigurasi dinamis (Routing koneksi database)</span><br>
+├── RAZinstall.php<span style="color:#6b7280;"># GUI Instalasi (Otomatisasi migrasi struktur tabel DDL)</span><br>
+├── RAZpos.php    <span style="color:#6b7280;"># Halaman antarmuka Kasir (Point of Sale Utama)</span><br>
+├── RAZdashboard.php <span style="color:#6b7280;"># Panel ringkasan analitik dan pusat komando Owner</span><br>
+└── README.md     <span style="color:#6b7280;"># Dokumentasi esensial repositori GitHub</span>
+                </div>
+            </div>
+
+            <div class="kb-section" id="installation">
+                <h2><?= t('kb_install_title') ?></h2>
+                <p><?= t('kb_install_p1') ?></p>
+                
+                <h3 style="margin-top:30px; margin-bottom:12px; color:var(--l-primary-light);"><?= t('kb_install_a') ?></h3>
+                <ol class="kb-list" style="margin-left: 20px; line-height: 1.8; margin-bottom: 20px; color: var(--l-text-muted);">
+                    <li><?= t('kb_install_a1') ?></li>
+                    <li><?= t('kb_install_a2') ?></li>
+                    <li><?= t('kb_install_a3') ?></li>
+                    <li><?= t('kb_install_a4') ?></li>
+                    <li><?= t('kb_install_a5') ?></li>
+                    <li><?= t('kb_install_a6') ?></li>
+                </ol>
+
+                <h3 style="margin-top:30px; margin-bottom:12px; color:#f59e0b;"><?= t('kb_install_b') ?></h3>
+                <ol class="kb-list" style="margin-left: 20px; line-height: 1.8; color: var(--l-text-muted);">
+                    <li><?= t('kb_install_b1') ?></li>
+                    <li><?= t('kb_install_b2') ?></li>
+                    <li><?= t('kb_install_b3') ?></li>
+                    <li><?= t('kb_install_b4') ?></li>
+                    <li><?= t('kb_install_b5') ?></li>
+                    <li><?= t('kb_install_b6') ?></li>
+                </ol>
+            </div>
+
+            <div class="kb-section" id="raz-services" style="border: 2px solid var(--l-primary-light); background: rgba(37, 99, 235, 0.05);">
+                <div style="text-align:center; margin-bottom:24px;">
+                    <i class="ph-bold ph-magic-wand" style="font-size: 3rem; color: var(--l-primary-light); margin-bottom: 12px;"></i>
+                    <h2 style="border:none; margin:0; padding:0; display:inline-block; font-size:2rem;"><?= t("kb_raz_title") ?></h2>
+                </div>
+                <p style="text-align: center; color: var(--l-text-muted); margin-bottom: 40px; font-size: 1.1rem; line-height: 1.6;">
+                    <?= t('kb_raz_p1') ?>
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px;">
+                    <div style="background:var(--l-card-bg); padding:24px; border-radius:16px; border:1px solid var(--l-border); text-align:center;">
+                        <i class="ph-bold ph-hard-drives" style="font-size: 2.5rem; color: #10b981; margin-bottom: 16px;"></i>
+                        <h4 style="color:var(--l-text); margin-bottom:8px; font-size:1.1rem;"><?= t('kb_raz_s1') ?></h4>
+                        <p style="font-size:0.9rem; color:var(--l-text-muted); line-height: 1.6;"><?= t('kb_raz_s1_d') ?></p>
+                    </div>
+                    <div style="background:var(--l-card-bg); padding:24px; border-radius:16px; border:1px solid var(--l-border); text-align:center;">
+                        <i class="ph-bold ph-code-block" style="font-size: 2.5rem; color: var(--l-accent); margin-bottom: 16px;"></i>
+                        <h4 style="color:var(--l-text); margin-bottom:8px; font-size:1.1rem;"><?= t('kb_raz_s2') ?></h4>
+                        <p style="font-size:0.9rem; color:var(--l-text-muted); line-height: 1.6;"><?= t('kb_raz_s2_d') ?></p>
+                    </div>
+                    <div style="background:var(--l-card-bg); padding:24px; border-radius:16px; border:1px solid var(--l-border); text-align:center;">
+                        <i class="ph-bold ph-lifebuoy" style="font-size: 2.5rem; color: var(--l-primary-light); margin-bottom: 16px;"></i>
+                        <h4 style="color:var(--l-text); margin-bottom:8px; font-size:1.1rem;"><?= t('kb_raz_s3') ?></h4>
+                        <p style="font-size:0.9rem; color:var(--l-text-muted); line-height: 1.6;"><?= t('kb_raz_s3_d') ?></p>
+                    </div>
+                </div>
+
+                <div style="text-align: center;">
+                    <a href="RAZdownload.php" class="btn-primary" style="display:inline-flex; align-items:center; gap:8px; padding: 14px 32px; font-size:1.1rem;">
+                        <i class="ph-bold ph-headset"></i> <?= t('kb_raz_btn') ?>
+                    </a>
+                </div>
+            </div>
+
+            <div class="kb-section" id="cloud-version" style="border: 2px solid #f43f5e; background: rgba(244, 63, 94, 0.05);">
+                <div style="text-align:center; margin-bottom:24px;">
+                    <i class="ph-bold ph-cloud" style="font-size: 3rem; color: #f43f5e; margin-bottom: 12px;"></i>
+                    <h2 style="border:none; margin:0; padding:0; display:inline-block; font-size:2rem;"><?= t("kb_cloud_title") ?></h2>
+                </div>
+                <p style="text-align: center; color: var(--l-text-muted); margin-bottom: 30px; font-size: 1.1rem; line-height: 1.6;">
+                    <?= t('kb_cloud_p1') ?>
+                </p>
+                <div style="background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.3); padding: 16px; border-radius: 8px; text-align: center;">
+                    <i class="ph-bold ph-info" style="color: #f43f5e; font-size: 1.2rem; vertical-align: middle; margin-right: 8px;"></i>
+                    <span style="color: var(--l-text);"><?= t('kb_cloud_info') ?></span>
+                </div>
             </div>
 
             <div class="kb-section" id="install">
@@ -243,11 +355,6 @@ require_once __DIR__ . '/includes/RAZlang.php'; // Include i18n
             </div>
         </main>
     </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; <?= date('Y') ?> <?= t('footer_text') ?> <br> <a href="https://raz.my.id/" target="_blank" style="color: var(--l-primary-light); text-decoration: none; font-weight: bold; margin-top: 10px; display: inline-block;">RAZ Creative Studio Official</a></p>
-    </footer>
 
     <script>
         // Update active sidebar link on scroll
@@ -380,7 +487,7 @@ require_once __DIR__ . '/includes/RAZlang.php'; // Include i18n
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 RAZ Creative Studio. Hak Cipta Dilindungi.</p>
+            <p>&copy; <?= date('Y') ?> SIMAJURAZ by RAZ Creative Studio. Membantu UMKM Indonesia Go Digital.</p>
             <div class="social-links">
                 <a href="https://www.instagram.com/raz_studio.id/" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@razcreativestudio" aria-label="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>

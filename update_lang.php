@@ -1,0 +1,75 @@
+<?php
+$content = file_get_contents('c:\Users\Administrator\Documents\DATA ZUL\RAZ\SIMAJURAZ\includes\RAZlang.php');
+
+$id_kb = "
+        'kb_sidebar_1' => 'Memulai (Instalasi)',
+        'kb_sidebar_2' => 'Manajemen Barang',
+        'kb_sidebar_3' => 'Cara Kasir Berjualan',
+        'kb_sidebar_4' => 'Laporan Keuangan',
+        'kb_sidebar_5' => 'Penggajian Karyawan',
+        'kb_sidebar_6' => 'Kalkulator HPP',
+        'kb_sidebar_7' => 'Sistem Bagi Hasil',
+        
+        'kb_c1_title' => 'Cara Instalasi Pertama Kali',
+        'kb_c1_desc' => '<p>Selamat datang di SIMAJURAZ! Sistem Kasir dan Manajemen Toko terlengkap. Berikut adalah langkah-langkah untuk memulai:</p><ol><li><strong>Buka Halaman Utama:</strong> Saat pertama kali mengakses aplikasi, Anda akan disambut oleh halaman selamat datang.</li><li><strong>Instalasi Database:</strong> Klik tombol instalasi. Kami sangat menyarankan Anda memilih opsi <strong>SQLite</strong> jika Anda menginginkan portabilitas. Sistem akan secara otomatis membuat struktur tabel yang dibutuhkan.</li><li><strong>Buat Akun Super Admin:</strong> Akun ini digunakan untuk mengelola sistem secara keseluruhan. Masukkan username dan password yang kuat.</li><li><strong>Daftar Akun Toko (Owner):</strong> Setelah instalasi selesai, kembali ke halaman utama dan klik <strong>Buat Akun Toko</strong>. Isi data toko Anda. Sekarang, Anda siap berjualan!</li></ol>',
+        
+        'kb_c2_title' => 'Cara Menambahkan Barang & HPP',
+        'kb_c2_desc' => '<p>Fitur Inventori adalah jantung dari toko Anda. Pastikan Anda mengisinya dengan benar sebelum berjualan.</p><ol><li><strong>Menambahkan Kategori:</strong> Buka menu <strong>Inventori</strong>. Di tab Kategori, tambahkan kategori baru seperti \"Makanan\", \"Minuman\", atau \"Snack\".</li><li><strong>Menambahkan Barang Baru:</strong> Klik tombol <strong>Tambah Barang Baru</strong>.</li><li><strong>Isi Rincian Barang:</strong> Masukkan Nama Barang, SKU (Kode Unik), dan Kategori.</li><li><strong>Pengaturan Harga (SANGAT PENTING):</strong> Anda wajib mengisi <strong>HPP (Harga Modal)</strong> dan <strong>Harga Jual</strong>. HPP adalah modal dasar Anda. Jika HPP salah, maka laporan Laba Rugi Anda tidak akan akurat!</li><li><strong>Stok Barang:</strong> Masukkan jumlah stok awal. Setiap kali ada transaksi di Kasir, stok ini akan berkurang secara otomatis.</li></ol>',
+        
+        'kb_c3_title' => 'Cara Berjualan di Kasir (POS)',
+        'kb_c3_desc' => '<p>Menu POS (Point of Sale) dirancang agar Anda dapat melayani pelanggan dengan sangat cepat tanpa antrean panjang.</p><ol><li><strong>Buka Shift Kasir:</strong> Sebelum mulai berjualan, Anda wajib <strong>Buka Shift</strong>. Masukkan uang modal awal yang ada di laci kasir (misal: Rp 100.000 untuk kembalian). Ini penting untuk pelacakan uang tunai fisik.</li><li><strong>Pencarian Barang:</strong> Di halaman POS, Anda dapat mencari barang dengan mengetikkan nama di kolom pencarian atau langsung menggunakan <em>Barcode Scanner</em>.</li><li><strong>Proses Pembayaran:</strong> Setelah item masuk ke keranjang, klik tombol hijau <strong>Bayar</strong>.</li><li><strong>Penerimaan Uang:</strong> Masukkan nominal uang yang diserahkan pelanggan. Sistem akan otomatis menghitung kembaliannya.</li><li><strong>Cetak Struk:</strong> Klik <strong>Selesaikan Transaksi & Cetak Struk</strong>. Transaksi selesai dan stok otomatis terpotong!</li></ol>',
+        
+        'kb_c4_title' => 'Membaca Laporan Laba Rugi',
+        'kb_c4_desc' => '<p>SIMAJURAZ secara otomatis mencatat seluruh pergerakan uang Anda dan membuat laporan yang sangat detail.</p><ol><li><strong>Menu Arus Kas (Cash Flow):</strong> Di sini, Anda bisa melihat semua uang masuk (dari penjualan) dan uang keluar (dari pengeluaran toko, penggajian, dll). Anda juga bisa mencatat pengeluaran manual seperti beli gas atau bayar listrik.</li><li><strong>Menu Laba Rugi:</strong> Ini adalah laporan terpenting Anda. Laba bersih dihitung dengan rumus: <code>(Total Penjualan) - (Total HPP) - (Total Pengeluaran)</code>.</li><li><strong>Filter Laporan:</strong> Anda dapat memfilter laporan berdasarkan hari ini, minggu ini, atau bulan tertentu.</li><li><strong>Ekspor ke PDF:</strong> Semua tabel laporan dapat Anda unduh dalam format dokumen PDF profesional dengan satu klik untuk keperluan pembukuan atau pelaporan ke investor.</li></ol>',
+
+        'kb_c5_title' => 'Sistem Penggajian & Cetak Slip Gaji',
+        'kb_c5_desc' => '<p>Tinggalkan cara lama mencatat gaji di buku. SIMAJURAZ memiliki sistem Payroll terintegrasi.</p><ol><li><strong>Buka Tab Penggajian:</strong> Masuk ke menu <strong>Karyawan</strong>, lalu pilih tab <strong>Penggajian (Payroll)</strong>.</li><li><strong>Proses Gaji:</strong> Klik tombol hijau <strong>Bayar Gaji</strong>.</li><li><strong>Rincian Gaji:</strong> Pilih nama karyawan. Masukkan <strong>Gaji Pokok</strong>, tambahkan <strong>Bonus</strong> (jika ada), dan masukkan <strong>Potongan/Kasbon</strong> (jika karyawan memiliki hutang).</li><li><strong>Integrasi Otomatis:</strong> Setelah Anda menyimpan data gaji, sistem akan otomatis mencatatnya sebagai \"Pengeluaran\" di menu Arus Kas. Anda tidak perlu mencatat dua kali!</li><li><strong>Cetak Slip Gaji:</strong> Anda bisa langsung mencetak Slip Gaji berformat PDF yang terlihat sangat profesional untuk diberikan kepada karyawan Anda.</li></ol>',
+        
+        'kb_c6_title' => 'Kalkulator HPP Premium',
+        'kb_c6_desc' => '<p>Kalkulator HPP membantu Anda menghitung modal pasti dari sebuah resep masakan atau minuman secara detail (Food Costing).</p><ol><li><strong>Buat Perhitungan Baru:</strong> Buka menu <strong>Kalkulator HPP</strong> dan klik <strong>Buat Perhitungan Baru</strong>.</li><li><strong>Masukkan Bahan Baku:</strong> Tambahkan bahan-bahan yang digunakan. Misalnya, untuk \"Kopi Susu\", masukkan Biji Kopi (gram), Susu UHT (ml), dan Gula Aren (ml) beserta harga belinya.</li><li><strong>Masukkan Kemasan & Biaya Ekstra:</strong> Jangan lupa masukkan biaya kemasan (Cup, Sedotan, Stiker) dan biaya ekstra (Gas Elpiji, Tenaga Kerja per porsi).</li><li><strong>Target Margin Keuntungan:</strong> Tentukan berapa persen keuntungan yang Anda inginkan (misal: 50%).</li><li><strong>Rekomendasi Harga Jual:</strong> Sistem akan secara otomatis menghitung total modal per porsi dan memberikan <strong>Rekomendasi Harga Jual</strong> yang paling optimal untuk mencapai target margin Anda!</li></ol>',
+
+        'kb_c7_title' => 'Sistem Bagi Hasil (Profit Share)',
+        'kb_c7_desc' => '<p>Jika toko Anda memiliki investor atau partner bisnis, fitur ini sangat membantu untuk menghitung pembagian keuntungan secara adil dan transparan.</p><ol><li><strong>Daftarkan Investor:</strong> Buka menu <strong>Keuangan</strong>, pilih tab <strong>Bagi Hasil</strong>. Klik <strong>Tambah Investor/Partner</strong>.</li><li><strong>Tentukan Persentase:</strong> Masukkan nama investor dan persentase bagi hasilnya (misal: Bapak Budi, 30%).</li><li><strong>Buat Laporan Pembagian:</strong> Setiap akhir bulan, Anda bisa mengklik <strong>Buat Laporan Bagi Hasil</strong>.</li><li><strong>Kalkulasi Otomatis:</strong> Sistem akan mengambil data <strong>Laba Bersih</strong> bulan tersebut, lalu secara otomatis membaginya sesuai persentase masing-masing investor.</li><li><strong>Cetak & Bayar:</strong> Cetak laporannya ke format PDF, dan tandai statusnya menjadi \"Sudah Dibayar\" setelah Anda mentransfer uang ke investor.</li></ol>',
+    ],";
+
+$en_kb = "
+        'kb_sidebar_1' => 'Getting Started (Install)',
+        'kb_sidebar_2' => 'Item Management',
+        'kb_sidebar_3' => 'Selling at POS',
+        'kb_sidebar_4' => 'Financial Reports',
+        'kb_sidebar_5' => 'Employee Payroll',
+        'kb_sidebar_6' => 'COGS Calculator',
+        'kb_sidebar_7' => 'Profit Sharing',
+        
+        'kb_c1_title' => 'How to Install for the First Time',
+        'kb_c1_desc' => '<p>Welcome to SIMAJURAZ! The most complete POS and Store Management system. Here are the steps to get started:</p><ol><li><strong>Open Main Page:</strong> Upon first access, you will be greeted by the welcome page.</li><li><strong>Database Installation:</strong> Click the installation button. We highly recommend selecting the <strong>SQLite</strong> option if you want portability. The system will automatically generate the required tables.</li><li><strong>Create Super Admin Account:</strong> This account is used to manage the system as a whole. Enter a secure username and password.</li><li><strong>Register Store Account (Owner):</strong> After installation, return to the main page and click <strong>Create Store Account</strong>. Fill in your store details. Now, you are ready to sell!</li></ol>',
+        
+        'kb_c2_title' => 'How to Add Items & COGS',
+        'kb_c2_desc' => '<p>The Inventory feature is the heart of your store. Make sure you fill it out correctly before selling.</p><ol><li><strong>Add Category:</strong> Go to the <strong>Inventory</strong> menu. In the Category tab, add a new category like \"Food\", \"Drink\", or \"Snack\".</li><li><strong>Add New Item:</strong> Click the <strong>Add New Item</strong> button.</li><li><strong>Fill Item Details:</strong> Enter Item Name, SKU (Unique Code), and Category.</li><li><strong>Price Settings (CRUCIAL):</strong> You must fill in the <strong>COGS (Base Cost)</strong> and <strong>Selling Price</strong>. COGS is your base capital. If COGS is wrong, your Profit/Loss report will be inaccurate!</li><li><strong>Item Stock:</strong> Enter the initial stock amount. Every time there is a transaction in POS, this stock will decrease automatically.</li></ol>',
+        
+        'kb_c3_title' => 'How to Sell in POS (Cashier)',
+        'kb_c3_desc' => '<p>The POS (Point of Sale) menu is designed so you can serve customers very quickly without long queues.</p><ol><li><strong>Open Cashier Shift:</strong> Before selling, you must <strong>Open Shift</strong>. Enter the initial capital money in the cash drawer (e.g., Rp 100,000 for change). This is important for physical cash tracking.</li><li><strong>Search Items:</strong> On the POS page, you can search for items by typing the name in the search bar or directly using a <em>Barcode Scanner</em>.</li><li><strong>Payment Process:</strong> After items are in the cart, click the green <strong>Pay</strong> button.</li><li><strong>Receive Money:</strong> Enter the cash amount given by the customer. The system will automatically calculate the change.</li><li><strong>Print Receipt:</strong> Click <strong>Complete Transaction & Print Receipt</strong>. Transaction complete and stock is automatically deducted!</li></ol>',
+        
+        'kb_c4_title' => 'Reading Profit & Loss Reports',
+        'kb_c4_desc' => '<p>SIMAJURAZ automatically records all your money movements and creates highly detailed reports.</p><ol><li><strong>Cash Flow Menu:</strong> Here, you can see all incoming money (from sales) and outgoing money (from store expenses, payroll, etc). You can also record manual expenses like buying gas or paying electricity.</li><li><strong>Profit/Loss Menu:</strong> This is your most important report. Net profit is calculated with the formula: <code>(Total Sales) - (Total COGS) - (Total Expenses)</code>.</li><li><strong>Filter Reports:</strong> You can filter reports by today, this week, or a specific month.</li><li><strong>Export to PDF:</strong> All report tables can be downloaded in professional PDF document format with one click for bookkeeping or reporting to investors.</li></ol>',
+
+        'kb_c5_title' => 'Payroll System & Payslip Printing',
+        'kb_c5_desc' => '<p>Leave the old way of recording salaries in a book. SIMAJURAZ has an integrated Payroll system.</p><ol><li><strong>Open Payroll Tab:</strong> Go to the <strong>Employees</strong> menu, then select the <strong>Payroll</strong> tab.</li><li><strong>Process Salary:</strong> Click the green <strong>Pay Salary</strong> button.</li><li><strong>Salary Details:</strong> Select the employee name. Enter <strong>Base Salary</strong>, add <strong>Bonus</strong> (if any), and enter <strong>Deductions/Cash Advance</strong> (if the employee has debts).</li><li><strong>Auto Integration:</strong> After you save the salary data, the system will automatically record it as an \"Expense\" in the Cash Flow menu. You don\'t need to record it twice!</li><li><strong>Print Payslip:</strong> You can directly print a professional-looking PDF Payslip to give to your employee.</li></ol>',
+        
+        'kb_c6_title' => 'Premium COGS Calculator',
+        'kb_c6_desc' => '<p>The COGS Calculator helps you calculate the exact capital of a food or beverage recipe in detail (Food Costing).</p><ol><li><strong>Create New Calculation:</strong> Go to the <strong>COGS Calculator</strong> menu and click <strong>Create New Calculation</strong>.</li><li><strong>Input Ingredients:</strong> Add the ingredients used. For example, for \"Milk Coffee\", enter Coffee Beans (grams), UHT Milk (ml), and Brown Sugar (ml) along with their purchase prices.</li><li><strong>Input Packaging & Extra Costs:</strong> Don\'t forget to input packaging costs (Cup, Straw, Sticker) and extra costs (LPG Gas, Labor per portion).</li><li><strong>Target Profit Margin:</strong> Determine the percentage of profit you want (e.g., 50%).</li><li><strong>Selling Price Recommendation:</strong> The system will automatically calculate the total capital per portion and provide the most optimal <strong>Selling Price Recommendation</strong> to achieve your target margin!</li></ol>',
+
+        'kb_c7_title' => 'Profit Sharing System',
+        'kb_c7_desc' => '<p>If your store has investors or business partners, this feature is very helpful for calculating profit sharing fairly and transparently.</p><ol><li><strong>Register Investors:</strong> Go to the <strong>Finance</strong> menu, select the <strong>Profit Share</strong> tab. Click <strong>Add Investor/Partner</strong>.</li><li><strong>Determine Percentage:</strong> Enter the investor\'s name and their profit share percentage (e.g., Mr. Budi, 30%).</li><li><strong>Create Sharing Report:</strong> At the end of every month, you can click <strong>Create Profit Share Report</strong>.</li><li><strong>Automatic Calculation:</strong> The system will take the <strong>Net Profit</strong> data for that month, then automatically divide it according to each investor\'s percentage.</li><li><strong>Print & Pay:</strong> Print the report to PDF format, and mark the status as \"Paid\" after you transfer the money to the investors.</li></ol>',
+    ]
+];";
+
+$pattern_id = "/'kb_sidebar_1' => 'Memulai \(Instalasi\)'.*?'kb_c5_desc' => '.*?<\/ul>',\n    \],/s";
+$pattern_en = "/'kb_sidebar_1' => 'Getting Started \(Install\)'.*?'kb_c5_desc' => '.*?<\/ul>',\n    \]\n\];/s";
+
+$content = preg_replace($pattern_id, $id_kb, $content);
+$content = preg_replace($pattern_en, $en_kb, $content);
+
+file_put_contents('c:\Users\Administrator\Documents\DATA ZUL\RAZ\SIMAJURAZ\includes\RAZlang.php', $content);
+echo "Lang file updated!";
+?>

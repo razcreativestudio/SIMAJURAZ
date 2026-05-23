@@ -21,7 +21,7 @@ define('RAZ_CONFIG_FILE', __DIR__ . '/data/RAZdbconfig.json');
 define('RAZ_SQLITE_FILE', __DIR__ . '/data/simajuraz.sqlite');
 
 // Versi aplikasi
-define('RAZ_VERSION', '1.0.3');
+define('RAZ_VERSION', '1.0.0');
 
 // Nama aplikasi
 define('RAZ_APP_NAME', 'SIMAJURAZ');
