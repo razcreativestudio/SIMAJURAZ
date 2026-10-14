@@ -11,7 +11,8 @@
  *               overhead, margin, dan push ke inventori.
  * ============================================================
  */
-ini_set('display_errors', 0);
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 require_once __DIR__ . '/../RAZconfig.php';
 require_once __DIR__ . '/../includes/RAZsession.php';
 require_once __DIR__ . '/../includes/RAZhelpers.php';
@@ -101,56 +102,71 @@ function createHpp($pdo, $storeId) {
 // UPDATE: Update master + semua komponen (bulk save)
 // ============================================================
 function updateHpp($pdo, $storeId) {
-    $input = RAZgetJsonInput();
-    $id = intval($input['id'] ?? 0);
-    if (!$id) RAZjsonResponse(false, 'ID tidak valid');
+    try {
+        $input = RAZgetJsonInput();
+        $id = intval($input['id'] ?? 0);
+        if (!$id) RAZjsonResponse(false, 'ID tidak valid');
 
-    // Verifikasi kepemilikan
-    $check = $pdo->prepare("SELECT id FROM hpp_calculations WHERE id=? AND store_id=?");
-    $check->execute([$id, $storeId]);
-    if (!$check->fetch()) RAZjsonResponse(false, 'Data tidak ditemukan');
+        // Verifikasi kepemilikan
+        $check = $pdo->prepare("SELECT id FROM hpp_calculations WHERE id=? AND store_id=?");
+        $check->execute([$id, $storeId]);
+        if (!$check->fetch()) RAZjsonResponse(false, 'Data tidak ditemukan');
 
-    // Update master
-    $stmt = $pdo->prepare("UPDATE hpp_calculations SET product_name=?, portions=?, overhead_pct=?, margin_pct=?, current_sell_price=?, notes=?, updated_at=datetime('now','localtime') WHERE id=? AND store_id=?");
-    $stmt->execute([
-        RAZsanitize($input['product_name'] ?? ''),
-        max(1, intval($input['portions'] ?? 1)),
-        floatval($input['overhead_pct'] ?? 15),
-        floatval($input['margin_pct'] ?? 30),
-        floatval($input['current_sell_price'] ?? 0),
-        RAZsanitize($input['notes'] ?? ''),
-        $id, $storeId
-    ]);
+        // Check if sqlite or mysql for datetime
+        $dbType = RAZgetDbType();
+        $updatedAt = ($dbType === 'sqlite') ? "datetime('now','localtime')" : "NOW()";
 
-    // Rebuild komponen: hapus lama, insert baru
-    // --- Bahan ---
-    $pdo->prepare("DELETE FROM hpp_ingredients WHERE hpp_id=?")->execute([$id]);
-    if (!empty($input['ingredients'])) {
-        $stmt = $pdo->prepare("INSERT INTO hpp_ingredients (hpp_id, name, purchase_qty, purchase_unit, purchase_price, portions_yield, sort_order) VALUES (?,?,?,?,?,?,?)");
-        foreach ($input['ingredients'] as $i => $ing) {
-            $stmt->execute([$id, RAZsanitize($ing['name']??''), floatval($ing['purchase_qty']??1), RAZsanitize($ing['purchase_unit']??'pcs'), floatval($ing['purchase_price']??0), max(1,intval($ing['portions_yield']??1)), $i]);
+        // Auto-migrate missing columns for SQLite to prevent "no such column" errors
+        if ($dbType === 'sqlite') {
+            try { $pdo->exec("ALTER TABLE hpp_calculations ADD COLUMN portions INT DEFAULT 1"); } catch (Throwable $t) {}
+            try { $pdo->exec("ALTER TABLE hpp_calculations ADD COLUMN current_sell_price DECIMAL(15,2) DEFAULT 0"); } catch (Throwable $t) {}
+            try { $pdo->exec("ALTER TABLE hpp_calculations ADD COLUMN notes TEXT"); } catch (Throwable $t) {}
         }
-    }
 
-    // --- Packaging ---
-    $pdo->prepare("DELETE FROM hpp_packagings WHERE hpp_id=?")->execute([$id]);
-    if (!empty($input['packagings'])) {
-        $stmt = $pdo->prepare("INSERT INTO hpp_packagings (hpp_id, name, purchase_qty, purchase_unit, purchase_price, capacity_pcs, usage_per_portion, sort_order) VALUES (?,?,?,?,?,?,?,?)");
-        foreach ($input['packagings'] as $i => $pkg) {
-            $stmt->execute([$id, RAZsanitize($pkg['name']??''), floatval($pkg['purchase_qty']??1), RAZsanitize($pkg['purchase_unit']??'pack'), floatval($pkg['purchase_price']??0), max(1,intval($pkg['capacity_pcs']??1)), max(1,intval($pkg['usage_per_portion']??1)), $i]);
+        // Update master
+        $stmt = $pdo->prepare("UPDATE hpp_calculations SET product_name=?, portions=?, overhead_pct=?, margin_pct=?, current_sell_price=?, notes=?, updated_at={$updatedAt} WHERE id=? AND store_id=?");
+        $stmt->execute([
+            RAZsanitize($input['product_name'] ?? ''),
+            max(1, intval($input['portions'] ?? 1)),
+            floatval($input['overhead_pct'] ?? 15),
+            floatval($input['margin_pct'] ?? 30),
+            floatval($input['current_sell_price'] ?? 0),
+            RAZsanitize($input['notes'] ?? ''),
+            $id, $storeId
+        ]);
+
+        // Rebuild komponen: hapus lama, insert baru
+        // --- Bahan ---
+        $pdo->prepare("DELETE FROM hpp_ingredients WHERE hpp_id=?")->execute([$id]);
+        if (!empty($input['ingredients'])) {
+            $stmt = $pdo->prepare("INSERT INTO hpp_ingredients (hpp_id, name, purchase_qty, purchase_unit, purchase_price, portions_yield, sort_order) VALUES (?,?,?,?,?,?,?)");
+            foreach ($input['ingredients'] as $i => $ing) {
+                $stmt->execute([$id, RAZsanitize($ing['name']??''), floatval($ing['purchase_qty']??1), RAZsanitize($ing['purchase_unit']??'pcs'), floatval($ing['purchase_price']??0), max(1,intval($ing['portions_yield']??1)), $i]);
+            }
         }
-    }
 
-    // --- Biaya Tambahan ---
-    $pdo->prepare("DELETE FROM hpp_extra_costs WHERE hpp_id=?")->execute([$id]);
-    if (!empty($input['extra_costs'])) {
-        $stmt = $pdo->prepare("INSERT INTO hpp_extra_costs (hpp_id, name, amount, portions_divide, sort_order) VALUES (?,?,?,?,?)");
-        foreach ($input['extra_costs'] as $i => $ec) {
-            $stmt->execute([$id, RAZsanitize($ec['name']??''), floatval($ec['amount']??0), max(1,intval($ec['portions_divide']??1)), $i]);
+        // --- Packaging ---
+        $pdo->prepare("DELETE FROM hpp_packagings WHERE hpp_id=?")->execute([$id]);
+        if (!empty($input['packagings'])) {
+            $stmt = $pdo->prepare("INSERT INTO hpp_packagings (hpp_id, name, purchase_qty, purchase_unit, purchase_price, capacity_pcs, usage_per_portion, sort_order) VALUES (?,?,?,?,?,?,?,?)");
+            foreach ($input['packagings'] as $i => $pkg) {
+                $stmt->execute([$id, RAZsanitize($pkg['name']??''), floatval($pkg['purchase_qty']??1), RAZsanitize($pkg['purchase_unit']??'pack'), floatval($pkg['purchase_price']??0), max(1,intval($pkg['capacity_pcs']??1)), max(1,intval($pkg['usage_per_portion']??1)), $i]);
+            }
         }
-    }
 
-    RAZjsonResponse(true, 'Kalkulasi HPP berhasil disimpan');
+        // --- Biaya Tambahan ---
+        $pdo->prepare("DELETE FROM hpp_extra_costs WHERE hpp_id=?")->execute([$id]);
+        if (!empty($input['extra_costs'])) {
+            $stmt = $pdo->prepare("INSERT INTO hpp_extra_costs (hpp_id, name, amount, portions_divide, sort_order) VALUES (?,?,?,?,?)");
+            foreach ($input['extra_costs'] as $i => $ec) {
+                $stmt->execute([$id, RAZsanitize($ec['name']??''), floatval($ec['amount']??0), max(1,intval($ec['portions_divide']??1)), $i]);
+            }
+        }
+
+        RAZjsonResponse(true, 'Kalkulasi HPP berhasil disimpan');
+    } catch (Throwable $e) {
+        RAZjsonResponse(false, 'DB Error: ' . $e->getMessage(), [], 500);
+    }
 }
 
 // ============================================================
@@ -173,33 +189,37 @@ function deleteHpp($pdo, $storeId) {
 // PUSH: Kirim hasil HPP ke tabel items (inventori)
 // ============================================================
 function pushToInventory($pdo, $storeId) {
-    $input = RAZgetJsonInput();
-    $id = intval($input['id'] ?? 0);
-    if (!$id) RAZjsonResponse(false, 'ID tidak valid');
+    try {
+        $input = RAZgetJsonInput();
+        $id = intval($input['id'] ?? 0);
+        if (!$id) RAZjsonResponse(false, 'ID tidak valid');
 
-    $stmt = $pdo->prepare("SELECT * FROM hpp_calculations WHERE id=? AND store_id=?");
-    $stmt->execute([$id, $storeId]);
-    $hpp = $stmt->fetch();
-    if (!$hpp) RAZjsonResponse(false, 'Data tidak ditemukan');
+        $stmt = $pdo->prepare("SELECT * FROM hpp_calculations WHERE id=? AND store_id=?");
+        $stmt->execute([$id, $storeId]);
+        $hpp = $stmt->fetch();
+        if (!$hpp) RAZjsonResponse(false, 'Data tidak ditemukan');
 
-    $calc = calcHppBreakdown($pdo, $hpp);
-    $hppPerPortion = round($calc['hpp_total'], 2);
-    $sellPrice = round($calc['recommended_price'], 2);
+        $calc = calcHppBreakdown($pdo, $hpp);
+        $hppPerPortion = round($calc['hpp_total'], 2);
+        $sellPrice = round($calc['recommended_price'], 2);
 
-    // Gunakan harga user jika ada, kalau tidak pakai rekomendasi
-    if ((float)$hpp['current_sell_price'] > 0) {
-        $sellPrice = (float)$hpp['current_sell_price'];
+        // Gunakan harga user jika ada, kalau tidak pakai rekomendasi
+        if ((float)$hpp['current_sell_price'] > 0) {
+            $sellPrice = (float)$hpp['current_sell_price'];
+        }
+
+        // Buat item baru di inventori
+        $stmt = $pdo->prepare("INSERT INTO items (store_id, name, hpp, sell_price, stock, is_active) VALUES (?,?,?,?,0,1)");
+        $stmt->execute([$storeId, $hpp['product_name'], $hppPerPortion, $sellPrice]);
+
+        RAZjsonResponse(true, 'Produk berhasil ditambahkan ke Inventori', [
+            'item_id' => (int)$pdo->lastInsertId(),
+            'hpp' => $hppPerPortion,
+            'sell_price' => $sellPrice
+        ]);
+    } catch (Throwable $e) {
+        RAZjsonResponse(false, 'DB Error: ' . $e->getMessage(), [], 500);
     }
-
-    // Buat item baru di inventori
-    $stmt = $pdo->prepare("INSERT INTO items (store_id, name, hpp, sell_price, stock, is_active) VALUES (?,?,?,?,0,1)");
-    $stmt->execute([$storeId, $hpp['product_name'], $hppPerPortion, $sellPrice]);
-
-    RAZjsonResponse(true, 'Produk berhasil ditambahkan ke Inventori', [
-        'item_id' => (int)$pdo->lastInsertId(),
-        'hpp' => $hppPerPortion,
-        'sell_price' => $sellPrice
-    ]);
 }
 
 // ============================================================
